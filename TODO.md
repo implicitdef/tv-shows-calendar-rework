@@ -1,0 +1,29 @@
+bouger tout le frontend sur ce nouveau setup
+	mettre en prod
+		comprendre comment faire nouveau setup
+			renommer l'app avec son nom définitif sur Heroku
+			adapter conf dans la console google
+			renommer/cleaner les anciens repos
+			faire une redirection dans le ghpages du projet /tv-shows-calendar pour ne pas killer les liens de mon cv (ou redirection cloudflare, ou namecheap)
+			vérifier liens du cv et liens de mon site
+			désactiver l'ancienne app heroku
+	faire que quand on se connecte on a les series par défaut
+	faire que le bouton de connexion mentionne Google pour que ce soit plus clair
+	peut-être virer le message d'erreur en prod, puisqu'apparemment j'ai réussi à l'afficher à un moment
+	rajouter "about" section qqpart
+	faire un seul appel à metaHasGlobalError dans la conf axios
+	mettre un message montrant que le show a été ajouté quand il a a pas de saisons cette année. Ou bouger à la dernière année où il a un show ?
+	Perfectionner le CSS
+	Mettre en place du routing
+	Recoder le fetching en JS, le mettre dans le server et le faire lancer automatiquement sous forme de cron de temps en temps
+	Se debarasser des fonctions anonymes dans les render() pour des raisons de perf
+	refaire le routing
+	Search : faire la navigation avec les fleches et le clavier dans le select
+	Search : make a smarter search with local cache to not fire ajax call everytime
+
+peut-être un jour :
+
+faire ajustements pour la prod dans la conf webpack
+merger configs webpack autant que possible
+prerendu
+code splitting ?

@@ -1,0 +1,17 @@
+html, body, #root {
+    height:100%;
+}
+
+
+body {
+    font-family: Roboto, sans-serif !important;    
+    background: #37474F;    
+}
+
+.page {
+    min-height:100%;
+    display: flex;
+    flex-flow: column;
+    padding:0 10px;
+}
+  

@@ -1,0 +1,114 @@
+.absolute-box {
+    height: 100%;
+    position: absolute;
+    top:0;
+}
+
+.calendar {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
+    .calendar__inner {
+        @extend .padding-clean;
+        flex: 1;
+    }
+
+
+    .calendar__marker {
+
+        $marker-color:#b0bec5;
+        
+
+        @extend .absolute-box;
+        z-index: 80;
+        width: 10px;
+        &::before {
+            @extend .absolute-box;
+            content: "now";
+            color: $marker-color;
+            font-weight: bold;
+            font-size: 1.3rem;
+            width: 100%;
+            position: absolute;
+            height: 20px;
+            top: -25px;
+            left: -20px;
+        }
+        .calendar__marker-bar {
+            @extend .absolute-box;
+            width: 1px;
+            background: $marker-color;
+        }
+    }
+
+    .calendar__months-background {
+        .calendar__month-column {
+            @extend .absolute-box;
+            border-left: 1px solid #CCCCCC;
+            z-index: 70;
+        }
+    }
+
+    .calendar__months-row {
+        height: 30px;
+        position: relative;
+        .calendar__month-name {
+            @extend .absolute-box;
+            @extend .centering;
+            color: white;
+            z-index: 70;
+        }
+    }
+
+    .calendar__season-row {
+        height: 50px;
+        position: relative;
+        margin: 0 0 -15px;
+        &:last-child{
+             margin: 0;
+        }
+
+        .calendar__season {
+            @extend .absolute-box;
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: center;
+            background: darkcyan;
+            color: white;
+            font-size: 1em;
+            padding: 10px 32px 10px 10px;
+            border: 1px solid #FFFFFF;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+            &:hover {
+                z-index: 10000 !important;
+                width: auto !important;
+                box-shadow: rgba(0, 0, 0, 0.188235) 0px 10px 30px, rgba(0, 0, 0, 0.227451) 0px 6px 10px;
+                transition: width .15s ease-out, margin-top .15s ease-out, box-shadow .15s ease-out;
+            }
+            &:not(:hover) {
+                min-width: 0 !important;
+                transition: width .15s ease-out, margin-top .15s ease-out, box-shadow .15s ease-out;
+                .calendar__season-close {
+                  display: none !important;
+                  vertical-align: middle;                  
+                }
+            }
+            .calendar__season-name {
+                vertical-align: middle;
+            }
+            .calendar__season-close {
+                background: transparent;
+                border: none;
+                outline: none;
+                right: 5px;
+                position: absolute;
+                color:#FFFFFF !important;
+                cursor:pointer;
+            }
+        }        
+    }
+
+}
