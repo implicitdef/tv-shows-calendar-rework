@@ -1,12 +1,7 @@
 bouger tout le frontend sur ce nouveau setup
-	mettre en prod
-		comprendre comment faire nouveau setup
-			renommer l'app avec son nom définitif sur Heroku
-			adapter conf dans la console google
-			renommer/cleaner les anciens repos
-			faire une redirection dans le ghpages du projet /tv-shows-calendar pour ne pas killer les liens de mon cv (ou redirection cloudflare, ou namecheap)
-			vérifier liens du cv et liens de mon site
-			désactiver l'ancienne app heroku
+	prettier on every file
+	updater conf google parce que apparemment ça marche pas
+	Faire une passe sur les fonctionnalités et updater le TODO
 	faire que quand on se connecte on a les series par défaut
 	faire que le bouton de connexion mentionne Google pour que ce soit plus clair
 	peut-être virer le message d'erreur en prod, puisqu'apparemment j'ai réussi à l'afficher à un moment
@@ -17,9 +12,16 @@ bouger tout le frontend sur ce nouveau setup
 	Mettre en place du routing
 	Recoder le fetching en JS, le mettre dans le server et le faire lancer automatiquement sous forme de cron de temps en temps
 	Se debarasser des fonctions anonymes dans les render() pour des raisons de perf
-	refaire le routing
 	Search : faire la navigation avec les fleches et le clavier dans le select
 	Search : make a smarter search with local cache to not fire ajax call everytime
+		mettre en prod
+		comprendre comment faire nouveau setup
+			renommer l'app avec son nom définitif sur Heroku
+			adapter conf dans la console google
+			renommer/cleaner les anciens repos
+			faire une redirection dans le ghpages du projet /tv-shows-calendar pour ne pas killer les liens de mon cv (ou redirection cloudflare, ou namecheap)
+			vérifier liens du cv et liens de mon site
+			désactiver l'ancienne app heroku
 
 peut-être un jour :
 
