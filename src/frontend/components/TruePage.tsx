@@ -9,14 +9,13 @@ import * as GlobalErrorBanner from "tv/frontend/components/meta/GlobalErrorBanne
 // tslint:disable-next-line no-empty
 const noop = () => {};
 
-const TruePage: React.SFC<{}> = ({
-}) => {
+const TruePage: React.SFC<{}> = ({}) => {
   return (
     <div className="page container-fluid">
-      <GlobalErrorBanner.connected/>
-      <AuthBar.connected/>
-      <CalendarBar.connected/>
-      <Calendar.connected/>
+      <GlobalErrorBanner.connected />
+      <AuthBar.connected />
+      <CalendarBar.connected />
+      <Calendar.connected />
     </div>
   );
 };

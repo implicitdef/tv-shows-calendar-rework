@@ -1,5 +1,4 @@
 bouger tout le frontend sur ce nouveau setup
-	prettier on every file
 	updater conf google parce que apparemment ça marche pas
 	Faire une passe sur les fonctionnalités et updater le TODO
 	faire que quand on se connecte on a les series par défaut

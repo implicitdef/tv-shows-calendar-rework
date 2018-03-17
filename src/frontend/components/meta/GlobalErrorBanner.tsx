@@ -6,24 +6,23 @@ interface Props {
   hasError: boolean;
 }
 
-const GlobalErrorBanner: React.SFC<Props> = ({
-  hasError,
-}) => (
-  hasError ? <div className="global-error-banner">
-    Oops, it looks like something didn't work as it should. Please refresh this page to see if things get better.
-  </div> : null
-);
+const GlobalErrorBanner: React.SFC<Props> = ({ hasError }) =>
+  hasError ? (
+    <div className="global-error-banner">
+      Oops, it looks like something didn't work as it should. Please refresh
+      this page to see if things get better.
+    </div>
+  ) : null;
 
 export default GlobalErrorBanner;
 
 export const connected = ReactRedux.connect(
   (state: State.T, ownProps) => {
     return {
-      hasError : state.meta.hasGlobalError,
+      hasError: state.meta.hasGlobalError
     };
   },
-  (dispatch) => {
-    return {
-    };
-  },
+  dispatch => {
+    return {};
+  }
 )(GlobalErrorBanner);

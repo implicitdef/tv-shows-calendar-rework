@@ -17,13 +17,17 @@ const MonthBox: React.SFC<ThisProps> = ({
   year,
   monthNumber,
   children,
-  specificClassName,
+  specificClassName
 }) => (
   <PeriodInYearBox
     specificClassName={specificClassName}
     year={year}
-    start={moment(year, "YYYY").month(monthNumber).startOf("month")}
-    end={moment(year, "YYYY").month(monthNumber).endOf("month")}
+    start={moment(year, "YYYY")
+      .month(monthNumber)
+      .startOf("month")}
+    end={moment(year, "YYYY")
+      .month(monthNumber)
+      .endOf("month")}
   >
     {children}
   </PeriodInYearBox>

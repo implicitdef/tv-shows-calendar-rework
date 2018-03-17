@@ -14,7 +14,10 @@ export interface ThisAction {
 
 type ThisState = number;
 
-export default function reducer(state: ThisState = 2000, action: ThisAction): ThisState {
+export default function reducer(
+  state: ThisState = 2000,
+  action: ThisAction
+): ThisState {
   switch (action.type) {
     case "calendar/year/SET":
       return action.payload;
@@ -25,5 +28,5 @@ export default function reducer(state: ThisState = 2000, action: ThisAction): Th
 
 export const set = (year: number): ThisAction => ({
   type: "calendar/year/SET",
-  payload: year,
+  payload: year
 });

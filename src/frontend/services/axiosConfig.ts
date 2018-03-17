@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosResponse} from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 import * as Constants from "tv/shared/constants";
 import * as loggedInDuck from "tv/frontend/redux/ducks/auth/loggedIn";
 import * as runningCallsDuck from "tv/frontend/redux/ducks/meta/runningCalls";
@@ -7,7 +7,7 @@ import * as AuthStorage from "tv/frontend/services/authStorage";
 
 export function getAxios(dispatch: State.ThisDispatch): AxiosInstance {
   const instance = axios.create();
-  instance.interceptors.request.use((config) => {
+  instance.interceptors.request.use(config => {
     dispatch(runningCallsDuck.start());
     const googleToken = AuthStorage.get();
     if (googleToken == null) {
@@ -18,8 +18,8 @@ export function getAxios(dispatch: State.ThisDispatch): AxiosInstance {
     }
   });
   instance.interceptors.response.use(
-    (response) => response,
-    (error) => {
+    response => response,
+    error => {
       if (error.response) {
         const r = error.response as AxiosResponse;
         if (r.status === 401) {
@@ -27,7 +27,7 @@ export function getAxios(dispatch: State.ThisDispatch): AxiosInstance {
         }
       }
       return error;
-    },
+    }
   );
   return instance;
 }

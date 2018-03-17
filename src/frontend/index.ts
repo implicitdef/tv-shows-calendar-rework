@@ -8,8 +8,5 @@ import * as ReactDOM from "react-dom";
 import * as App from "tv/frontend/components/App";
 
 $(() => {
-  ReactDOM.render(
-    App.rootElement,
-    document.getElementById("root"),
-  );
+  ReactDOM.render(App.rootElement, document.getElementById("root"));
 });

@@ -14,7 +14,10 @@ export interface ThisAction {
 
 type ThisState = Domain.SeasonWithShow[];
 
-export default function reducer(state: ThisState = [], action: ThisAction): ThisState {
+export default function reducer(
+  state: ThisState = [],
+  action: ThisAction
+): ThisState {
   switch (action.type) {
     case "calendar/seasons/LOADED":
       return action.payload;
@@ -25,14 +28,17 @@ export default function reducer(state: ThisState = [], action: ThisAction): This
 
 const loaded = (seasons: Domain.SeasonWithShow[]): ThisAction => ({
   type: "calendar/seasons/LOADED",
-  payload: seasons,
+  payload: seasons
 });
 
 export const fetch = (): Actions.TT<void> => {
   return async (dispatch, getState) => {
     try {
       const isLoggedIn = getState().auth.loggedIn;
-      const seasons = await calendarDataFetcher.getSeasonsWithShows(dispatch, isLoggedIn);
+      const seasons = await calendarDataFetcher.getSeasonsWithShows(
+        dispatch,
+        isLoggedIn
+      );
       dispatch(loaded(seasons));
     } catch (e) {
       dispatch(metaHasGlobalError.set());

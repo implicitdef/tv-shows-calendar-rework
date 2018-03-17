@@ -10,10 +10,14 @@ import * as Google from "tv/server/auth/google";
 // it will add the 'userId' field to the request,
 
 export type LoggedInRequest = express.Request & {
-  userId: number,
+  userId: number;
 };
 
-export const middleware: express.RequestHandler = async (req, res, next): Promise<void> => {
+export const middleware: express.RequestHandler = async (
+  req,
+  res,
+  next
+): Promise<void> => {
   // if headers missing, refuse request
   const token = req.header(Constants.AUTH_TOKEN_HEADER);
   if (!token) {

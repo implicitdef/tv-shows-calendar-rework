@@ -17,7 +17,10 @@ export interface ThisAction {
 
 type ThisState = google.User | null;
 
-export default function reducer(state: ThisState = null, action: ThisAction): ThisState {
+export default function reducer(
+  state: ThisState = null,
+  action: ThisAction
+): ThisState {
   switch (action.type) {
     case "auth/userInfo/SET":
       return action.payload;
@@ -28,5 +31,5 @@ export default function reducer(state: ThisState = null, action: ThisAction): Th
 
 export const set = (user: google.User | null): ThisAction => ({
   type: "auth/userInfo/SET",
-  payload: user,
+  payload: user
 });

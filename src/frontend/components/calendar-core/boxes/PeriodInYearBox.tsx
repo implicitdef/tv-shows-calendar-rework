@@ -22,21 +22,21 @@ const PeriodInYearBox: React.SFC<ThisProps> = ({
   end,
   zIndex,
   children,
-  specificColor,
+  specificColor
 }) => {
   const startInYear = DateUtils.bringDateInYear(start, year);
   const endInYear = DateUtils.bringDateInYear(end, year);
   const leftOffset = DateUtils.dateLeftOffset(startInYear);
   const width = DateUtils.offsetBetween(startInYear, endInYear);
   const style = {
-    left : `${leftOffset}%`,
+    left: `${leftOffset}%`,
     // We set both width and minWidth, but only one of them
     // is used depending if we're :hover or not.
     // cf override in CSS
-    minWidth : `${width}%`,
-    width : `${width}%`,
+    minWidth: `${width}%`,
+    width: `${width}%`,
     zIndex,
-    backgroundColor : specificColor,
+    backgroundColor: specificColor
   };
   return (
     <div className={specificClassName} style={style}>

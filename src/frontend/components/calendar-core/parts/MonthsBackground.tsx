@@ -7,12 +7,9 @@ interface ThisProps {
 }
 
 // Columns suggesting the months behind the series
-const MonthsBackground: React.SFC<ThisProps>  = ({
-  year,
-}) => (
+const MonthsBackground: React.SFC<ThisProps> = ({ year }) => (
   <div className="calendar__months-background">
-  {
-    _.range(0, 12).map((monthNumber) => {
+    {_.range(0, 12).map(monthNumber => {
       return (
         <MonthBox
           year={year}
@@ -21,8 +18,7 @@ const MonthsBackground: React.SFC<ThisProps>  = ({
           specificClassName="calendar__month-column"
         />
       );
-    })
-  }
+    })}
   </div>
 );
 export default MonthsBackground;

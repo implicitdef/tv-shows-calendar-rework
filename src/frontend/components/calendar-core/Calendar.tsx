@@ -24,33 +24,33 @@ const Calendar: React.SFC<ThisProps> = ({
   mockedNow,
   seasons,
   showRemoveButtons,
-  onShowRemove,
+  onShowRemove
 }) => {
   const now = mockedNow || moment();
-  const marker = now.year() === year ? <Marker now={now}/> : "";
+  const marker = now.year() === year ? <Marker now={now} /> : "";
   return (
     <div className="calendar">
       <div className="col-12 calendar__inner">
         {marker}
-        <MonthsBackground year={year}/>
-        <MonthsRow year={year}/>
-        {
-          seasons
-            .filter((season) => {
-              return DateUtils.isTimeRangeInYear(season.time, year);
-            })
-            .map((season, index) => {
-              const onClose = () => (onShowRemove(season.show));
-              return <SeasonRow
+        <MonthsBackground year={year} />
+        <MonthsRow year={year} />
+        {seasons
+          .filter(season => {
+            return DateUtils.isTimeRangeInYear(season.time, year);
+          })
+          .map((season, index) => {
+            const onClose = () => onShowRemove(season.show);
+            return (
+              <SeasonRow
                 key={`${season.show.id}S${season.number}`}
                 index={index}
                 season={season}
                 year={year}
                 onClose={onClose}
                 showRemoveButtons={showRemoveButtons}
-              />;
-           })
-        }
+              />
+            );
+          })}
       </div>
     </div>
   );
@@ -61,16 +61,16 @@ export default Calendar;
 export const connected = ReactRedux.connect(
   (state: State.T, ownProps) => {
     return {
-      year : state.calendar.year,
+      year: state.calendar.year,
       seasons: state.calendar.seasons,
-      showRemoveButtons: state.auth.loggedIn,
+      showRemoveButtons: state.auth.loggedIn
     };
   },
-  (dispatch) => {
+  dispatch => {
     return {
-      onShowRemove : (show: Domain.Show) => {
+      onShowRemove: (show: Domain.Show) => {
         dispatch(calendarFollowing.unfollowShow(show.id));
-      },
+      }
     };
-  },
+  }
 )(Calendar);

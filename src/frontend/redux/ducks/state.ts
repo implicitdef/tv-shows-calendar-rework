@@ -5,21 +5,21 @@ import * as google from "tv/frontend/services/google";
 
 export interface T {
   auth: {
-    loggedIn: boolean,
-    userInfo: google.User | null,
+    loggedIn: boolean;
+    userInfo: google.User | null;
   };
   calendar: {
-    year: number,
-    seasons: Domain.SeasonWithShow[],
+    year: number;
+    seasons: Domain.SeasonWithShow[];
     search: {
-      results: Domain.Show[],
-      input: string,
-      open: boolean,
-    },
+      results: Domain.Show[];
+      input: string;
+      open: boolean;
+    };
   };
   meta: {
-    hasGlobalError: boolean,
-    runningCalls: number,
+    hasGlobalError: boolean;
+    runningCalls: number;
   };
 }
 
@@ -27,21 +27,21 @@ export function initial(): T {
   return {
     auth: {
       loggedIn: false,
-      userInfo: null,
+      userInfo: null
     },
     calendar: {
       year: moment().year(),
       seasons: [],
-      search : {
+      search: {
         results: [],
         input: "",
-        open: false,
-      },
+        open: false
+      }
     },
     meta: {
       hasGlobalError: false,
-      runningCalls: 0,
-    },
+      runningCalls: 0
+    }
   };
 }
 

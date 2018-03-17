@@ -4,8 +4,7 @@ import * as Domain from "tv/shared/domain";
 import * as Calendar from "tv/frontend/components/calendar-core/Calendar";
 import * as CalendarBar from "tv/frontend/components/calendar-wrap/CalendarBar";
 
-const FullCalendar: React.SFC<{}> = ({
-}) => {
+const FullCalendar: React.SFC<{}> = ({}) => {
   const calendarBarProps = {
     year: 2015,
     showAddShowButton: false,
@@ -16,7 +15,7 @@ const FullCalendar: React.SFC<{}> = ({
     // tslint:disable-next-line
     searchOnInput: () => {},
     // tslint:disable-next-line
-    searchOnSubmit: () => {},
+    searchOnSubmit: () => {}
   };
   const calendarProps = {
     year: 2015,
@@ -27,8 +26,8 @@ const FullCalendar: React.SFC<{}> = ({
   };
   return (
     <div className="full-calendar">
-      <CalendarBar.connected/>
-      <Calendar.connected/>
+      <CalendarBar.connected />
+      <Calendar.connected />
     </div>
   );
 };

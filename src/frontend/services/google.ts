@@ -16,7 +16,7 @@ const gapiPromise = new Promise<any>((resolve, reject) => {
   gapiPromiseResolve = resolve;
 });
 let googleAuth: any = null;
-const googleAuthPromise = gapiPromise.then((gapi) => {
+const googleAuthPromise = gapiPromise.then(gapi => {
   return new Promise<void>((resolve, reject) => {
     gapi.load("auth2", () => {
       // normally here we'd resolve the promise with
@@ -26,7 +26,7 @@ const googleAuthPromise = gapiPromise.then((gapi) => {
       // so we resolve with nothing and have to store
       // the object in an outside variable
       googleAuth = gapi.auth2.init({
-        client_id: Conf.googleClientId,
+        client_id: Conf.googleClientId
       });
       // still have to wait for full initialization
       googleAuth.then(() => {
@@ -41,8 +41,9 @@ export const setup = () => {
   W.gapiLoadedCallback = () => {
     gapiPromiseResolve(W.gapi);
   };
-  const script = document.createElement( "script" );
-  script.src = "https://apis.google.com/js/platform.js?onload=gapiLoadedCallback";
+  const script = document.createElement("script");
+  script.src =
+    "https://apis.google.com/js/platform.js?onload=gapiLoadedCallback";
   script.setAttribute("async", "");
   script.setAttribute("defer", "");
   document.body.appendChild(script);
@@ -64,10 +65,10 @@ export async function getUserInfo(): Promise<User> {
   await googleAuthPromise;
   const basicProfile = googleAuth.currentUser.get().getBasicProfile();
   return {
-    id : basicProfile.getId(),
-    name : basicProfile.getName(),
-    email : basicProfile.getEmail(),
-    image : basicProfile.getImageUrl(),
+    id: basicProfile.getId(),
+    name: basicProfile.getName(),
+    email: basicProfile.getEmail(),
+    image: basicProfile.getImageUrl()
   };
 }
 export async function getToken(): Promise<string> {

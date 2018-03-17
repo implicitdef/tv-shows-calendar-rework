@@ -1,4 +1,3 @@
-
 const ls = window.localStorage;
 
 const key = "auth:googleToken";

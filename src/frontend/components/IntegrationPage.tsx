@@ -9,11 +9,10 @@ import GlobalErrorBanner from "tv/frontend/components/meta/GlobalErrorBanner";
 // tslint:disable-next-line no-empty
 const noop = () => {};
 
-const IntegrationPage: React.SFC<{}> = ({
-}) => {
+const IntegrationPage: React.SFC<{}> = ({}) => {
   return (
     <div className="integration">
-      <GlobalErrorBanner hasError/>
+      <GlobalErrorBanner hasError />
       <AuthBar
         loggedIn
         email={"george@gmail.com"}
@@ -37,10 +36,10 @@ const IntegrationPage: React.SFC<{}> = ({
         showAddShowButton
         onSetYear={noop}
         searchShows={[
-            {id: 33, name: "A show"},
-            {id: 35, name: "Another"},
-            {id: 36, name: "Yet a show"},
-          ]}
+          { id: 33, name: "A show" },
+          { id: 35, name: "Another" },
+          { id: 36, name: "Yet a show" }
+        ]}
         searchInput={""}
         searchOpen={true}
         searchOnInput={noop}
@@ -53,37 +52,37 @@ const IntegrationPage: React.SFC<{}> = ({
         mockedNow={moment("1492-03-25")}
         seasons={[
           {
-            show: {id: 33, name: "A show"},
+            show: { id: 33, name: "A show" },
             number: 1,
             time: {
               start: moment("1492-01-10"),
-              end: moment("1492-02-25"),
-            },
+              end: moment("1492-02-25")
+            }
           },
           {
-            show: {id: 33, name: "A show"},
+            show: { id: 33, name: "A show" },
             number: 2,
             time: {
               start: moment("1492-01-01"),
-              end: moment("1492-01-02"),
-            },
+              end: moment("1492-01-02")
+            }
           },
           {
-            show: {id: 33, name: "A show"},
+            show: { id: 33, name: "A show" },
             number: 3,
             time: {
               start: moment("1500-01-10"),
-              end: moment("1500-02-25"),
-            },
+              end: moment("1500-02-25")
+            }
           },
           {
-            show: {id: 55, name: "Another"},
+            show: { id: 55, name: "Another" },
             number: 1,
             time: {
               start: moment("1492-10-15"),
-              end: moment("1495-10-15"),
-            },
-          },
+              end: moment("1495-10-15")
+            }
+          }
         ]}
         showRemoveButtons={true}
         onShowRemove={noop}

@@ -1,14 +1,19 @@
 import * as redux from "redux";
 
-export type ThisAction = {
-  type: "meta/hasGlobalError/SET",
-} | {
-  type: "meta/hasGlobalError/CLEAR";
-};
+export type ThisAction =
+  | {
+      type: "meta/hasGlobalError/SET";
+    }
+  | {
+      type: "meta/hasGlobalError/CLEAR";
+    };
 
 type ThisState = boolean;
 
-export default function reducer(state: ThisState = false, action: ThisAction): ThisState {
+export default function reducer(
+  state: ThisState = false,
+  action: ThisAction
+): ThisState {
   switch (action.type) {
     case "meta/hasGlobalError/SET":
       return true;
@@ -19,5 +24,5 @@ export default function reducer(state: ThisState = false, action: ThisAction): T
   }
 }
 
-export const set = (): ThisAction => ({type: "meta/hasGlobalError/SET"});
-export const clear = (): ThisAction => ({type: "meta/hasGlobalError/CLEAR"});
+export const set = (): ThisAction => ({ type: "meta/hasGlobalError/SET" });
+export const clear = (): ThisAction => ({ type: "meta/hasGlobalError/CLEAR" });

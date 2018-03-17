@@ -6,14 +6,14 @@ import * as DbQueries from "tv/server/services/dbQueries";
 
 const knexClient = Knex({
   client: "postgres",
-  connection: Conf.db,
+  connection: Conf.db
 });
 
 export async function loadData(): Promise<Domain.ShowAndSeasons[]> {
   return DbQueries.loadData(knexClient);
 }
 export async function saveOrGetUser(googleUserId: string): Promise<number> {
-  return knexClient.transaction(async (trx) => {
+  return knexClient.transaction(async trx => {
     const maybeUser = await DbQueries.getUserByGoogleUserId(trx, googleUserId);
     if (maybeUser) {
       return maybeUser.id;
@@ -21,10 +21,16 @@ export async function saveOrGetUser(googleUserId: string): Promise<number> {
     return DbQueries.saveUser(trx, googleUserId);
   });
 }
-export async function addSerieToUser(userId: number, serieId: number): Promise<void> {
+export async function addSerieToUser(
+  userId: number,
+  serieId: number
+): Promise<void> {
   return DbQueries.addSerieToUser(knexClient, userId, serieId);
 }
-export async function removeSerieFromUser(userId: number, serieId: number): Promise<void> {
+export async function removeSerieFromUser(
+  userId: number,
+  serieId: number
+): Promise<void> {
   return DbQueries.removeSerieFromUser(knexClient, userId, serieId);
 }
 export async function getSeriesOfUser(userId: number): Promise<number[]> {

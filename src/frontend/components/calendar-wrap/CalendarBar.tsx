@@ -37,7 +37,7 @@ const CalendarBar: React.SFC<ThisProps> = ({
   searchOnInput,
   searchOnSubmit,
   searchOnBlur,
-  searchOnOpen,
+  searchOnOpen
 }) => {
   const onPreviousYear = () => {
     onSetYear(year - 1);
@@ -52,21 +52,25 @@ const CalendarBar: React.SFC<ThisProps> = ({
     onInput: searchOnInput,
     onSubmit: searchOnSubmit,
     onBlur: searchOnBlur,
-    onOpen: searchOnOpen,
+    onOpen: searchOnOpen
   };
   const searchBoxOrNot = showAddShowButton ? (
     <SearchBox {...searchProps} />
   ) : null;
-  return <div className="calendar-bar row no-gutters">
-      <div className="col-md-3 col-sm-6">
-        {searchBoxOrNot}
-      </div>
+  return (
+    <div className="calendar-bar row no-gutters">
+      <div className="col-md-3 col-sm-6">{searchBoxOrNot}</div>
       <div className="calendar-bar__nav col-md-6 col-sm-6">
-        <a className="calendar-bar__back" onClick={onPreviousYear}>{"<"}</a>
+        <a className="calendar-bar__back" onClick={onPreviousYear}>
+          {"<"}
+        </a>
         <span className="calendar-bar__year">{year}</span>
-        <a className="calendar-bar__forward" onClick={onNextYear}>></a>
+        <a className="calendar-bar__forward" onClick={onNextYear}>
+          >
+        </a>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default CalendarBar;
@@ -78,26 +82,26 @@ export const connected = ReactRedux.connect(
       showAddShowButton: state.auth.loggedIn,
       searchShows: state.calendar.search.results,
       searchInput: state.calendar.search.input,
-      searchOpen: state.calendar.search.open,
+      searchOpen: state.calendar.search.open
     };
   },
-  (dispatch) => {
+  dispatch => {
     return {
-      onSetYear : (year: number) => {
+      onSetYear: (year: number) => {
         dispatch(calendarYear.set(year));
       },
-      searchOnInput : (input: string) => {
+      searchOnInput: (input: string) => {
         dispatch(calendarSearch.searchShows(input));
       },
-      searchOnSubmit : (show: Domain.Show) => {
+      searchOnSubmit: (show: Domain.Show) => {
         dispatch(calendarFollowing.followShow(show.id));
       },
-      searchOnBlur : () => {
+      searchOnBlur: () => {
         dispatch(calendarSearch.close());
       },
-      searchOnOpen : () => {
+      searchOnOpen: () => {
         dispatch(calendarSearch.open());
-      },
+      }
     };
-  },
+  }
 )(CalendarBar);

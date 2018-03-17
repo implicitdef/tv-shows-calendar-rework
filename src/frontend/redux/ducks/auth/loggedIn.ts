@@ -18,7 +18,10 @@ export interface ThisAction {
 
 type ThisState = boolean;
 
-export default function reducer(state: ThisState = false, action: ThisAction): ThisState {
+export default function reducer(
+  state: ThisState = false,
+  action: ThisAction
+): ThisState {
   switch (action.type) {
     case "auth/loggedIn/SET":
       return action.payload;
@@ -29,11 +32,11 @@ export default function reducer(state: ThisState = false, action: ThisAction): T
 
 const set = (loggedIn: boolean): ThisAction => ({
   type: "auth/loggedIn/SET",
-  payload: loggedIn,
+  payload: loggedIn
 });
 
 export const login = (): Actions.TT<void> => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       await google.login();
       const token = await google.getToken();
@@ -49,7 +52,7 @@ export const login = (): Actions.TT<void> => {
 };
 
 export const logout = (): Actions.TT<void> => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       await google.logout();
       authStorage.clear();
@@ -63,7 +66,7 @@ export const logout = (): Actions.TT<void> => {
 };
 
 export const checkStatusOnStartupAndFetch = (): Actions.TT<void> => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       const token = authStorage.get();
       if (token) {

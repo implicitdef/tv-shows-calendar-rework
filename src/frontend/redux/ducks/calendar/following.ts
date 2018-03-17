@@ -10,7 +10,7 @@ import * as calendarSearch from "tv/frontend/redux/ducks/calendar/search";
 import * as calendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
 
 export const unfollowShow = (id: number): Actions.TT<void> => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       await api.unfollowShow(dispatch, id);
       dispatch(calendarSeasons.fetch());
@@ -21,7 +21,7 @@ export const unfollowShow = (id: number): Actions.TT<void> => {
 };
 
 export const followShow = (id: number): Actions.TT<void> => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       dispatch(calendarSearch.clear());
       await api.followShow(dispatch, id);

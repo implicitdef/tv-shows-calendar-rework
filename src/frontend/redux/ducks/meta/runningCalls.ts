@@ -1,14 +1,19 @@
 import * as redux from "redux";
 
-export type ThisAction = {
-  type: "meta/runningCalls/START",
-} | {
-  type: "meta/runningCalls/END";
-};
+export type ThisAction =
+  | {
+      type: "meta/runningCalls/START";
+    }
+  | {
+      type: "meta/runningCalls/END";
+    };
 
 type ThisState = number;
 
-export default function reducer(state: ThisState  = 0, action: ThisAction): ThisState {
+export default function reducer(
+  state: ThisState = 0,
+  action: ThisAction
+): ThisState {
   switch (action.type) {
     case "meta/runningCalls/START":
       return state + 1;
@@ -19,5 +24,5 @@ export default function reducer(state: ThisState  = 0, action: ThisAction): This
   }
 }
 
-export const start = (): ThisAction => ({type: "meta/runningCalls/START"});
-export const end = (): ThisAction => ({type: "meta/runningCalls/END"});
+export const start = (): ThisAction => ({ type: "meta/runningCalls/START" });
+export const end = (): ThisAction => ({ type: "meta/runningCalls/END" });

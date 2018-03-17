@@ -32,7 +32,7 @@ const colors = [
   // "#FFEB3B",
   "#FFC107",
   "#FF9800",
-  "#FF5722",
+  "#FF5722"
   // "#795548",
   // "#9E9E9E",
   // "#607D8B",
@@ -40,17 +40,20 @@ const colors = [
 
 const alwaysPositiveModulo = (nb: number, divider: number): number => {
   // http://stackoverflow.com/questions/4467539/javascript-modulo-not-behaving
-  return ((nb % divider) + divider) % divider;
+  return (nb % divider + divider) % divider;
 };
 
 const hashOfStr = (str: string): number => {
   // http://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript-jquery
   /* tslint:disable */
-  let hash = 0, i, chr, len;
+  let hash = 0,
+    i,
+    chr,
+    len;
   if (str.length === 0) return hash;
   for (i = 0, len = str.length; i < len; i++) {
-    chr   = str.charCodeAt(i);
-    hash  = ((hash << 5) - hash) + chr;
+    chr = str.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
     hash |= 0;
   }
   /* tslint:enable */
@@ -66,12 +69,14 @@ const SeasonRow: React.SFC<ThisProps> = ({
   season,
   index,
   showRemoveButtons,
-  onClose,
+  onClose
 }) => {
-  const {show, number: seasonNumber, time} = season;
-  const {start, end} = time;
+  const { show, number: seasonNumber, time } = season;
+  const { start, end } = time;
   const closingButton = showRemoveButtons ? (
-    <button onClick={onClose} className="calendar__season-close">&times;</button>
+    <button onClick={onClose} className="calendar__season-close">
+      &times;
+    </button>
   ) : null;
   return (
     <div className="calendar__season-row">
@@ -84,7 +89,9 @@ const SeasonRow: React.SFC<ThisProps> = ({
         specificColor={pickColor(show.name)}
       >
         {closingButton}
-        <span className="calendar__season-name">{show.name.toUpperCase()}&nbsp;S{seasonNumber}</span>
+        <span className="calendar__season-name">
+          {show.name.toUpperCase()}&nbsp;S{seasonNumber}
+        </span>
       </PeriodInYearBox>
     </div>
   );

@@ -9,7 +9,8 @@ interface Props {
   hasError: boolean;
 }
 
-export const rootElement =
+export const rootElement = (
   <ReactRedux.Provider store={ReduxSetup.store}>
-    <TruePage/>
-  </ReactRedux.Provider>;
+    <TruePage />
+  </ReactRedux.Provider>
+);

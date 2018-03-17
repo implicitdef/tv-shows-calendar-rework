@@ -11,15 +11,15 @@ import * as State from "tv/frontend/redux/ducks/state";
 export const f: redux.Reducer<State.T> = redux.combineReducers({
   auth: redux.combineReducers({
     loggedIn: authLoggedIn,
-    userInfo: authUserInfo,
+    userInfo: authUserInfo
   }),
   calendar: redux.combineReducers({
     search: calendarSearch,
     seasons: calendarSeasons,
-    year: calendarYear,
+    year: calendarYear
   }),
   meta: redux.combineReducers({
     hasGlobalError: metaHasGlobalError,
-    runningCalls: metaRunningCalls,
-  }),
+    runningCalls: metaRunningCalls
+  })
 });

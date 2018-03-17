@@ -19,7 +19,10 @@ export function dateRightOffset(date: moment.Moment): number {
   return 100 - dateLeftOffset(date);
 }
 
-export function offsetBetween(before: moment.Moment, after: moment.Moment): number {
+export function offsetBetween(
+  before: moment.Moment,
+  after: moment.Moment
+): number {
   const startOfYear = before.clone().startOf("year");
   const endOfYear = before.clone().endOf("year");
   const durationOfYear = endOfYear.diff(startOfYear);
@@ -28,7 +31,10 @@ export function offsetBetween(before: moment.Moment, after: moment.Moment): numb
   return 100 * diff / durationOfYear;
 }
 
-export function isTimeRangeInYear({start, end}: Domain.MTimeRange, year: number): boolean {
+export function isTimeRangeInYear(
+  { start, end }: Domain.MTimeRange,
+  year: number
+): boolean {
   return start.year() <= year && end.year() >= year;
 }
 
@@ -36,7 +42,10 @@ export function isTimeRangeInYear({start, end}: Domain.MTimeRange, year: number)
 // this will return instead the first day or the last
 // of that year.
 // If the date is in the year, returns it untouched
-export function bringDateInYear(date: moment.Moment, year: number): moment.Moment {
+export function bringDateInYear(
+  date: moment.Moment,
+  year: number
+): moment.Moment {
   if (date.year() < year) {
     return moment(year, "YYYY").startOf("year");
   }

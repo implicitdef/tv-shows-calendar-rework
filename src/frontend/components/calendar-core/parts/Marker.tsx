@@ -7,15 +7,15 @@ interface ThisProps {
 }
 
 // Columns suggesting the months behind the series
-const Marker: React.SFC<ThisProps> = ({
-  now,
-}) => {
+const Marker: React.SFC<ThisProps> = ({ now }) => {
   const style = {
-    left : `${DateUtils.dateLeftOffset(now)}%`,
+    left: `${DateUtils.dateLeftOffset(now)}%`
   };
-  return <div className="calendar__marker" style={style}>
-    <div className="calendar__marker-bar"/>
-  </div>;
+  return (
+    <div className="calendar__marker" style={style}>
+      <div className="calendar__marker-bar" />
+    </div>
+  );
 };
 
 export default Marker;

@@ -3,42 +3,47 @@ import * as Domain from "tv/shared/domain";
 import * as Utils from "tv/server/utils/utils";
 
 interface RawJsonDataRow {
-    id: number;
-    content: string;
+  id: number;
+  content: string;
 }
 
 interface User {
-    id: number;
-    google_user_id: string;
+  id: number;
+  google_user_id: string;
 }
 interface UserSerieRow {
-    user_id: number;
-    serie_id: number;
+  user_id: number;
+  serie_id: number;
 }
 
-export async function loadData(knex: Knex.QueryInterface): Promise<Domain.ShowAndSeasons[]> {
-    const rows = await Utils.bluebirdToNative(
-      knex
-        .select()
-        .from("raw_json_data")
-        .orderBy("creation_time", "desc")
-        .limit(1),
-    );
-    const rowsCasted = (rows as RawJsonDataRow[]);
-    const json = JSON.parse(rowsCasted[0].content);
-    return json as Domain.ShowAndSeasons[];
+export async function loadData(
+  knex: Knex.QueryInterface
+): Promise<Domain.ShowAndSeasons[]> {
+  const rows = await Utils.bluebirdToNative(
+    knex
+      .select()
+      .from("raw_json_data")
+      .orderBy("creation_time", "desc")
+      .limit(1)
+  );
+  const rowsCasted = rows as RawJsonDataRow[];
+  const json = JSON.parse(rowsCasted[0].content);
+  return json as Domain.ShowAndSeasons[];
 }
 
-export async function getUserByGoogleUserId(knex: Knex.QueryInterface, googleUserId: string): Promise<User | null> {
+export async function getUserByGoogleUserId(
+  knex: Knex.QueryInterface,
+  googleUserId: string
+): Promise<User | null> {
   const rows = await Utils.bluebirdToNative(
     knex
       .select()
       .where({
-        google_user_id: googleUserId,
+        google_user_id: googleUserId
       })
-      .from("users"),
+      .from("users")
   );
-  const rowsCasted = (rows as User[]);
+  const rowsCasted = rows as User[];
   if (rowsCasted.length > 0) {
     return rowsCasted[0];
   } else {
@@ -46,32 +51,41 @@ export async function getUserByGoogleUserId(knex: Knex.QueryInterface, googleUse
   }
 }
 
-export async function saveUser(knex: Knex.QueryInterface, googleUserId: string): Promise<number> {
+export async function saveUser(
+  knex: Knex.QueryInterface,
+  googleUserId: string
+): Promise<number> {
   const rows = await Utils.bluebirdToNative(
     knex
       .insert({
-        google_user_id: googleUserId,
+        google_user_id: googleUserId
       })
       .into("users")
-      .returning("id"),
+      .returning("id")
   );
-  const rowsCasted = (rows as number[]);
+  const rowsCasted = rows as number[];
   if (rowsCasted.length === 1) {
     return rowsCasted[0];
   } else {
-    throw new Error(`${rowsCasted.length} rows were created by the saveUser query`);
+    throw new Error(
+      `${rowsCasted.length} rows were created by the saveUser query`
+    );
   }
 }
 
-export async function addSerieToUser(knex: Knex.QueryInterface, userId: number, serieId: number): Promise<void> {
+export async function addSerieToUser(
+  knex: Knex.QueryInterface,
+  userId: number,
+  serieId: number
+): Promise<void> {
   try {
-      await Utils.bluebirdToNative(
+    await Utils.bluebirdToNative(
       knex
         .insert({
           user_id: userId,
-          serie_id: serieId,
+          serie_id: serieId
         })
-        .into("users_series"),
+        .into("users_series")
     );
   } catch (err) {
     // swallow duplicate key constraint
@@ -81,28 +95,35 @@ export async function addSerieToUser(knex: Knex.QueryInterface, userId: number, 
   }
 }
 
-export async function removeSerieFromUser(knex: Knex.QueryInterface, userId: number, serieId: number): Promise<void> {
+export async function removeSerieFromUser(
+  knex: Knex.QueryInterface,
+  userId: number,
+  serieId: number
+): Promise<void> {
   return Utils.bluebirdToNative(
     knex
       .del()
       .where({
         user_id: userId,
-        serie_id: serieId,
+        serie_id: serieId
       })
-      .from("users_series"),
+      .from("users_series")
   );
 }
 
-export async function getSeriesOfUser(knex: Knex.QueryInterface, userId: number): Promise<number[]> {
+export async function getSeriesOfUser(
+  knex: Knex.QueryInterface,
+  userId: number
+): Promise<number[]> {
   const rows = await Utils.bluebirdToNative(
     knex
       .select()
       .from("users_series")
       .where({
-        user_id: userId,
+        user_id: userId
       })
-      .orderBy("serie_id", "asc"),
+      .orderBy("serie_id", "asc")
   );
-  const rowsCasted = (rows as UserSerieRow[]);
-  return rowsCasted.map((row) => row.serie_id);
+  const rowsCasted = rows as UserSerieRow[];
+  return rowsCasted.map(row => row.serie_id);
 }
