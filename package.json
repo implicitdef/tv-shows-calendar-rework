@@ -7,8 +7,7 @@
     "server:compile": "webpack  --progress --config webpack/webpack.server.config.ts",
     "server:compile-w": "webpack --watch  --progress --config webpack/webpack.server.config.ts",
     "server:run": "node dist/bundle-server.js",
-    "server:run-w": "nodemon dist/bundle-server.js --watch dist",
-    "lint": "(tslint -p tsconfig.json && echo 'OK') || echo 'Lint failed!'"
+    "server:run-w": "nodemon dist/bundle-server.js --watch dist"
   },
   "engines": {
     "node": "8.3.0",
