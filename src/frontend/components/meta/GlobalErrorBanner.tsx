@@ -7,7 +7,7 @@ interface Props {
 }
 
 const GlobalErrorBanner: React.SFC<Props> = ({ hasError }) =>
-  hasError ? (
+  !hasError ? (
     <div className="global-error-banner">
       Oops, it looks like something didn't work as it should. Please refresh
       this page to see if things get better.
