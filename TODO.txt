@@ -1,5 +1,4 @@
 bouger tout le frontend sur ce nouveau setup
-	verifier que le typage est bon
 	Mise en prod
 		comprendre comment faire nouveau setup
 			renommer l'app avec son nom définitif sur Heroku
