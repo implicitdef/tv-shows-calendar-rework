@@ -29,6 +29,7 @@ export const middleware: express.RequestHandler = async (
       (req as LoggedInRequest).userId = userId;
       next();
     } catch (err) {
+      console.error(err);
       next(new Web.AuthError());
     }
   }

@@ -18,14 +18,19 @@ export async function saveOrGetUser(googleUserId: string): Promise<number> {
     if (maybeUser) {
       return maybeUser.id;
     }
-    return DbQueries.saveUser(trx, googleUserId);
+    const newUserId = await DbQueries.saveUser(trx, googleUserId);
+    await Conf.defaultShowsIds.reduce(async (previousPromise, serieId) => {
+      await previousPromise;
+      return DbQueries.addSerieToUser(trx, newUserId, serieId);
+    }, Promise.resolve());
+    return newUserId;
   });
 }
 export async function addSerieToUser(
   userId: number,
   serieId: number
 ): Promise<void> {
-  return DbQueries.addSerieToUser(knexClient, userId, serieId);
+  await DbQueries.addSerieToUser(knexClient, userId, serieId);
 }
 export async function removeSerieFromUser(
   userId: number,
