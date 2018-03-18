@@ -1,5 +1,7 @@
 bouger tout le frontend sur ce nouveau setup
 	Mise en prod
+		remettre l'app sur heroku en mode payant
+		verifier la base de données, la brancher si besoin
 		comprendre comment faire nouveau setup
 			renommer l'app avec son nom définitif sur Heroku
 			adapter conf dans la console google
