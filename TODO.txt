@@ -1,7 +1,4 @@
 bouger tout le frontend sur ce nouveau setup
-	Faire une passe sur les fonctionnalités et updater le TODO
-	peut-être virer le message d'erreur en prod, puisqu'apparemment j'ai réussi à l'afficher à un moment
-	rajouter "about" section qqpart
 	Mise en prod
 		comprendre comment faire nouveau setup
 			renommer l'app avec son nom définitif sur Heroku

@@ -5,6 +5,7 @@ import calendarSearch from "tv/frontend/redux/ducks/calendar/search";
 import calendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
 import calendarYear from "tv/frontend/redux/ducks/calendar/year";
 import metaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
+import metaAbout from "tv/frontend/redux/ducks/meta/about";
 import metaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
 import * as State from "tv/frontend/redux/ducks/state";
 
@@ -19,6 +20,7 @@ export const f: redux.Reducer<State.T> = redux.combineReducers({
     year: calendarYear
   }),
   meta: redux.combineReducers({
+    about: metaAbout,
     hasGlobalError: metaHasGlobalError,
     runningCalls: metaRunningCalls
   })

@@ -16,6 +16,7 @@ const IntegrationPage: React.SFC<{}> = ({}) => {
       <AuthBar
         loggedIn
         email={"george@gmail.com"}
+        onClickAbout={noop}
         onLogin={noop}
         onLogout={noop}
       />

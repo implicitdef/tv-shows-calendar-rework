@@ -18,6 +18,7 @@ export interface T {
     };
   };
   meta: {
+    about: boolean;
     hasGlobalError: boolean;
     runningCalls: number;
   };
@@ -39,6 +40,7 @@ export function initial(): T {
       }
     },
     meta: {
+      about: false,
       hasGlobalError: false,
       runningCalls: 0
     }
