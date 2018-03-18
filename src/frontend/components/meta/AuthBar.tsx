@@ -15,7 +15,7 @@ const AuthBar: React.SFC<ThisProps> = props => (
     {props.loggedIn && (props.email || "")}
     {props.loggedIn || (
       <a className="auth-bar__button" onClick={props.onLogin}>
-        SIGN IN
+        SIGN IN WITH GOOGLE
       </a>
     )}
     {props.loggedIn && (
