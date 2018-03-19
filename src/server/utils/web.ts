@@ -48,13 +48,15 @@ export function finishExpressAppSetupAndLaunch(app: express.Express): void {
   app.get("/", (req, res) => {
     res.sendFile("index.html", { root: PublicFolder });
   });
-  const webpackCompiler = webpack(webpackFrontendConfig.frontendConfig);
-  app.use(
-    webpackDevMiddleware(webpackCompiler, {
-      publicPath: webpackFrontendConfig.frontendConfigOutputPublicPath
-    })
-  );
-  app.use(webpackHotMiddleware(webpackCompiler));
+  if (process.env.NODE_ENV !== "production") {
+    const webpackCompiler = webpack(webpackFrontendConfig.frontendConfig);
+    app.use(
+      webpackDevMiddleware(webpackCompiler, {
+        publicPath: webpackFrontendConfig.frontendConfigOutputPublicPath
+      })
+    );
+    app.use(webpackHotMiddleware(webpackCompiler));
+  }
   app.use("/static", express.static(PublicFolder));
   app.use("/static", express.static("dist"));
   app.listen(Conf.port, listeningHandler);

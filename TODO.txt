@@ -1,6 +1,5 @@
 bouger tout le frontend sur ce nouveau setup
 	Mise en prod
-		remettre l'app sur heroku en mode payant
 		en mode prod (si heroku-postbuild)
 			désactiver le hot etc. pour fixer le pb de memory
 			adapter la conf
