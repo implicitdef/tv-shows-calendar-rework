@@ -1,11 +1,7 @@
 bouger tout le frontend sur ce nouveau setup
 	Mise en prod
 		comprendre comment faire nouveau setup
-			renommer/cleaner les anciens repos
-			faire une redirection dans le ghpages du projet /tv-shows-calendar pour ne pas killer les liens de mon cv (ou redirection cloudflare, ou namecheap)
-			vérifier liens du cv et liens de mon site
 			désactiver l'ancienne app heroku (rails)
-			refaire le README (reprendre l'ancien)
 		fixer petit bug : si on revient plus tard (après avoir kill son browser ? ou session expirée ? on a un bandeau d'erreur qui disparait si on fait F5)
 
 peut-être un jour :
