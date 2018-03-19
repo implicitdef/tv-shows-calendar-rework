@@ -24,6 +24,11 @@ export const defaultShowsIds = [
   1424, // Orange is the new black
   1412, // Arrow
   2190, // South park
-  61733 // Empire
+  61733, // Empire,
+  60625, // Rick and Morty
+  38472, // jessica jones
+  61889, // daredevil
+  67136, // this is us
+  42009 // black mirror
 ];
 export const port = process.env.PORT || 3333;

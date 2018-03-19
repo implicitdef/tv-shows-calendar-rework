@@ -1,9 +1,5 @@
 bouger tout le frontend sur ce nouveau setup
 	Mise en prod
-		en mode prod (si heroku-postbuild)
-			adapter la conf
-		adapt default shows to have something in 2018
-		verifier la base de données, la brancher si besoin
 		comprendre comment faire nouveau setup
 			renommer l'app avec son nom définitif sur Heroku
 			adapter conf dans la console google
@@ -11,6 +7,7 @@ bouger tout le frontend sur ce nouveau setup
 			faire une redirection dans le ghpages du projet /tv-shows-calendar pour ne pas killer les liens de mon cv (ou redirection cloudflare, ou namecheap)
 			vérifier liens du cv et liens de mon site
 			désactiver l'ancienne app heroku
+		fixer petit bug : si on revient plus tard (après avoir kill son browser ? ou session expirée ? on a un bandeau d'erreur qui disparait si on fait F5)
 
 peut-être un jour :
 
