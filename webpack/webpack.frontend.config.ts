@@ -4,10 +4,11 @@ import * as HtmlWebpackPlugin from "html-webpack-plugin";
 import * as webpack from "webpack";
 
 export const frontendConfigOutputPublicPath = "/static/";
+const isProd = process.env.NODE_ENV === "production";
 
 export const frontendConfig: webpack.Configuration = {
   entry: [
-    "webpack-hot-middleware/client",
+    ...(isProd ? ["webpack-hot-middleware/client"] : []),
     path.resolve(__dirname, "../src/frontend", "index.ts")
   ],
   // Add .ts/.tsx to the resolve.extensions array.
@@ -53,7 +54,7 @@ export const frontendConfig: webpack.Configuration = {
     new webpack.DefinePlugin({
       APP_URL: JSON.stringify("http://localhost:3000")
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    ...(isProd ? [new webpack.HotModuleReplacementPlugin()] : []),
     new webpack.NoEmitOnErrorsPlugin()
   ],
   target: "web",
