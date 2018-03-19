@@ -1,8 +1,8 @@
 bouger tout le frontend sur ce nouveau setup
 	Mise en prod
 		en mode prod (si heroku-postbuild)
-			désactiver le hot etc. pour fixer le pb de memory
 			adapter la conf
+		adapt default shows to have something in 2018
 		verifier la base de données, la brancher si besoin
 		comprendre comment faire nouveau setup
 			renommer l'app avec son nom définitif sur Heroku

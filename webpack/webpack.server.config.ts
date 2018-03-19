@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as nodeExternals from "webpack-node-externals";
-import {CheckerPlugin} from "awesome-typescript-loader";
+import { CheckerPlugin } from "awesome-typescript-loader";
 import * as webpack from "webpack";
 
 export const serverConfig: webpack.Configuration = {
@@ -9,8 +9,8 @@ export const serverConfig: webpack.Configuration = {
     // Add .ts/.tsx to the resolve.extensions array.
     extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
-      tv: path.resolve(__dirname, "../src"),
-    },
+      tv: path.resolve(__dirname, "../src")
+    }
   },
   devtool: "source-map",
   // Add the loader for .ts files.
@@ -22,29 +22,27 @@ export const serverConfig: webpack.Configuration = {
           {
             loader: "awesome-typescript-loader",
             options: {
-              configFileName: path.resolve(__dirname, "../tsconfig.json"),
-            },
-          },
-        ],
-      },
-    ],
+              configFileName: path.resolve(__dirname, "../tsconfig.json")
+            }
+          }
+        ]
+      }
+    ]
   },
-  plugins: [
-      new CheckerPlugin(),
-  ],
+  plugins: [new CheckerPlugin()],
   target: "node",
   node: {
     __dirname: false,
-    __filename: false,
+    __filename: false
   },
   externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
   output: {
     filename: "bundle-server.js",
-    path: path.resolve(__dirname, "../dist"),
+    path: path.resolve(__dirname, "../dist")
   },
   watchOptions: {
-    ignored: /node_modules/,
-  },
+    ignored: /node_modules/
+  }
 };
 
 export default serverConfig;
