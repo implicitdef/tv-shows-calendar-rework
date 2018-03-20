@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "heroku-postbuild": "npm run build:all",
-    "heroku-run": "npm run server:run",
+    "heroku-postbuild": "NODE_ENV=production npm run build:all",
+    "heroku-run": "NODE_ENV=production npm run server:run",
+    "build-and-run-like-prod": "npm run heroku-postbuild && npm run heroku-run",
     "build:all":
       "webpack --progress --config webpack/webpack.server.config.ts && webpack --progress --config webpack/webpack.frontend.config.ts",
     "server:compile":

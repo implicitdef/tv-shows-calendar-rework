@@ -52,9 +52,10 @@ export const frontendConfig: webpack.Configuration = {
   plugins: [
     new CheckerPlugin(),
     new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       APP_URL: JSON.stringify("http://localhost:3000")
     }),
-    ...(isProd ? [new webpack.HotModuleReplacementPlugin()] : []),
+    ...(!isProd ? [new webpack.HotModuleReplacementPlugin()] : []),
     new webpack.NoEmitOnErrorsPlugin()
   ],
   target: "web",
