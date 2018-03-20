@@ -17,9 +17,7 @@ const gapiPromise = new Promise<any>((resolve, reject) => {
 });
 let googleAuth: any = null;
 const googleAuthPromise = gapiPromise.then(gapi => {
-  console.log("GGG gapi promise resolved");
   return new Promise<void>((resolve, reject) => {
-    console.log("GGG loading auth2 module");
     gapi.load("auth2", () => {
       // normally here we'd resolve the promise with
       // the returned object.
@@ -27,16 +25,11 @@ const googleAuthPromise = gapiPromise.then(gapi => {
       // the browser hangs inexplicably....
       // so we resolve with nothing and have to store
       // the object in an outside variable
-      console.log(
-        "GGG loaded auth2 module, now initialising it with " +
-          Conf.googleClientId
-      );
       googleAuth = gapi.auth2.init({
         client_id: Conf.googleClientId
       });
       // still have to wait for full initialization
       googleAuth.then(() => {
-        console.log("GGG everything initialised and ready");
         resolve();
       });
     });
@@ -45,9 +38,7 @@ const googleAuthPromise = gapiPromise.then(gapi => {
 
 // Google + SDK setup
 export const setup = () => {
-  console.log("GGG setup()");
   W.gapiLoadedCallback = () => {
-    console.log("GGG callback called by the script");
     gapiPromiseResolve(W.gapi);
   };
   const script = document.createElement("script");
@@ -55,7 +46,6 @@ export const setup = () => {
     "https://apis.google.com/js/platform.js?onload=gapiLoadedCallback";
   script.setAttribute("async", "");
   script.setAttribute("defer", "");
-  console.log("GGG appending the script the DOM");
   document.body.appendChild(script);
 };
 
