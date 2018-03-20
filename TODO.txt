@@ -2,7 +2,6 @@ bouger tout le frontend sur ce nouveau setup
 		fixer l'app en prod : signin broken
 			refaire marcher en local en mode prod :
 			pourquoi on a une navigation vers une iframe google ??
-			pourquoi on tape encore sur _webpack_hmr ??
 		fixer petit bug : si on revient plus tard (après avoir kill son browser ? ou session expirée ? on a un bandeau d'erreur qui disparait si on fait F5)
 
 peut-être un jour :
