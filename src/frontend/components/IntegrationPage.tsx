@@ -6,7 +6,6 @@ import CalendarBar from "tv/frontend/components/calendar-wrap/CalendarBar";
 import AuthBar from "tv/frontend/components/meta/AuthBar";
 import GlobalErrorBanner from "tv/frontend/components/meta/GlobalErrorBanner";
 
-// tslint:disable-next-line no-empty
 const noop = () => {};
 
 const IntegrationPage: React.SFC<{}> = ({}) => {

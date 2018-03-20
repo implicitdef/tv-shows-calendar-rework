@@ -1,6 +1,5 @@
 import "babel-polyfill";
 import "bootstrap/dist/css/bootstrap.css";
-// tslint:disable-next-line no-var-requires
 const style = require("tv/frontend/style/index.scss");
 import * as $ from "jquery";
 import * as React from "react";

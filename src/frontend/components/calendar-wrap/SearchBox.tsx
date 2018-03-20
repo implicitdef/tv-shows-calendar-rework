@@ -35,7 +35,6 @@ export default class SearchBox extends React.Component<ThisProps, ThisState> {
           <ul className="search-box__results-inner">
             {this.props.open &&
               this.props.shows.slice(0, 10).map(show => {
-                // tslint:disable-next-line jsx-no-lambda
                 return (
                   <li
                     key={show.id}

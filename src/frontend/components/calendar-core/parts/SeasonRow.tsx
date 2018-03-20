@@ -45,7 +45,6 @@ const alwaysPositiveModulo = (nb: number, divider: number): number => {
 
 const hashOfStr = (str: string): number => {
   // http://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript-jquery
-  /* tslint:disable */
   let hash = 0,
     i,
     chr,
@@ -56,7 +55,6 @@ const hashOfStr = (str: string): number => {
     hash = (hash << 5) - hash + chr;
     hash |= 0;
   }
-  /* tslint:enable */
   return hash;
 };
 

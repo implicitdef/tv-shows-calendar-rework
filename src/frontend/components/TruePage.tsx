@@ -7,7 +7,6 @@ import * as AuthBar from "tv/frontend/components/meta/AuthBar";
 import * as About from "tv/frontend/components/meta/About";
 import * as GlobalErrorBanner from "tv/frontend/components/meta/GlobalErrorBanner";
 
-// tslint:disable-next-line no-empty
 const noop = () => {};
 
 const TruePage: React.SFC<{}> = ({}) => {

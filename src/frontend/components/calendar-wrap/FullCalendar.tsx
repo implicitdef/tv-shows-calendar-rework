@@ -8,20 +8,16 @@ const FullCalendar: React.SFC<{}> = ({}) => {
   const calendarBarProps = {
     year: 2015,
     showAddShowButton: false,
-    // tslint:disable-next-line
     onSetYear: () => {},
     searchShows: [],
     searchNotFound: false,
-    // tslint:disable-next-line
     searchOnInput: () => {},
-    // tslint:disable-next-line
     searchOnSubmit: () => {}
   };
   const calendarProps = {
     year: 2015,
     seasons: [],
     showRemoveButtons: false,
-    // tslint:disable-next-line
     onShowRemove: () => {}
   };
   return (

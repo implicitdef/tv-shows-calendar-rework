@@ -32,14 +32,12 @@ const errorHandler = (
   } else if (err instanceof AuthError) {
     res.status(401).send({ message: err.message });
   } else {
-    // tslint:disable-next-line:no-console
     console.error(err);
     res.status(500).send({ message: "Something went wrong" });
   }
 };
 
 const listeningHandler = () => {
-  // tslint:disable-next-line:no-console
   console.log(`Listening on port ${Conf.port}`);
 };
 
