@@ -7,6 +7,11 @@ import * as DbService from "tv/server/services/dbService";
 import * as Conf from "tv/server/utils/conf";
 import * as Web from "tv/server/utils/web";
 
+console.log(
+  `Server started with process.env.NODE_ENV = `,
+  process.env.NODE_ENV
+);
+
 const app = express();
 
 // Return all shows, optionally filtered by the search parameter 'q'

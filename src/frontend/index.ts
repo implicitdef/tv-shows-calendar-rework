@@ -7,6 +7,9 @@ import * as ReactDOM from "react-dom";
 import * as App from "tv/frontend/components/App";
 
 $(() => {
-  console.log(`App started with process.env.NODE_ENV = `, process.env.NODE_ENV);
+  console.log(
+    `Frontend code started with process.env.NODE_ENV = `,
+    process.env.NODE_ENV
+  );
   ReactDOM.render(App.rootElement, document.getElementById("root"));
 });
