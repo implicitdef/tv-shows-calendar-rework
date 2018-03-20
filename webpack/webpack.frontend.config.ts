@@ -8,7 +8,7 @@ const isProd = process.env.NODE_ENV === "production";
 
 export const frontendConfig: webpack.Configuration = {
   entry: [
-    ...(isProd ? ["webpack-hot-middleware/client"] : []),
+    ...(!isProd ? ["webpack-hot-middleware/client"] : []),
     path.resolve(__dirname, "../src/frontend", "index.ts")
   ],
   // Add .ts/.tsx to the resolve.extensions array.
