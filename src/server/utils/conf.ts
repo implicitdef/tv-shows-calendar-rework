@@ -32,3 +32,4 @@ export const defaultShowsIds = [
   42009 // black mirror
 ];
 export const port = process.env.PORT || 3333;
+export const pushDataApiKey = process.env.PUSH_DATA_API_KEY || "pushDataApiKey";

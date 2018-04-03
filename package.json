@@ -6,12 +6,9 @@
     "heroku-postbuild": "NODE_ENV=production npm run build:all",
     "heroku-run": "NODE_ENV=production npm run server:run",
     "build-and-run-like-prod": "npm run heroku-postbuild && npm run heroku-run",
-    "build:all":
-      "webpack --progress --config webpack/webpack.server.config.ts && webpack --progress --config webpack/webpack.frontend.config.ts",
-    "server:compile":
-      "webpack  --progress --config webpack/webpack.server.config.ts",
-    "server:compile-w":
-      "webpack --watch  --progress --config webpack/webpack.server.config.ts",
+    "build:all": "webpack --progress --config webpack/webpack.server.config.ts && webpack --progress --config webpack/webpack.frontend.config.ts",
+    "server:compile": "webpack  --progress --config webpack/webpack.server.config.ts",
+    "server:compile-w": "webpack --watch  --progress --config webpack/webpack.server.config.ts",
     "server:run": "node dist/bundle-server.js",
     "server:run-w": "nodemon dist/bundle-server.js --watch dist"
   },
@@ -20,6 +17,7 @@
     "npm": "5.3.0"
   },
   "dependencies": {
+    "@types/body-parser": "^1.16.8",
     "@types/express": "^4.0.37",
     "@types/html-webpack-plugin": "^2.28.0",
     "@types/jquery": "^3.2.12",
@@ -39,6 +37,7 @@
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-alpha.6",
     "css-loader": "^0.28.7",
     "express": "^4.15.4",

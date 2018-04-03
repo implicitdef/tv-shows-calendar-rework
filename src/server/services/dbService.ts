@@ -41,3 +41,7 @@ export async function removeSerieFromUser(
 export async function getSeriesOfUser(userId: number): Promise<number[]> {
   return DbQueries.getSeriesOfUser(knexClient, userId);
 }
+
+export async function pushData(data: string): Promise<void> {
+  return DbQueries.pushData(knexClient, data);
+}

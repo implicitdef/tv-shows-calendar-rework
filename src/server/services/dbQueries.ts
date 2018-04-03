@@ -127,3 +127,12 @@ export async function getSeriesOfUser(
   const rowsCasted = rows as UserSerieRow[];
   return rowsCasted.map(row => row.serie_id);
 }
+
+export async function pushData(
+  knex: Knex.QueryInterface,
+  data: string
+): Promise<void> {
+  return await Utils.bluebirdToNative(
+    knex.insert({ content: data }).into("raw_json_data")
+  );
+}

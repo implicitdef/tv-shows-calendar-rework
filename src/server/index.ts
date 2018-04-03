@@ -6,6 +6,7 @@ import * as Auth from "tv/server/auth/auth";
 import * as DbService from "tv/server/services/dbService";
 import * as Conf from "tv/server/utils/conf";
 import * as Web from "tv/server/utils/web";
+import * as bodyParser from "body-parser";
 
 console.log(
   `Server started with process.env.NODE_ENV = `,
@@ -98,6 +99,24 @@ app.delete("/me/shows/:serieId", Auth.middleware, async (req, res, next) => {
       liReq.userId,
       parseInt(req.params.serieId, 10)
     );
+    res.json({ message: "Done" });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Overrides the underlying data (shows, seasons, etc.) in one big HTTP POST
+// Actually will just inserts a new line in the DB, for safety
+// but only the most recent row is ever read, so be careful, if you push to this
+// you have to push ALL the data you need
+// You have to send an api key in the param 'key'
+app.post("/data", bodyParser.text({ type: "*/*" }), async (req, res, next) => {
+  try {
+    const keyParamName = "key";
+    if (req.query.key !== Conf.pushDataApiKey) {
+      throw new Web.AuthError();
+    }
+    await DbService.pushData(req.body);
     res.json({ message: "Done" });
   } catch (err) {
     next(err);
