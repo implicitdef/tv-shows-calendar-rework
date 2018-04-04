@@ -110,17 +110,21 @@ app.delete("/me/shows/:serieId", Auth.middleware, async (req, res, next) => {
 // but only the most recent row is ever read, so be careful, if you push to this
 // you have to push ALL the data you need
 // You have to send an api key in the param 'key'
-app.post("/data", bodyParser.text({ type: "*/*" }), async (req, res, next) => {
-  try {
-    const keyParamName = "key";
-    if (req.query.key !== Conf.pushDataApiKey) {
-      throw new Web.AuthError();
+app.post(
+  "/data",
+  bodyParser.text({ type: "*/*", limit: "50mb" }),
+  async (req, res, next) => {
+    try {
+      const keyParamName = "key";
+      if (req.query.key !== Conf.pushDataApiKey) {
+        throw new Web.AuthError();
+      }
+      await DbService.pushData(req.body);
+      res.json({ message: "Done" });
+    } catch (err) {
+      next(err);
     }
-    await DbService.pushData(req.body);
-    res.json({ message: "Done" });
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 Web.finishExpressAppSetupAndLaunch(app);
