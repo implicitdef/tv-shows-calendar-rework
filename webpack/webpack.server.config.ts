@@ -16,7 +16,7 @@ export const serverConfig: webpack.Configuration = {
   devtool: "source-map",
   // Add the loader for .ts files.
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.tsx?$/,
         use: [
