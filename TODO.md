@@ -1,5 +1,5 @@
-- maybe move to yarn
-- - fix errors with react types https://github.com/yarnpkg/yarn/issues/4226
+- moving to yarn and upgrading everything including webpack
+- - set correct webpack mode (currently hardcoded to development)
 - maybe upgrade every library one by one as much as possible
 - maybe move to create-react-app
 - maybe upgrade to webpack
