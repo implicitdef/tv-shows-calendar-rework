@@ -1,12 +1,12 @@
 ### How to work locally
 
-`npm run server:run-w` in a tab
+`yarn server:compile-w` in a tab
 
-`npm run server:compile-w` in the other
+`yarn server:run-w` in the other
 
 ### How to imitate the production behavior locally
 
-`npm run build-and-run-like-prod` rebuilds everything, and run it, with prod settings
+`yarn build-and-run-like-prod` rebuilds everything, and run it, with prod settings
 
 ### How to view production logs
 

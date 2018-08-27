@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "heroku-postbuild": "NODE_ENV=production npm run build:all",
-    "heroku-run": "NODE_ENV=production npm run server:run",
-    "build-and-run-like-prod": "npm run heroku-postbuild && npm run heroku-run",
+    "heroku-postbuild": "NODE_ENV=production yarn run build:all",
+    "heroku-run": "NODE_ENV=production yarn run server:run",
+    "build-and-run-like-prod": "yarn run heroku-postbuild && yarn run heroku-run",
     "build:all": "webpack --progress --config webpack/webpack.server.config.ts && webpack --progress --config webpack/webpack.frontend.config.ts",
     "server:compile": "webpack  --progress --config webpack/webpack.server.config.ts",
     "server:compile-w": "webpack --watch  --progress --config webpack/webpack.server.config.ts",
@@ -13,8 +13,8 @@
     "server:run-w": "nodemon dist/bundle-server.js --watch dist"
   },
   "engines": {
-    "node": "8.3.0",
-    "npm": "5.3.0"
+    "node": "9.5.0",
+    "yarn": "1.9.4"
   },
   "dependencies": {
     "@types/body-parser": "^1.16.8",
