@@ -46,5 +46,3 @@ export function initial(): T {
     }
   };
 }
-
-export type ThisDispatch = redux.Dispatch<T>;

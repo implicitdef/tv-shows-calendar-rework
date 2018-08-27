@@ -12,4 +12,6 @@ export type T = redux.Action &
     | metaAbout.ThisAction);
 
 // alias for our redux-thunk actions
-export type TT<A> = reduxThunk.ThunkAction<Promise<A>, State.T, null>;
+export type TT<R> = reduxThunk.ThunkAction<Promise<R>, State.T, null, T>;
+
+export type ThisDispatch = redux.Dispatch<T>;

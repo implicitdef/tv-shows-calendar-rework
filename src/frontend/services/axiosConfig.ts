@@ -2,10 +2,10 @@ import axios, { AxiosInstance, AxiosResponse } from "axios";
 import * as Constants from "tv/shared/constants";
 import * as loggedInDuck from "tv/frontend/redux/ducks/auth/loggedIn";
 import * as runningCallsDuck from "tv/frontend/redux/ducks/meta/runningCalls";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as Actions from "tv/frontend/redux/ducks/actions";
 import * as AuthStorage from "tv/frontend/services/authStorage";
 
-export function getAxios(dispatch: State.ThisDispatch): AxiosInstance {
+export function getAxios(dispatch: Actions.ThisDispatch): AxiosInstance {
   const instance = axios.create();
   instance.interceptors.request.use(config => {
     dispatch(runningCallsDuck.start());
