@@ -1,6 +1,5 @@
 import * as path from "path";
 import { CheckerPlugin } from "awesome-typescript-loader";
-import * as HtmlWebpackPlugin from "html-webpack-plugin";
 import * as webpack from "webpack";
 
 export const frontendConfigOutputPublicPath = "/static/";
