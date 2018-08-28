@@ -1,8 +1,4 @@
-- moving to yarn and upgrading everything including webpack
-- - set correct webpack mode (currently hardcoded to development)
-- maybe upgrade every library one by one as much as possible
-- maybe move to create-react-app
-- maybe upgrade to webpack
+- set correct webpack mode (currently hardcoded to development)
 - maybe make adjustments for prod in webpack conf (perf improvements, etc.)
 - maybe merge webpack confs as much as possible
 - fix auth bug : if we come back later (after exiting browser ? or after session expired ? we see an error banner which disappears after a refresh)
