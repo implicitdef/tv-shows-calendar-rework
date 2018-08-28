@@ -1,7 +1,7 @@
 import * as redux from "redux";
 import reduxThunk from "redux-thunk";
 import * as google from "tv/frontend/services/google";
-import * as authLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
+import * as duckAuthLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
 import * as Reducer from "tv/frontend/redux/ducks/reducer";
 import * as State from "tv/frontend/redux/ducks/state";
 import * as $ from "jquery";
@@ -16,5 +16,5 @@ export const store = redux.createStore(
 
 $(() => {
   google.setup();
-  store.dispatch(authLoggedIn.checkStatusOnStartupAndFetch());
+  store.dispatch(duckAuthLoggedIn.checkStatusOnStartupAndFetch());
 });

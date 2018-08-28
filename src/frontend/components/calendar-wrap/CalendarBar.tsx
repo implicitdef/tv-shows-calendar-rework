@@ -3,8 +3,8 @@ import * as React from "react";
 import * as ReactRedux from "react-redux";
 import * as Domain from "tv/shared/domain";
 import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
-import * as calendarSearch from "tv/frontend/redux/ducks/calendar/search";
-import * as calendarYear from "tv/frontend/redux/ducks/calendar/year";
+import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
+import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
 import * as State from "tv/frontend/redux/ducks/state";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
@@ -88,19 +88,19 @@ export const connected = ReactRedux.connect(
   dispatch => {
     return {
       onSetYear: (year: number) => {
-        dispatch(calendarYear.set(year));
+        dispatch(duckCalendarYear.set(year));
       },
       searchOnInput: (input: string) => {
-        dispatch(calendarSearch.searchShows(input));
+        dispatch(duckCalendarSearch.searchShows(input));
       },
       searchOnSubmit: (show: Domain.Show) => {
         dispatch(calendarFollowing.followShow(show.id));
       },
       searchOnBlur: () => {
-        dispatch(calendarSearch.close());
+        dispatch(duckCalendarSearch.close());
       },
       searchOnOpen: () => {
-        dispatch(calendarSearch.open());
+        dispatch(duckCalendarSearch.open());
       }
     };
   }

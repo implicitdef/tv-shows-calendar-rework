@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactRedux from "react-redux";
 import * as State from "tv/frontend/redux/ducks/state";
-import * as metaAbout from "tv/frontend/redux/ducks/meta/about";
+import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 
 interface Props {
   isDisplayed: boolean;
@@ -32,7 +32,7 @@ export const connected = ReactRedux.connect(
   dispatch => {
     return {
       onClose: () => {
-        dispatch(metaAbout.clear());
+        dispatch(duckMetaAbout.clear());
       }
     };
   }

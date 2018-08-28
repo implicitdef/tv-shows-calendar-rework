@@ -5,11 +5,11 @@ import * as api from "tv/frontend/services/api";
 import * as authStorage from "tv/frontend/services/authStorage";
 import * as google from "tv/frontend/services/google";
 import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as calendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
-import * as metaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
-import * as metaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
+import * as duckCalendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
+import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
+import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
 import * as State from "tv/frontend/redux/ducks/state";
-import * as authUserInfo from "tv/frontend/redux/ducks/auth/userInfo";
+import * as duckAuthUserInfo from "tv/frontend/redux/ducks/auth/userInfo";
 
 export interface ThisAction {
   type: "auth/loggedIn/SET";
@@ -41,12 +41,13 @@ export const login = (): Actions.TT<void> => {
       await google.login();
       const token = await google.getToken();
       authStorage.store(token);
+      const d = dispatch;
       dispatch(set(true));
       const user = await google.getUserInfo();
-      dispatch(authUserInfo.set(user));
-      await dispatch(calendarSeasons.fetch());
+      dispatch(duckAuthUserInfo.set(user));
+      await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
-      dispatch(metaHasGlobalError.set());
+      dispatch(duckMetaHasGlobalError.set());
     }
   };
 };
@@ -57,10 +58,10 @@ export const logout = (): Actions.TT<void> => {
       await google.logout();
       authStorage.clear();
       dispatch(set(false));
-      dispatch(authUserInfo.set(null));
-      await dispatch(calendarSeasons.fetch());
+      dispatch(duckAuthUserInfo.set(null));
+      await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
-      dispatch(metaHasGlobalError.set());
+      dispatch(duckMetaHasGlobalError.set());
     }
   };
 };
@@ -72,12 +73,12 @@ export const checkStatusOnStartupAndFetch = (): Actions.TT<void> => {
       if (token) {
         dispatch(set(true));
         const user = await google.getUserInfo();
-        dispatch(authUserInfo.set(user));
+        dispatch(duckAuthUserInfo.set(user));
       }
-      await dispatch(calendarSeasons.fetch());
+      await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
       dispatch(set(false));
-      dispatch(authUserInfo.set(null));
+      dispatch(duckAuthUserInfo.set(null));
     }
   };
 };

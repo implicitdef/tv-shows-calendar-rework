@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactRedux from "react-redux";
 import * as Domain from "tv/shared/domain";
 import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
-import * as calendarSearch from "tv/frontend/redux/ducks/calendar/search";
+import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
 import * as State from "tv/frontend/redux/ducks/state";
 
 interface ThisProps {

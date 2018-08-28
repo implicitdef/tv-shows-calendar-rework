@@ -3,8 +3,8 @@ import * as reduxThunk from "redux-thunk";
 import * as Domain from "tv/shared/domain";
 import * as api from "tv/frontend/services/api";
 import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as metaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
-import * as metaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
+import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
+import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
 import * as State from "tv/frontend/redux/ducks/state";
 
 export type ThisAction =
@@ -98,7 +98,7 @@ export const searchShows = (input: string): Actions.TT<void> => {
       }
       dispatch(open());
     } catch (e) {
-      dispatch(metaHasGlobalError.set());
+      dispatch(duckMetaHasGlobalError.set());
     }
   };
 };
