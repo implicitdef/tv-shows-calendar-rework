@@ -6,6 +6,7 @@ import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
 import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
 import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
 import * as State from "tv/frontend/redux/ducks/state";
+import * as Actions from "tv/frontend/redux/ducks/actions";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
 import Marker from "tv/frontend/components/calendar-core/parts/Marker";
@@ -85,7 +86,8 @@ export const connected = ReactRedux.connect(
       searchOpen: state.calendar.search.open
     };
   },
-  dispatch => {
+  d => {
+    const dispatch = d as Actions.ThisDispatch;
     return {
       onSetYear: (year: number) => {
         dispatch(duckCalendarYear.set(year));

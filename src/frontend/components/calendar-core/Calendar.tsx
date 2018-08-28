@@ -4,6 +4,8 @@ import * as ReactRedux from "react-redux";
 import * as Domain from "tv/shared/domain";
 import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
 import * as State from "tv/frontend/redux/ducks/state";
+import * as Actions from "tv/frontend/redux/ducks/actions";
+import * as Connect from "tv/frontend/redux/ducks/state";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
 import Marker from "tv/frontend/components/calendar-core/parts/Marker";
@@ -59,14 +61,15 @@ const Calendar: React.SFC<ThisProps> = ({
 export default Calendar;
 
 export const connected = ReactRedux.connect(
-  (state: State.T, ownProps) => {
+  (state: State.T) => {
     return {
       year: state.calendar.year,
       seasons: state.calendar.seasons,
       showRemoveButtons: state.auth.loggedIn
     };
   },
-  dispatch => {
+  d => {
+    const dispatch = d as Actions.ThisDispatch;
     return {
       onShowRemove: (show: Domain.Show) => {
         dispatch(calendarFollowing.unfollowShow(show.id));

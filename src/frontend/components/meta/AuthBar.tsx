@@ -3,6 +3,7 @@ import * as ReactRedux from "react-redux";
 import * as duckAuthLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 import * as State from "tv/frontend/redux/ducks/state";
+import * as Actions from "tv/frontend/redux/ducks/actions";
 
 interface ThisProps {
   loggedIn: boolean;
@@ -40,7 +41,8 @@ export const connected = ReactRedux.connect(
       email: state.auth.userInfo ? state.auth.userInfo.email : null
     };
   },
-  dispatch => {
+  d => {
+    const dispatch = d as Actions.ThisDispatch;
     return {
       onClickAbout: () => {
         dispatch(duckMetaAbout.set());
