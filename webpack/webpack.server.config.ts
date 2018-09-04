@@ -2,9 +2,10 @@ import * as path from "path";
 import * as nodeExternals from "webpack-node-externals";
 import { CheckerPlugin } from "awesome-typescript-loader";
 import * as webpack from "webpack";
+const isProd = process.env.NODE_ENV === "production";
 
 export const serverConfig: webpack.Configuration = {
-  mode: 'development',
+  mode: isProd ? "production" : "development",
   entry: path.resolve(__dirname, "../src/server", "index.ts"),
   resolve: {
     // Add .ts/.tsx to the resolve.extensions array.

@@ -6,7 +6,7 @@ export const frontendConfigOutputPublicPath = "/static/";
 const isProd = process.env.NODE_ENV === "production";
 
 export const frontendConfig: webpack.Configuration = {
-  mode: "development",
+  mode: isProd ? "production" : "development",
   entry: [
     ...(!isProd ? ["webpack-hot-middleware/client"] : []),
     path.resolve(__dirname, "../src/frontend", "index.ts")
