@@ -1,8 +1,9 @@
 import * as React from "react";
 import * as ReactRedux from "react-redux";
-import * as authLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
-import * as metaAbout from "tv/frontend/redux/ducks/meta/about";
+import * as duckAuthLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
+import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 import * as State from "tv/frontend/redux/ducks/state";
+import * as Actions from "tv/frontend/redux/ducks/actions";
 
 interface ThisProps {
   loggedIn: boolean;
@@ -40,16 +41,17 @@ export const connected = ReactRedux.connect(
       email: state.auth.userInfo ? state.auth.userInfo.email : null
     };
   },
-  dispatch => {
+  d => {
+    const dispatch = d as Actions.ThisDispatch;
     return {
       onClickAbout: () => {
-        dispatch(metaAbout.set());
+        dispatch(duckMetaAbout.set());
       },
       onLogin: () => {
-        dispatch(authLoggedIn.login());
+        dispatch(duckAuthLoggedIn.login());
       },
       onLogout: () => {
-        dispatch(authLoggedIn.logout());
+        dispatch(duckAuthLoggedIn.logout());
       }
     };
   }

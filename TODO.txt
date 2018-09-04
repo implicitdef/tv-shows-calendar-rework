@@ -1,7 +1,0 @@
-peut-être un jour :
-	fixer petit bug : si on revient plus tard (après avoir kill son browser ? ou session expirée ? on a un bandeau d'erreur qui disparait si on fait F5)
-
-faire ajustements pour la prod dans la conf webpack
-merger configs webpack autant que possible
-prerendu
-code splitting ?

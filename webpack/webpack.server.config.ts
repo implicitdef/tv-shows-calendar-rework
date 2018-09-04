@@ -4,6 +4,7 @@ import { CheckerPlugin } from "awesome-typescript-loader";
 import * as webpack from "webpack";
 
 export const serverConfig: webpack.Configuration = {
+  mode: 'development',
   entry: path.resolve(__dirname, "../src/server", "index.ts"),
   resolve: {
     // Add .ts/.tsx to the resolve.extensions array.
@@ -15,7 +16,7 @@ export const serverConfig: webpack.Configuration = {
   devtool: "source-map",
   // Add the loader for .ts files.
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.tsx?$/,
         use: [

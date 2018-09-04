@@ -1,5 +1,5 @@
 import * as Domain from "tv/shared/domain";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as Actions from "tv/frontend/redux/ducks/actions";
 import * as Api from "tv/frontend/services/api";
 
 function flatten<A>(arrayOfArrays: A[][]): A[] {
@@ -18,7 +18,7 @@ function reformatSeason(
 }
 
 function buildSeasonsWithShowForShow(
-  dispatch: State.ThisDispatch,
+  dispatch: Actions.ThisDispatch,
   show: Domain.Show
 ): Promise<Domain.SeasonWithShow[]> {
   return Api.seasonsOfShow(dispatch, show.id).then(seasons => {
@@ -27,7 +27,7 @@ function buildSeasonsWithShowForShow(
 }
 
 function getShowsToDisplay(
-  dispatch: State.ThisDispatch,
+  dispatch: Actions.ThisDispatch,
   isLoggedIn: boolean
 ): Promise<Domain.Show[]> {
   if (isLoggedIn) {
@@ -37,7 +37,7 @@ function getShowsToDisplay(
 }
 
 export function getSeasonsWithShows(
-  dispatch: State.ThisDispatch,
+  dispatch: Actions.ThisDispatch,
   isLoggedIn: boolean
 ): Promise<Domain.SeasonWithShow[]> {
   return getShowsToDisplay(dispatch, isLoggedIn).then(shows => {

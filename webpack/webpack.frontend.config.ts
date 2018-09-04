@@ -1,12 +1,12 @@
 import * as path from "path";
 import { CheckerPlugin } from "awesome-typescript-loader";
-import * as HtmlWebpackPlugin from "html-webpack-plugin";
 import * as webpack from "webpack";
 
 export const frontendConfigOutputPublicPath = "/static/";
 const isProd = process.env.NODE_ENV === "production";
 
 export const frontendConfig: webpack.Configuration = {
+  mode: "development",
   entry: [
     ...(!isProd ? ["webpack-hot-middleware/client"] : []),
     path.resolve(__dirname, "../src/frontend", "index.ts")
