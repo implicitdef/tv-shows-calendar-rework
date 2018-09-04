@@ -1,3 +1,4 @@
+- push last modifs on prod
 - set correct webpack mode (currently hardcoded to development)
 - maybe make adjustments for prod in webpack conf (perf improvements, etc.)
 - maybe merge webpack confs as much as possible
