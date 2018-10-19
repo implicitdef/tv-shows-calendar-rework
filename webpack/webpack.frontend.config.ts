@@ -18,7 +18,7 @@ export const frontendConfig: webpack.Configuration = {
       tv: path.resolve(__dirname, "../src")
     }
   },
-  devtool: "source-map",
+  ...(!isProd && { devtool: "eval-source-map" }),
   // Add the loader for .ts files.
   module: {
     rules: [

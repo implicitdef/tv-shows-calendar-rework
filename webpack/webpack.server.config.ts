@@ -14,7 +14,6 @@ export const serverConfig: webpack.Configuration = {
       tv: path.resolve(__dirname, "../src")
     }
   },
-  devtool: "source-map",
   // Add the loader for .ts files.
   module: {
     rules: [
