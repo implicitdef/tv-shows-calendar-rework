@@ -6,7 +6,6 @@ import * as webpackDevMiddleware from "webpack-dev-middleware";
 import * as webpackHotMiddleware from "webpack-hot-middleware";
 import * as webpackFrontendConfig from "tv/../webpack/webpack.frontend.config";
 
-// var webpackConfig = require('./webpack.config');
 export class NotFoundError extends Error {
   constructor(message: string) {
     super(message);
