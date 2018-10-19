@@ -3,3 +3,4 @@
 - maybe merge webpack confs as much as possible
 - maybe move to redux-actions or something like that
 - fix auth bug : if we come back later (after exiting browser ? or after session expired ? we see an error banner which disappears after a refresh)
+- virer bootstrap un jour si possible

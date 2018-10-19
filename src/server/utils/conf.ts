@@ -33,3 +33,5 @@ export const defaultShowsIds = [
 ];
 export const port = process.env.PORT || 3333;
 export const pushDataApiKey = process.env.PUSH_DATA_API_KEY || "pushDataApiKey";
+export const isProd = process.env.NODE_ENV === "production";
+export const isDev = !isProd;

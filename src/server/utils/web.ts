@@ -1,10 +1,13 @@
 import * as express from "express";
 import * as path from "path";
 import * as webpack from "webpack";
-import * as Conf from "tv/server/utils/conf";
 import * as webpackDevMiddleware from "webpack-dev-middleware";
 import * as webpackHotMiddleware from "webpack-hot-middleware";
-import * as webpackFrontendConfig from "tv/../webpack/webpack.frontend.config";
+import { isDev, port } from "tv/server/utils/conf";
+import {
+  frontendConfig,
+  frontendConfigOutputPublicPath
+} from "tv/../webpack/webpack.frontend.config";
 
 export class NotFoundError extends Error {
   constructor(message: string) {
@@ -37,7 +40,7 @@ const errorHandler = (
 };
 
 const listeningHandler = () => {
-  console.log(`Listening on port ${Conf.port}`);
+  console.log(`Listening on port ${port}`);
 };
 
 export function finishExpressAppSetupAndLaunch(app: express.Express): void {
@@ -45,16 +48,16 @@ export function finishExpressAppSetupAndLaunch(app: express.Express): void {
   app.get("/", (req, res) => {
     res.sendFile("index.html", { root: PublicFolder });
   });
-  if (process.env.NODE_ENV !== "production") {
-    const webpackCompiler = webpack(webpackFrontendConfig.frontendConfig);
+  if (isDev) {
+    const webpackCompiler = webpack(frontendConfig);
     app.use(
       webpackDevMiddleware(webpackCompiler, {
-        publicPath: webpackFrontendConfig.frontendConfigOutputPublicPath
+        publicPath: frontendConfigOutputPublicPath
       })
     );
     app.use(webpackHotMiddleware(webpackCompiler));
   }
   app.use("/static", express.static(PublicFolder));
   app.use("/static", express.static("dist"));
-  app.listen(Conf.port, listeningHandler);
+  app.listen(port, listeningHandler);
 }
