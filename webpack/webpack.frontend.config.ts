@@ -1,6 +1,6 @@
-import * as path from "path";
 import { CheckerPlugin } from "awesome-typescript-loader";
 import * as webpack from "webpack";
+import { buildPath } from "./webpackConfUtils";
 
 export const frontendConfigOutputPublicPath = "/static/";
 const isProd = process.env.NODE_ENV === "production";
@@ -9,13 +9,13 @@ export const frontendConfig: webpack.Configuration = {
   mode: isProd ? "production" : "development",
   entry: [
     ...(!isProd ? ["webpack-hot-middleware/client"] : []),
-    path.resolve(__dirname, "../src/frontend", "index.ts")
+    buildPath("../src/frontend/index.ts")
   ],
   // Add .ts/.tsx to the resolve.extensions array.
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
     alias: {
-      tv: path.resolve(__dirname, "../src")
+      tv: buildPath("../src")
     }
   },
   ...(!isProd && { devtool: "eval-source-map" }),
@@ -34,7 +34,7 @@ export const frontendConfig: webpack.Configuration = {
           {
             loader: "awesome-typescript-loader",
             options: {
-              configFileName: path.resolve(__dirname, "../tsconfig.json")
+              configFileName: buildPath("../tsconfig.json")
             }
           }
         ]
@@ -52,16 +52,14 @@ export const frontendConfig: webpack.Configuration = {
   plugins: [
     new CheckerPlugin(),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       APP_URL: JSON.stringify("http://localhost:3000")
     }),
-    ...(!isProd ? [new webpack.HotModuleReplacementPlugin()] : []),
-    new webpack.NoEmitOnErrorsPlugin()
+    ...(!isProd ? [new webpack.HotModuleReplacementPlugin()] : [])
   ],
   target: "web",
   output: {
     filename: "bundle-frontend.js",
-    path: path.resolve(__dirname, "../dist"),
+    path: buildPath("../dist"),
     publicPath: frontendConfigOutputPublicPath
   },
   watchOptions: {
