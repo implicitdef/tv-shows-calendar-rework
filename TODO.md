@@ -1,5 +1,6 @@
+- revoir un peu les ducks : genre tester de merger loggedIn et userInfo maybe ? voir à quoi ça ressemblerait
 - maybe move to redux-actions or something like that
-- fix auth bug : if we come back later (after exiting browser ? or after session expired ? we see an error banner which disappears after a refresh)
 - virer bootstrap un jour si possible
 - optimiser perfs : cf les warnings quand on build comme en prod
 - ptet afficher un loader discret pour quand les series se rechargent
+- distinguer quand on a pas encore l'info de auth : ne pas afficher logged out, ou mettre un loader

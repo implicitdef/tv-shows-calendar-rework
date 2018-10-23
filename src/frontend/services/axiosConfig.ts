@@ -3,17 +3,22 @@ import * as Constants from "tv/shared/constants";
 import * as loggedInDuck from "tv/frontend/redux/ducks/auth/loggedIn";
 import * as runningCallsDuck from "tv/frontend/redux/ducks/meta/runningCalls";
 import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as AuthStorage from "tv/frontend/services/authStorage";
+import * as State from "tv/frontend/redux/ducks/state";
 
-export function getAxios(dispatch: Actions.ThisDispatch): AxiosInstance {
+export type Wirings = {
+  dispatch: Actions.ThisDispatch;
+  getState: () => State.T;
+};
+
+export function getAxios({ dispatch, getState }: Wirings): AxiosInstance {
   const instance = axios.create();
   instance.interceptors.request.use(config => {
     dispatch(runningCallsDuck.start());
-    const googleToken = AuthStorage.get();
-    if (googleToken == null) {
+    const token = getState().auth.loggedIn.token;
+    if (token == null) {
       return config;
     } else {
-      config.headers[Constants.AUTH_TOKEN_HEADER] = googleToken;
+      config.headers[Constants.AUTH_TOKEN_HEADER] = token;
       return config;
     }
   });

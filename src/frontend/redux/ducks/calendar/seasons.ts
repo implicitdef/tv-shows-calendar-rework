@@ -34,9 +34,9 @@ const loaded = (seasons: Domain.SeasonWithShow[]): ThisAction => ({
 export const fetch = (): Actions.TT<void> => {
   return async (dispatch, getState) => {
     try {
-      const isLoggedIn = getState().auth.loggedIn;
+      const isLoggedIn = !!getState().auth.loggedIn.token;
       const seasons = await calendarDataFetcher.getSeasonsWithShows(
-        dispatch,
+        { dispatch, getState },
         isLoggedIn
       );
       dispatch(loaded(seasons));

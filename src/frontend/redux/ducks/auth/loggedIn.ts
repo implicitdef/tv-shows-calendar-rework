@@ -2,7 +2,6 @@ import * as redux from "redux";
 import * as reduxThunk from "redux-thunk";
 import * as Domain from "tv/shared/domain";
 import * as api from "tv/frontend/services/api";
-import * as authStorage from "tv/frontend/services/authStorage";
 import * as google from "tv/frontend/services/google";
 import * as Actions from "tv/frontend/redux/ducks/actions";
 import * as duckCalendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
@@ -11,28 +10,40 @@ import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls
 import * as State from "tv/frontend/redux/ducks/state";
 import * as duckAuthUserInfo from "tv/frontend/redux/ducks/auth/userInfo";
 
-export interface ThisAction {
-  type: "auth/loggedIn/SET";
-  payload: boolean;
-}
+export type ThisAction =
+  | {
+      type: "auth/loggedIn/SET_LOGGED_IN_TOKEN";
+      payload: string;
+    }
+  | {
+      type: "auth/loggedIn/SET_LOGGED_OUT";
+      payload: null;
+    };
 
-type ThisState = boolean;
+type ThisState = { token: string | null };
 
 export default function reducer(
-  state: ThisState = false,
+  state: ThisState = { token: null },
   action: ThisAction
 ): ThisState {
   switch (action.type) {
-    case "auth/loggedIn/SET":
-      return action.payload;
+    case "auth/loggedIn/SET_LOGGED_IN_TOKEN":
+      return { ...state, token: action.payload };
+    case "auth/loggedIn/SET_LOGGED_OUT":
+      return { ...state, token: null };
     default:
       return state;
   }
 }
 
-const set = (loggedIn: boolean): ThisAction => ({
-  type: "auth/loggedIn/SET",
-  payload: loggedIn
+const setToken = (token: string): ThisAction => ({
+  type: "auth/loggedIn/SET_LOGGED_IN_TOKEN",
+  payload: token
+});
+
+const setLoggedOut = (): ThisAction => ({
+  type: "auth/loggedIn/SET_LOGGED_OUT",
+  payload: null
 });
 
 export const login = (): Actions.TT<void> => {
@@ -40,10 +51,8 @@ export const login = (): Actions.TT<void> => {
     try {
       await google.login();
       const token = await google.getToken();
-      authStorage.store(token);
-      const d = dispatch;
-      dispatch(set(true));
       const user = await google.getUserInfo();
+      dispatch(setToken(token));
       dispatch(duckAuthUserInfo.set(user));
       await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
@@ -56,8 +65,7 @@ export const logout = (): Actions.TT<void> => {
   return async dispatch => {
     try {
       await google.logout();
-      authStorage.clear();
-      dispatch(set(false));
+      dispatch(setLoggedOut());
       dispatch(duckAuthUserInfo.set(null));
       await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
@@ -69,15 +77,16 @@ export const logout = (): Actions.TT<void> => {
 export const checkStatusOnStartupAndFetch = (): Actions.TT<void> => {
   return async dispatch => {
     try {
-      const token = authStorage.get();
-      if (token) {
-        dispatch(set(true));
+      const isLoggedIn = await google.isLoggedIn();
+      if (isLoggedIn) {
         const user = await google.getUserInfo();
+        const token = await google.getToken();
+        dispatch(setToken(token));
         dispatch(duckAuthUserInfo.set(user));
       }
       await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
-      dispatch(set(false));
+      dispatch(setLoggedOut());
       dispatch(duckAuthUserInfo.set(null));
     }
   };

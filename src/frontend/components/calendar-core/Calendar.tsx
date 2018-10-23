@@ -65,7 +65,7 @@ export const connected = ReactRedux.connect(
     return {
       year: state.calendar.year,
       seasons: state.calendar.seasons,
-      showRemoveButtons: state.auth.loggedIn
+      showRemoveButtons: !!state.auth.loggedIn.token
     };
   },
   d => {

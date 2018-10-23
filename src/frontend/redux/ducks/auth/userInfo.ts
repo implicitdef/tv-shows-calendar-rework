@@ -1,14 +1,4 @@
-import * as redux from "redux";
-import * as reduxThunk from "redux-thunk";
-import * as Domain from "tv/shared/domain";
-import * as api from "tv/frontend/services/api";
-import * as authStorage from "tv/frontend/services/authStorage";
 import * as google from "tv/frontend/services/google";
-import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as duckCalendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
-import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
-import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
-import * as State from "tv/frontend/redux/ducks/state";
 
 export interface ThisAction {
   type: "auth/userInfo/SET";

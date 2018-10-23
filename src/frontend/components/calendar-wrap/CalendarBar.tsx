@@ -80,7 +80,7 @@ export const connected = ReactRedux.connect(
   (state: State.T, ownProps) => {
     return {
       year: state.calendar.year,
-      showAddShowButton: state.auth.loggedIn,
+      showAddShowButton: !!state.auth.loggedIn.token,
       searchShows: state.calendar.search.results,
       searchInput: state.calendar.search.input,
       searchOpen: state.calendar.search.open

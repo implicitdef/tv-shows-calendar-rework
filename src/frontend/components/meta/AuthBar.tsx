@@ -37,7 +37,7 @@ export default AuthBar;
 export const connected = ReactRedux.connect(
   (state: State.T, ownProps) => {
     return {
-      loggedIn: state.auth.loggedIn,
+      loggedIn: !!state.auth.loggedIn.token,
       email: state.auth.userInfo ? state.auth.userInfo.email : null
     };
   },

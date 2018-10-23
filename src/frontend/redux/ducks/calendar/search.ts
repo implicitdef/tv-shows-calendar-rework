@@ -1,11 +1,7 @@
-import * as redux from "redux";
-import * as reduxThunk from "redux-thunk";
-import * as Domain from "tv/shared/domain";
-import * as api from "tv/frontend/services/api";
 import * as Actions from "tv/frontend/redux/ducks/actions";
 import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
-import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as api from "tv/frontend/services/api";
+import * as Domain from "tv/shared/domain";
 
 export type ThisAction =
   | {
@@ -87,13 +83,13 @@ export const clear = (): Actions.TT<void> => {
 };
 
 export const searchShows = (input: string): Actions.TT<void> => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     try {
       dispatch(setInput(input));
       if (input.trim().length === 0) {
         dispatch(loaded([]));
       } else {
-        const shows = await api.searchShows(dispatch, input);
+        const shows = await api.searchShows({ dispatch, getState }, input);
         dispatch(loaded(shows));
       }
       dispatch(open());

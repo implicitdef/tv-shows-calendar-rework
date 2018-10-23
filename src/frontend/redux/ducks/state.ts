@@ -5,7 +5,9 @@ import * as google from "tv/frontend/services/google";
 
 export interface T {
   auth: {
-    loggedIn: boolean;
+    loggedIn: {
+      token: string | null;
+    };
     userInfo: google.User | null;
   };
   calendar: {
@@ -27,7 +29,9 @@ export interface T {
 export function initial(): T {
   return {
     auth: {
-      loggedIn: false,
+      loggedIn: {
+        token: null
+      },
       userInfo: null
     },
     calendar: {

@@ -1,6 +1,6 @@
 import * as Domain from "tv/shared/domain";
-import * as Actions from "tv/frontend/redux/ducks/actions";
 import * as Api from "tv/frontend/services/api";
+import { Wirings } from "tv/frontend/services/axiosConfig";
 
 function flatten<A>(arrayOfArrays: A[][]): A[] {
   return arrayOfArrays.reduce((a, b) => a.concat(b), []);
@@ -18,31 +18,31 @@ function reformatSeason(
 }
 
 function buildSeasonsWithShowForShow(
-  dispatch: Actions.ThisDispatch,
+  wirings: Wirings,
   show: Domain.Show
 ): Promise<Domain.SeasonWithShow[]> {
-  return Api.seasonsOfShow(dispatch, show.id).then(seasons => {
+  return Api.seasonsOfShow(wirings, show.id).then(seasons => {
     return seasons.map(season => reformatSeason(season, show));
   });
 }
 
 function getShowsToDisplay(
-  dispatch: Actions.ThisDispatch,
+  wirings: Wirings,
   isLoggedIn: boolean
 ): Promise<Domain.Show[]> {
   if (isLoggedIn) {
-    return Api.userShows(dispatch);
+    return Api.userShows(wirings);
   }
-  return Api.defaultShows(dispatch);
+  return Api.defaultShows(wirings);
 }
 
 export function getSeasonsWithShows(
-  dispatch: Actions.ThisDispatch,
+  wirings: Wirings,
   isLoggedIn: boolean
 ): Promise<Domain.SeasonWithShow[]> {
-  return getShowsToDisplay(dispatch, isLoggedIn).then(shows => {
+  return getShowsToDisplay(wirings, isLoggedIn).then(shows => {
     return Promise.all(
-      shows.map(s => buildSeasonsWithShowForShow(dispatch, s))
+      shows.map(s => buildSeasonsWithShowForShow(wirings, s))
     ).then(flatten);
   });
 }
