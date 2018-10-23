@@ -4,8 +4,7 @@ import * as webpack from "webpack";
 import * as webpackDevMiddleware from "webpack-dev-middleware";
 import * as webpackHotMiddleware from "webpack-hot-middleware";
 import { isDev, port } from "tv/server/utils/conf";
-import {
-  frontendConfig,
+import frontendConfig, {
   frontendConfigOutputPublicPath
 } from "tv/../webpack/webpack.frontend.config";
 
