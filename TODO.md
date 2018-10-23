@@ -1,6 +1,8 @@
+- virer bootstrap un jour si possible
 - revoir un peu les ducks : genre tester de merger loggedIn et userInfo maybe ? voir à quoi ça ressemblerait
 - maybe move to redux-actions or something like that
-- virer bootstrap un jour si possible
+- cleaner dépendences inutilisées
 - optimiser perfs : cf les warnings quand on build comme en prod
 - ptet afficher un loader discret pour quand les series se rechargent
 - distinguer quand on a pas encore l'info de auth : ne pas afficher logged out, ou mettre un loader
+- updater les shows par défaut
