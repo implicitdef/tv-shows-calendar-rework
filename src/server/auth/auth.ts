@@ -20,8 +20,6 @@ export const middleware: express.RequestHandler = async (
 ): Promise<void> => {
   // if headers missing, refuse request
   const token = req.header(Constants.AUTH_TOKEN_HEADER);
-  console.log("@@@@@@@@@@@@@@@@@@@@@");
-  console.log("@@ received request with token in header", token);
   if (!token) {
     next(new Web.AuthError());
   } else {
