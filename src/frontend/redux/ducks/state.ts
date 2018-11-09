@@ -1,5 +1,4 @@
 import * as moment from "moment";
-import * as redux from "redux";
 import * as Domain from "tv/shared/domain";
 import * as google from "tv/frontend/services/google";
 

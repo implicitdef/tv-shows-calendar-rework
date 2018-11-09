@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as ReactRedux from "react-redux";
+import { connect } from "react-redux";
 import * as State from "tv/frontend/redux/ducks/state";
 
 interface Props {
@@ -16,7 +16,7 @@ const GlobalErrorBanner: React.SFC<Props> = ({ hasError }) =>
 
 export default GlobalErrorBanner;
 
-export const connected = ReactRedux.connect(
+export const connected = connect(
   (state: State.T, ownProps) => {
     return {
       hasError: state.meta.hasGlobalError

@@ -1,6 +1,6 @@
 import * as moment from "moment";
 import * as React from "react";
-import * as ReactRedux from "react-redux";
+import { connect } from "react-redux";
 import * as Domain from "tv/shared/domain";
 import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
 import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
@@ -76,7 +76,7 @@ const CalendarBar: React.SFC<ThisProps> = ({
 
 export default CalendarBar;
 
-export const connected = ReactRedux.connect(
+export const connected = connect(
   (state: State.T, ownProps) => {
     return {
       year: state.calendar.year,

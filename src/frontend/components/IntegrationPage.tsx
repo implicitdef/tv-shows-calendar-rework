@@ -1,6 +1,5 @@
 import * as moment from "moment";
 import * as React from "react";
-import * as Domain from "tv/shared/domain";
 import Calendar from "tv/frontend/components/calendar-core/Calendar";
 import CalendarBar from "tv/frontend/components/calendar-wrap/CalendarBar";
 import AuthBar from "tv/frontend/components/meta/AuthBar";

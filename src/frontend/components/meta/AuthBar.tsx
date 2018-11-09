@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as ReactRedux from "react-redux";
+import { connect } from "react-redux";
 import * as duckAuthLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 import * as State from "tv/frontend/redux/ducks/state";
@@ -34,7 +34,7 @@ const AuthBar: React.SFC<ThisProps> = props => (
 
 export default AuthBar;
 
-export const connected = ReactRedux.connect(
+export const connected = connect(
   (state: State.T, ownProps) => {
     return {
       loggedIn: !!state.auth.loggedIn.token,

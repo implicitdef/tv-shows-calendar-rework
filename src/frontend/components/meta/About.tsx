@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as ReactRedux from "react-redux";
+import { connect } from "react-redux";
 import * as State from "tv/frontend/redux/ducks/state";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 
@@ -23,7 +23,7 @@ const About: React.SFC<Props> = ({ isDisplayed, onClose }) =>
     </div>
   ) : null;
 
-export const connected = ReactRedux.connect(
+export const connected = connect(
   (state: State.T, ownProps) => {
     return {
       isDisplayed: state.meta.about

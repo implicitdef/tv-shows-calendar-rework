@@ -1,4 +1,5 @@
-- virer bootstrap un jour si possible
+- revoir un peu la structure des components pour me la réapproprier
+- rebosser un peu le css, essayer de passer à un container non-fluide
 - revoir un peu les ducks : genre tester de merger loggedIn et userInfo maybe ? voir à quoi ça ressemblerait
 - maybe move to redux-actions or something like that
 - cleaner dépendences inutilisées
@@ -6,3 +7,4 @@
 - ptet afficher un loader discret pour quand les series se rechargent
 - distinguer quand on a pas encore l'info de auth : ne pas afficher logged out, ou mettre un loader
 - updater les shows par défaut
+- un jour faire un affichage décent sur mobile
