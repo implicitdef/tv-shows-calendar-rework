@@ -1,5 +1,5 @@
-- properly type all connected components, using AuthBar as example
 - rebosser un peu le css, essayer de passer à un container non-fluide
+- utiliser css modules, virer BEM ?
 - utiliser partout des type X = , au lieu de interface X
 - revoir un peu les ducks : genre tester de merger loggedIn et userInfo maybe ? voir à quoi ça ressemblerait
 - maybe move to redux-actions or something like that

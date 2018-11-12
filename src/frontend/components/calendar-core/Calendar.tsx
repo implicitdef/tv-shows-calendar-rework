@@ -1,17 +1,15 @@
 import * as moment from "moment";
 import * as React from "react";
 import { connect } from "react-redux";
-import * as Domain from "tv/shared/domain";
-import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
-import * as State from "tv/frontend/redux/ducks/state";
-import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as Connect from "tv/frontend/redux/ducks/state";
-import * as DateUtils from "tv/frontend/services/dateUtils";
-import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
 import Marker from "tv/frontend/components/calendar-core/parts/Marker";
 import MonthsBackground from "tv/frontend/components/calendar-core/parts/MonthsBackground";
 import MonthsRow from "tv/frontend/components/calendar-core/parts/MonthsRow";
 import SeasonRow from "tv/frontend/components/calendar-core/parts/SeasonRow";
+import * as Actions from "tv/frontend/redux/ducks/actions";
+import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
+import * as State from "tv/frontend/redux/ducks/state";
+import * as DateUtils from "tv/frontend/services/dateUtils";
+import * as Domain from "tv/shared/domain";
 
 type StateProps = {
   year: number;
