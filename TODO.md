@@ -1,3 +1,4 @@
+- mettre reselect et des selecteurs
 - rebosser un peu le css, essayer de passer à un container non-fluide
 - utiliser css modules, virer BEM ?
 - revoir un peu les ducks : genre tester de merger loggedIn et userInfo maybe ? voir à quoi ça ressemblerait
