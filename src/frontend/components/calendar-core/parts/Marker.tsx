@@ -2,9 +2,9 @@ import * as moment from "moment";
 import * as React from "react";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 
-interface ThisProps {
+type ThisProps = {
   now: moment.Moment;
-}
+};
 
 // Columns suggesting the months behind the series
 const Marker: React.SFC<ThisProps> = ({ now }) => (

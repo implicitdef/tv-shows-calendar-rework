@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Domain from "tv/shared/domain";
 
-interface ThisProps {
+type ThisProps = {
   shows: Domain.Show[];
   open: boolean;
   input: string;
@@ -9,11 +9,11 @@ interface ThisProps {
   onSubmit: (selectedShow: Domain.Show) => void;
   onBlur: () => void;
   onOpen: () => void;
-}
+};
 
-interface ThisState {
+type ThisState = {
   input: string;
-}
+};
 
 export default class SearchBox extends React.Component<ThisProps, ThisState> {
   public render() {

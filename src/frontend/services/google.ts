@@ -2,12 +2,12 @@ import * as Conf from "tv/frontend/services/conf";
 
 const W = window as any;
 
-export interface User {
+export type User = {
   id: string;
   name: string | null;
   email: string | null;
   image: string | null;
-}
+};
 
 // to ensure our calls are made after gapi is loaded
 // we have to wrap it in a promise

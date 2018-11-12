@@ -1,6 +1,5 @@
 - rebosser un peu le css, essayer de passer à un container non-fluide
 - utiliser css modules, virer BEM ?
-- utiliser partout des type X = , au lieu de interface X
 - revoir un peu les ducks : genre tester de merger loggedIn et userInfo maybe ? voir à quoi ça ressemblerait
 - maybe move to redux-actions or something like that
 - cleaner dépendences inutilisées
@@ -9,4 +8,4 @@
 - distinguer quand on a pas encore l'info de auth : ne pas afficher logged out, ou mettre un loader
 - updater les shows par défaut
 - un jour faire un affichage décent sur mobile
-- mettre graphql
+- mettre graphql, d'abord coté server puis faire coté front

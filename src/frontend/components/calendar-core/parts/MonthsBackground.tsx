@@ -2,9 +2,9 @@ import * as _ from "lodash";
 import * as React from "react";
 import MonthBox from "tv/frontend/components/calendar-core/boxes/MonthBox";
 
-interface ThisProps {
+type ThisProps = {
   year: number;
-}
+};
 
 // Columns suggesting the months behind the series
 const MonthsBackground: React.SFC<ThisProps> = ({ year }) => (

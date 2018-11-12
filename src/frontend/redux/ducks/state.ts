@@ -2,7 +2,7 @@ import * as moment from "moment";
 import * as Domain from "tv/shared/domain";
 import * as google from "tv/frontend/services/google";
 
-export interface T {
+export type T = {
   auth: {
     loggedIn: {
       token: string | null;

@@ -19,7 +19,7 @@ export type ThisAction =
       type: "calendar/search/CLOSE";
     };
 
-interface ThisState {
+type ThisState = {
   results: Domain.Show[];
   input: string;
   open: boolean;

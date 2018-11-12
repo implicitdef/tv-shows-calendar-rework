@@ -5,7 +5,7 @@ import * as DateUtils from "tv/frontend/services/dateUtils";
 // Generic div to represente an arbitrary period of time in a year
 // with automatic width and horizontal position
 
-interface ThisProps {
+type ThisProps = {
   specificClassName?: string;
   year: number;
   start: moment.Moment;
@@ -13,7 +13,7 @@ interface ThisProps {
   zIndex?: number;
   children?: React.ReactNode;
   specificColor?: string;
-}
+};
 
 const PeriodInYearBox: React.SFC<ThisProps> = ({
   specificClassName,

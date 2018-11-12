@@ -1,38 +1,38 @@
 import * as moment from "moment";
 
-export interface Show {
+export type Show = {
   id: number;
   name: string;
-}
-export interface Season {
+};
+export type Season = {
   id: number;
   number: number;
   time: TimeRange;
-}
+};
 
-export interface MSeason {
+export type MSeason = {
   id: number;
   number: number;
   time: MTimeRange;
-}
+};
 
-export interface ShowAndSeasons {
+export type ShowAndSeasons = {
   serie: Show;
   seasons: Season[];
-}
+};
 
-export interface TimeRange {
+export type TimeRange = {
   start: string;
   end: string;
-}
+};
 
-export interface MTimeRange {
+export type MTimeRange = {
   start: moment.Moment;
   end: moment.Moment;
-}
+};
 
-export interface SeasonWithShow {
+export type SeasonWithShow = {
   show: Show;
   number: number;
   time: MTimeRange;
-}
+};

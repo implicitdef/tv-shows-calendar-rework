@@ -1,6 +1,6 @@
 import * as google from "tv/frontend/services/google";
 
-export interface ThisAction {
+export type ThisAction = {
   type: "auth/userInfo/SET";
   payload: google.User | null;
 }

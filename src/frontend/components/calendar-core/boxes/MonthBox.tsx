@@ -6,12 +6,12 @@ import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodIn
 // Generic div to represente an arbitrary period of time in a year
 // with automatic width and horizontal position
 
-interface ThisProps {
+type ThisProps = {
   year: number;
   monthNumber: number;
   children?: React.ReactNode;
   specificClassName?: string;
-}
+};
 
 const MonthBox: React.SFC<ThisProps> = ({
   year,

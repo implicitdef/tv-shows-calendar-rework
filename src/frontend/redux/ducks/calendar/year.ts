@@ -7,7 +7,7 @@ import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalE
 import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
 import * as State from "tv/frontend/redux/ducks/state";
 
-export interface ThisAction {
+export type ThisAction = {
   type: "calendar/year/SET";
   payload: number;
 }

@@ -2,16 +2,16 @@ import * as Knex from "knex";
 import * as Domain from "tv/shared/domain";
 import * as Utils from "tv/server/utils/utils";
 
-interface RawJsonDataRow {
+type RawJsonDataRow = {
   id: number;
   content: string;
 }
 
-interface User {
+type User = {
   id: number;
   google_user_id: string;
 }
-interface UserSerieRow {
+type UserSerieRow = {
   user_id: number;
   serie_id: number;
 }

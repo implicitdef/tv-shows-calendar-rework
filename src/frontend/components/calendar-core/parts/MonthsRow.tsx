@@ -4,9 +4,9 @@ import * as React from "react";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 import MonthBox from "tv/frontend/components/calendar-core/boxes/MonthBox";
 
-interface ThisProps {
+type ThisProps = {
   year: number;
-}
+};
 
 // Lists the months at the top of the parts
 const MonthsRow: React.SFC<ThisProps> = ({ year }) => (

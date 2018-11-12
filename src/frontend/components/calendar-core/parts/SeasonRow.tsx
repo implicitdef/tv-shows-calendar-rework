@@ -8,13 +8,13 @@ import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodIn
 
 // displays a given season of a serie
 
-interface ThisProps {
+type ThisProps = {
   year: number;
   season: Domain.SeasonWithShow;
   index: number;
   showRemoveButtons: boolean;
   onClose: () => void;
-}
+};
 
 const colors = [
   "#f44336",
@@ -40,7 +40,7 @@ const colors = [
 
 const alwaysPositiveModulo = (nb: number, divider: number): number => {
   // http://stackoverflow.com/questions/4467539/javascript-modulo-not-behaving
-  return (nb % divider + divider) % divider;
+  return ((nb % divider) + divider) % divider;
 };
 
 const hashOfStr = (str: string): number => {
