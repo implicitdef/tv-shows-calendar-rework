@@ -49,17 +49,15 @@ export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
     loggedIn: !!state.auth.loggedIn.token,
     email: state.auth.userInfo ? state.auth.userInfo.email : null
   }),
-  (dispatch: Actions.ThisDispatch) => {
-    return {
-      onClickAbout: () => {
-        dispatch(duckMetaAbout.set());
-      },
-      onLogin: () => {
-        dispatch(duckAuthLoggedIn.login());
-      },
-      onLogout: () => {
-        dispatch(duckAuthLoggedIn.logout());
-      }
-    };
-  }
+  (dispatch: Actions.ThisDispatch) => ({
+    onClickAbout: () => {
+      dispatch(duckMetaAbout.set());
+    },
+    onLogin: () => {
+      dispatch(duckAuthLoggedIn.login());
+    },
+    onLogout: () => {
+      dispatch(duckAuthLoggedIn.logout());
+    }
+  })
 )(AuthBar);

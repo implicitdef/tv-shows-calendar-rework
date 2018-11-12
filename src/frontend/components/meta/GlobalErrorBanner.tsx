@@ -2,11 +2,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 import * as State from "tv/frontend/redux/ducks/state";
 
-interface Props {
+type StateProps = {
   hasError: boolean;
-}
+};
+type DispatchProps = {};
+type OwnProps = {};
+type ThisProps = StateProps & DispatchProps & OwnProps;
 
-const GlobalErrorBanner: React.SFC<Props> = ({ hasError }) =>
+const GlobalErrorBanner: React.SFC<ThisProps> = ({ hasError }) =>
   hasError ? (
     <div className="global-error-banner">
       Oops, it looks like something didn't work as it should. Please refresh
@@ -16,13 +19,9 @@ const GlobalErrorBanner: React.SFC<Props> = ({ hasError }) =>
 
 export default GlobalErrorBanner;
 
-export const connected = connect(
-  (state: State.T, ownProps) => {
-    return {
-      hasError: state.meta.hasGlobalError
-    };
-  },
-  dispatch => {
-    return {};
-  }
+export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
+  (state: State.T) => ({
+    hasError: state.meta.hasGlobalError
+  }),
+  () => {}
 )(GlobalErrorBanner);

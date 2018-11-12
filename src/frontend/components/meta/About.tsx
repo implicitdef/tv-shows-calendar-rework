@@ -2,13 +2,18 @@ import * as React from "react";
 import { connect } from "react-redux";
 import * as State from "tv/frontend/redux/ducks/state";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
+import * as Actions from "tv/frontend/redux/ducks/actions";
 
-interface Props {
+type StateProps = {
   isDisplayed: boolean;
+};
+type DispatchProps = {
   onClose: () => void;
-}
+};
+type OwnProps = {};
+type ThisProps = StateProps & DispatchProps & OwnProps;
 
-const About: React.SFC<Props> = ({ isDisplayed, onClose }) =>
+const About: React.SFC<ThisProps> = ({ isDisplayed, onClose }) =>
   isDisplayed ? (
     <div className="about">
       <p>
@@ -23,17 +28,13 @@ const About: React.SFC<Props> = ({ isDisplayed, onClose }) =>
     </div>
   ) : null;
 
-export const connected = connect(
-  (state: State.T, ownProps) => {
-    return {
-      isDisplayed: state.meta.about
-    };
-  },
-  dispatch => {
-    return {
-      onClose: () => {
-        dispatch(duckMetaAbout.clear());
-      }
-    };
-  }
+export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
+  (state: State.T) => ({
+    isDisplayed: state.meta.about
+  }),
+  (dispatch: Actions.ThisDispatch) => ({
+    onClose: () => {
+      dispatch(duckMetaAbout.clear());
+    }
+  })
 )(About);

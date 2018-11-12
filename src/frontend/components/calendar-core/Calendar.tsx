@@ -13,13 +13,18 @@ import MonthsBackground from "tv/frontend/components/calendar-core/parts/MonthsB
 import MonthsRow from "tv/frontend/components/calendar-core/parts/MonthsRow";
 import SeasonRow from "tv/frontend/components/calendar-core/parts/SeasonRow";
 
-interface ThisProps {
+type StateProps = {
   year: number;
-  mockedNow?: moment.Moment;
   seasons: Domain.SeasonWithShow[];
   showRemoveButtons: boolean;
+};
+type DispatchProps = {
   onShowRemove: (show: Domain.Show) => void;
-}
+};
+type OwnProps = {
+  mockedNow?: moment.Moment;
+};
+type ThisProps = StateProps & DispatchProps & OwnProps;
 
 const Calendar: React.SFC<ThisProps> = ({
   year,
@@ -60,20 +65,15 @@ const Calendar: React.SFC<ThisProps> = ({
 
 export default Calendar;
 
-export const connected = connect(
-  (state: State.T) => {
-    return {
-      year: state.calendar.year,
-      seasons: state.calendar.seasons,
-      showRemoveButtons: !!state.auth.loggedIn.token
-    };
-  },
-  d => {
-    const dispatch = d as Actions.ThisDispatch;
-    return {
-      onShowRemove: (show: Domain.Show) => {
-        dispatch(calendarFollowing.unfollowShow(show.id));
-      }
-    };
-  }
+export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
+  (state: State.T) => ({
+    year: state.calendar.year,
+    seasons: state.calendar.seasons,
+    showRemoveButtons: !!state.auth.loggedIn.token
+  }),
+  (dispatch: Actions.ThisDispatch) => ({
+    onShowRemove: (show: Domain.Show) => {
+      dispatch(calendarFollowing.unfollowShow(show.id));
+    }
+  })
 )(Calendar);
