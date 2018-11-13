@@ -10,7 +10,7 @@ import * as State from "tv/frontend/redux/ducks/state";
 export type ThisAction = {
   type: "calendar/seasons/LOADED";
   payload: Domain.SeasonWithShow[];
-}
+};
 
 type ThisState = Domain.SeasonWithShow[];
 

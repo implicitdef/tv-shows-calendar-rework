@@ -1,6 +1,7 @@
 import * as moment from "moment";
 import * as Domain from "tv/shared/domain";
 import * as google from "tv/frontend/services/google";
+import * as newAuthDuck from "tv/frontend/redux/ducks/newAuth";
 
 export type T = {
   auth: {
@@ -9,6 +10,7 @@ export type T = {
     };
     userInfo: google.User | null;
   };
+  newAuth: newAuthDuck.ThisState;
   calendar: {
     year: number;
     seasons: Domain.SeasonWithShow[];
@@ -23,7 +25,7 @@ export type T = {
     hasGlobalError: boolean;
     runningCalls: number;
   };
-}
+};
 
 export function initial(): T {
   return {
@@ -33,6 +35,7 @@ export function initial(): T {
       },
       userInfo: null
     },
+    newAuth: newAuthDuck.initial,
     calendar: {
       year: moment().year(),
       seasons: [],
@@ -49,3 +52,5 @@ export function initial(): T {
     }
   };
 }
+
+export type Selector<A> = (state: T) => A;
