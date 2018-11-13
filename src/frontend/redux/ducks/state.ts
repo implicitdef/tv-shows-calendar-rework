@@ -1,15 +1,8 @@
 import * as moment from "moment";
-import * as Domain from "tv/shared/domain";
-import * as google from "tv/frontend/services/google";
 import * as newAuthDuck from "tv/frontend/redux/ducks/newAuth";
+import * as Domain from "tv/shared/domain";
 
 export type T = {
-  auth: {
-    loggedIn: {
-      token: string | null;
-    };
-    userInfo: google.User | null;
-  };
   newAuth: newAuthDuck.ThisState;
   calendar: {
     year: number;
@@ -29,12 +22,6 @@ export type T = {
 
 export function initial(): T {
   return {
-    auth: {
-      loggedIn: {
-        token: null
-      },
-      userInfo: null
-    },
     newAuth: newAuthDuck.initial,
     calendar: {
       year: moment().year(),

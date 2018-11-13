@@ -1,7 +1,6 @@
 import * as redux from "redux";
 import * as reduxThunk from "redux-thunk";
-import * as duckAuthLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
-import * as duckAuthUserInfo from "tv/frontend/redux/ducks/auth/userInfo";
+import * as duckNewAuth from "tv/frontend/redux/ducks/newAuth";
 import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
 import * as duckCalendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
 import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
@@ -12,8 +11,7 @@ import * as State from "tv/frontend/redux/ducks/state";
 
 export type T = redux.Action<String> &
   (
-    | duckAuthLoggedIn.ThisAction
-    | duckAuthUserInfo.ThisAction
+    | duckNewAuth.ThisAction
     | duckCalendarSeasons.ThisAction
     | duckCalendarSearch.ThisAction
     | duckCalendarYear.ThisAction

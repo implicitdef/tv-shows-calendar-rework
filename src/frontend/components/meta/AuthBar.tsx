@@ -1,7 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as duckAuthLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
+import * as duckNewAuth from "tv/frontend/redux/ducks/newAuth";
+import * as newAuthThunk from "tv/frontend/redux/ducks/newAuthThunk";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 import * as State from "tv/frontend/redux/ducks/state";
 
@@ -46,18 +47,18 @@ export default AuthBar;
 
 export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   (state: State.T) => ({
-    loggedIn: !!state.auth.loggedIn.token,
-    email: state.auth.userInfo ? state.auth.userInfo.email : null
+    loggedIn: !!duckNewAuth.isUserLoggedInSelector(state),
+    email: duckNewAuth.userEmailSelector(state)
   }),
   (dispatch: Actions.ThisDispatch) => ({
     onClickAbout: () => {
       dispatch(duckMetaAbout.set());
     },
     onLogin: () => {
-      dispatch(duckAuthLoggedIn.login());
+      dispatch(newAuthThunk.login());
     },
     onLogout: () => {
-      dispatch(duckAuthLoggedIn.logout());
+      dispatch(newAuthThunk.logout());
     }
   })
 )(AuthBar);

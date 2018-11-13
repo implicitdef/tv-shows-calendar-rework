@@ -6,6 +6,7 @@ import * as Actions from "tv/frontend/redux/ducks/actions";
 import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
 import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
 import * as State from "tv/frontend/redux/ducks/state";
+import * as newAuthDuck from "tv/frontend/redux/ducks/newAuth";
 
 export type ThisAction = {
   type: "calendar/seasons/LOADED";
@@ -34,10 +35,9 @@ const loaded = (seasons: Domain.SeasonWithShow[]): ThisAction => ({
 export const fetch = (): Actions.TT<void> => {
   return async (dispatch, getState) => {
     try {
-      const isLoggedIn = !!getState().auth.loggedIn.token;
       const seasons = await calendarDataFetcher.getSeasonsWithShows(
         { dispatch, getState },
-        isLoggedIn
+        newAuthDuck.isUserLoggedInSelector(getState())
       );
       dispatch(loaded(seasons));
     } catch (e) {

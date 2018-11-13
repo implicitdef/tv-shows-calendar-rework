@@ -6,7 +6,6 @@ import { createSelector } from "reselect";
 import * as State from "tv/frontend/redux/ducks/state";
 
 export const SET_TOKEN = "newAuth.SET_TOKEN";
-export const REMOVE_TOKEN = "newAuth.REMOVE_TOKEN";
 export const SET_USER_INFO = "newAuth.SET_USER_INFO";
 
 export type ThisState = {
@@ -24,9 +23,13 @@ const userInfoSelector = createSelector(
   newAuthSelector,
   newAuth => newAuth.userInfo
 );
-export const isUserLoggedInSelector: State.Selector<boolean> = createSelector(
+export const tokenSelector: State.Selector<string | null> = createSelector(
   newAuthSelector,
-  newAuth => !!newAuth.token
+  newAuth => newAuth.token
+);
+export const isUserLoggedInSelector: State.Selector<boolean> = createSelector(
+  tokenSelector,
+  token => !!token
 );
 export const userEmailSelector: State.Selector<string | null> = createSelector(
   isUserLoggedInSelector,
@@ -35,26 +38,19 @@ export const userEmailSelector: State.Selector<string | null> = createSelector(
     isUserLoggedIn && userInfo ? userInfo.email : null
 );
 
-export const Actions = {
-  setToken: (value: string) => createAction(SET_TOKEN, value),
-  removeToken: () => createAction(REMOVE_TOKEN),
-  setUserInfo: (value: google.User) => createAction(SET_USER_INFO, value)
+export const actions = {
+  setToken: (value: string | null) => createAction(SET_TOKEN, value),
+  setUserInfo: (value: google.User | null) => createAction(SET_USER_INFO, value)
 };
 
-export type Actions = ActionsUnion<typeof Actions>;
+export type ThisAction = ActionsUnion<typeof actions>;
 
-export const reducer = (state = initial, action: Actions): ThisState => {
+export default (state: ThisState = initial, action: ThisAction): ThisState => {
   switch (action.type) {
     case SET_TOKEN: {
       return {
         ...state,
         token: action.payload
-      };
-    }
-    case REMOVE_TOKEN: {
-      return {
-        ...state,
-        token: null
       };
     }
     case SET_USER_INFO: {

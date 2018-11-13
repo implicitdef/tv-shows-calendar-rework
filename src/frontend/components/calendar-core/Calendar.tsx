@@ -10,6 +10,7 @@ import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
 import * as State from "tv/frontend/redux/ducks/state";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 import * as Domain from "tv/shared/domain";
+import * as newAuthDuck from "tv/frontend/redux/ducks/newAuth";
 
 type StateProps = {
   year: number;
@@ -67,7 +68,7 @@ export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   (state: State.T) => ({
     year: state.calendar.year,
     seasons: state.calendar.seasons,
-    showRemoveButtons: !!state.auth.loggedIn.token
+    showRemoveButtons: newAuthDuck.isUserLoggedInSelector(state)
   }),
   (dispatch: Actions.ThisDispatch) => ({
     onShowRemove: (show: Domain.Show) => {

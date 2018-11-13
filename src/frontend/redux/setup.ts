@@ -1,7 +1,7 @@
 import * as redux from "redux";
 import reduxThunk from "redux-thunk";
 import * as google from "tv/frontend/services/google";
-import * as duckAuthLoggedIn from "tv/frontend/redux/ducks/auth/loggedIn";
+import * as newAuthThunk from "tv/frontend/redux/ducks/newAuthThunk";
 import * as Reducer from "tv/frontend/redux/ducks/reducer";
 import * as State from "tv/frontend/redux/ducks/state";
 import * as Actions from "tv/frontend/redux/ducks/actions";
@@ -18,5 +18,5 @@ export const store = redux.createStore(
 $(() => {
   google.setup();
   const dispatch = store.dispatch as Actions.ThisDispatch;
-  dispatch(duckAuthLoggedIn.checkStatusOnStartupAndFetch());
+  dispatch(newAuthThunk.checkStatusOnStartupAndFetch());
 });
