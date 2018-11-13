@@ -1,14 +1,13 @@
 import * as google from "tv/frontend/services/google";
-import {
-  createAction,
-  createActions,
-  handleActions,
-  combineActions
-} from "redux-actions";
+
+import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
+
 import { createSelector } from "reselect";
 import * as State from "tv/frontend/redux/ducks/state";
 
-const prefix = "newAuth";
+export const SET_TOKEN = "newAuth.SET_TOKEN";
+export const REMOVE_TOKEN = "newAuth.REMOVE_TOKEN";
+export const SET_USER_INFO = "newAuth.SET_USER_INFO";
 
 export type ThisState = {
   token: string | null;
@@ -36,18 +35,35 @@ export const userEmailSelector: State.Selector<string | null> = createSelector(
     isUserLoggedIn && userInfo ? userInfo.email : null
 );
 
-const setToken = createAction<string>(`${prefix}.SET_TOKEN`);
-const removeToken = createAction<{}>(`${prefix}.REMOVE_TOKEN`);
+export const Actions = {
+  setToken: (value: string) => createAction(SET_TOKEN, value),
+  removeToken: () => createAction(REMOVE_TOKEN),
+  setUserInfo: (value: google.User) => createAction(SET_USER_INFO, value)
+};
 
-type ThisActionsPayload = string | {};
+export type Actions = ActionsUnion<typeof Actions>;
 
-const reducer: Reducer<State> = handleActions<ThisState, ThisActionsPayload>(
-  {
-    [setToken.toString()]: (state, foo) => {
-      return { ...state, counter: state.counter + amount };
+export const reducer = (state = initial, action: Actions): ThisState => {
+  switch (action.type) {
+    case SET_TOKEN: {
+      return {
+        ...state,
+        token: action.payload
+      };
     }
-  },
-  initial
-);
-
-removeToken({});
+    case REMOVE_TOKEN: {
+      return {
+        ...state,
+        token: null
+      };
+    }
+    case SET_USER_INFO: {
+      return {
+        ...state,
+        userInfo: action.payload
+      };
+    }
+    default:
+      return state;
+  }
+};
