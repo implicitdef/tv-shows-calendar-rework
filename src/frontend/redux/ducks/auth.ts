@@ -20,15 +20,15 @@ const userInfoSelector = createSelector(
   rootSelector,
   _ => _.user
 );
-export const tokenSelector: State.Selector<string | null> = createSelector(
+export const tokenSelector = createSelector(
   rootSelector,
   _ => _.token
 );
-export const isUserLoggedInSelector: State.Selector<boolean> = createSelector(
+export const isUserLoggedInSelector = createSelector(
   tokenSelector,
   token => !!token
 );
-export const userEmailSelector: State.Selector<string | null> = createSelector(
+export const userEmailSelector = createSelector(
   isUserLoggedInSelector,
   userInfoSelector,
   (isUserLoggedIn, userInfo) =>
