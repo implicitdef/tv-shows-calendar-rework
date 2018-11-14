@@ -5,23 +5,23 @@ import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 import { createSelector } from "reselect";
 import * as State from "tv/frontend/redux/ducks/state";
 
-export const SET_TOKEN = "newAuth.SET_TOKEN";
-export const SET_USER_INFO = "newAuth.SET_USER_INFO";
+export const LOGIN = "newAuth.LOGIN";
+export const LOGOUT = "newAuth.LOGOUT";
 
 export type ThisState = {
   token: string | null;
-  userInfo: google.User | null;
+  user: google.User | null;
 };
 
 export const initial = {
   token: null,
-  userInfo: null
+  user: null
 };
 
 const newAuthSelector = (state: State.T) => state.newAuth;
 const userInfoSelector = createSelector(
   newAuthSelector,
-  newAuth => newAuth.userInfo
+  newAuth => newAuth.user
 );
 export const tokenSelector: State.Selector<string | null> = createSelector(
   newAuthSelector,
@@ -39,24 +39,26 @@ export const userEmailSelector: State.Selector<string | null> = createSelector(
 );
 
 export const actions = {
-  setToken: (value: string | null) => createAction(SET_TOKEN, value),
-  setUserInfo: (value: google.User | null) => createAction(SET_USER_INFO, value)
+  login: (value: { token: string; user: google.User }) =>
+    createAction(LOGIN, value),
+  logout: () => createAction(LOGOUT)
 };
 
 export type ThisAction = ActionsUnion<typeof actions>;
 
 export default (state: ThisState = initial, action: ThisAction): ThisState => {
   switch (action.type) {
-    case SET_TOKEN: {
+    case LOGIN: {
       return {
         ...state,
-        token: action.payload
+        ...action.payload
       };
     }
-    case SET_USER_INFO: {
+    case LOGOUT: {
       return {
         ...state,
-        userInfo: action.payload
+        user: null,
+        token: null
       };
     }
     default:

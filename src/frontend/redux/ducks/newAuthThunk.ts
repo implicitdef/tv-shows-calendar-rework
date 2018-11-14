@@ -10,8 +10,7 @@ export const login = (): Actions.TT<void> => {
       await google.login();
       const token = await google.getToken();
       const user = await google.getUserInfo();
-      dispatch(duckNewAuth.actions.setToken(token));
-      dispatch(duckNewAuth.actions.setUserInfo(user));
+      dispatch(duckNewAuth.actions.login({ token, user }));
       await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
       dispatch(duckMetaHasGlobalError.set());
@@ -23,8 +22,7 @@ export const logout = (): Actions.TT<void> => {
   return async dispatch => {
     try {
       await google.logout();
-      dispatch(duckNewAuth.actions.setToken(null));
-      dispatch(duckNewAuth.actions.setUserInfo(null));
+      dispatch(duckNewAuth.actions.logout());
       await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
       dispatch(duckMetaHasGlobalError.set());
@@ -39,13 +37,11 @@ export const checkStatusOnStartupAndFetch = (): Actions.TT<void> => {
       if (isLoggedIn) {
         const user = await google.getUserInfo();
         const token = await google.getToken();
-        dispatch(duckNewAuth.actions.setToken(token));
-        dispatch(duckNewAuth.actions.setUserInfo(user));
+        dispatch(duckNewAuth.actions.login({ token, user }));
       }
       await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
-      dispatch(duckNewAuth.actions.setToken(null));
-      dispatch(duckNewAuth.actions.setUserInfo(null));
+      dispatch(duckNewAuth.actions.logout());
     }
   };
 };
