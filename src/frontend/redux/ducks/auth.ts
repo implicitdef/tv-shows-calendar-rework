@@ -5,8 +5,8 @@ import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 import { createSelector } from "reselect";
 import * as State from "tv/frontend/redux/ducks/state";
 
-export const LOGIN = "newAuth.LOGIN";
-export const LOGOUT = "newAuth.LOGOUT";
+export const LOGIN = "auth.LOGIN";
+export const LOGOUT = "auth.LOGOUT";
 
 export type ThisState = {
   token: string | null;
@@ -18,14 +18,14 @@ export const initial = {
   user: null
 };
 
-const newAuthSelector = (state: State.T) => state.newAuth;
+const authSelector = (state: State.T) => state.auth;
 const userInfoSelector = createSelector(
-  newAuthSelector,
-  newAuth => newAuth.user
+  authSelector,
+  auth => auth.user
 );
 export const tokenSelector: State.Selector<string | null> = createSelector(
-  newAuthSelector,
-  newAuth => newAuth.token
+  authSelector,
+  auth => auth.token
 );
 export const isUserLoggedInSelector: State.Selector<boolean> = createSelector(
   tokenSelector,

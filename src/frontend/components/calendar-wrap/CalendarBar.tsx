@@ -5,7 +5,7 @@ import * as Domain from "tv/shared/domain";
 import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
 import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
 import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
-import * as newAuthDuck from "tv/frontend/redux/ducks/newAuth";
+import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as State from "tv/frontend/redux/ducks/state";
 import * as Actions from "tv/frontend/redux/ducks/actions";
 import * as DateUtils from "tv/frontend/services/dateUtils";
@@ -85,7 +85,7 @@ export default CalendarBar;
 export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   (state: State.T) => ({
     year: state.calendar.year,
-    showAddShowButton: newAuthDuck.isUserLoggedInSelector(state),
+    showAddShowButton: authDuck.isUserLoggedInSelector(state),
     searchShows: state.calendar.search.results,
     searchInput: state.calendar.search.input,
     searchOpen: state.calendar.search.open

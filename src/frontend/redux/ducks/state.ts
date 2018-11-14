@@ -1,9 +1,9 @@
 import * as moment from "moment";
-import * as newAuthDuck from "tv/frontend/redux/ducks/newAuth";
+import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as Domain from "tv/shared/domain";
 
 export type T = {
-  newAuth: newAuthDuck.ThisState;
+  auth: authDuck.ThisState;
   calendar: {
     year: number;
     seasons: Domain.SeasonWithShow[];
@@ -22,7 +22,7 @@ export type T = {
 
 export function initial(): T {
   return {
-    newAuth: newAuthDuck.initial,
+    auth: authDuck.initial,
     calendar: {
       year: moment().year(),
       seasons: [],

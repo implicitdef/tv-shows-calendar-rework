@@ -1,8 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as duckNewAuth from "tv/frontend/redux/ducks/newAuth";
-import * as newAuthThunk from "tv/frontend/redux/ducks/newAuthThunk";
+import * as duckNewAuth from "tv/frontend/redux/ducks/auth";
+import * as authThunk from "tv/frontend/redux/ducks/authThunk";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 import * as State from "tv/frontend/redux/ducks/state";
 
@@ -55,10 +55,10 @@ export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
       dispatch(duckMetaAbout.set());
     },
     onLogin: () => {
-      dispatch(newAuthThunk.login());
+      dispatch(authThunk.login());
     },
     onLogout: () => {
-      dispatch(newAuthThunk.logout());
+      dispatch(authThunk.logout());
     }
   })
 )(AuthBar);
