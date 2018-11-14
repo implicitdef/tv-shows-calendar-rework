@@ -1,7 +1,7 @@
 import * as Actions from "tv/frontend/redux/actions";
 import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
 import * as duckCalendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
-import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
+import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as api from "tv/frontend/services/api";
 
 export const unfollowShow = (id: number): Actions.TT<void> => {
@@ -10,7 +10,7 @@ export const unfollowShow = (id: number): Actions.TT<void> => {
       await api.unfollowShow({ dispatch, getState }, id);
       dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
-      dispatch(duckMetaHasGlobalError.set());
+      dispatch(metaDuck.actions.registerGlobalError());
     }
   };
 };
@@ -23,7 +23,7 @@ export const followShow = (id: number): Actions.TT<void> => {
       const otherAction = duckCalendarSeasons.fetch();
       dispatch(otherAction);
     } catch (e) {
-      dispatch(duckMetaHasGlobalError.set());
+      dispatch(metaDuck.actions.registerGlobalError());
     }
   };
 };

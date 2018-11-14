@@ -1,6 +1,6 @@
 import * as Actions from "tv/frontend/redux/actions";
 import * as duckCalendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
-import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
+import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as google from "tv/frontend/services/google";
 
@@ -13,7 +13,7 @@ export const login = (): Actions.TT<void> => {
       dispatch(authDuck.actions.login({ token, user }));
       await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
-      dispatch(duckMetaHasGlobalError.set());
+      dispatch(metaDuck.actions.registerGlobalError());
     }
   };
 };
@@ -25,7 +25,7 @@ export const logout = (): Actions.TT<void> => {
       dispatch(authDuck.actions.logout());
       await dispatch(duckCalendarSeasons.fetch());
     } catch (e) {
-      dispatch(duckMetaHasGlobalError.set());
+      dispatch(metaDuck.actions.registerGlobalError());
     }
   };
 };

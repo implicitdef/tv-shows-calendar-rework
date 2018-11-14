@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as Actions from "tv/frontend/redux/actions";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as authThunk from "tv/frontend/redux/thunks/auth";
-import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
+import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as State from "tv/frontend/redux/state";
 
 type StateProps = {
@@ -52,7 +52,7 @@ export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   }),
   (dispatch: Actions.ThisDispatch) => ({
     onClickAbout: () => {
-      dispatch(duckMetaAbout.set());
+      dispatch(metaDuck.actions.displayAbout());
     },
     onLogin: () => {
       dispatch(authThunk.login());

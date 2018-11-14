@@ -1,5 +1,5 @@
 import * as Actions from "tv/frontend/redux/actions";
-import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
+import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as api from "tv/frontend/services/api";
 import * as Domain from "tv/shared/domain";
 
@@ -23,7 +23,7 @@ type ThisState = {
   results: Domain.Show[];
   input: string;
   open: boolean;
-}
+};
 
 const initialState = { results: [], input: "", open: false };
 
@@ -94,7 +94,7 @@ export const searchShows = (input: string): Actions.TT<void> => {
       }
       dispatch(open());
     } catch (e) {
-      dispatch(duckMetaHasGlobalError.set());
+      dispatch(metaDuck.actions.registerGlobalError());
     }
   };
 };

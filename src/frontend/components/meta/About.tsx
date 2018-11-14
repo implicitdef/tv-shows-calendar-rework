@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as State from "tv/frontend/redux/state";
-import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
+import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as Actions from "tv/frontend/redux/actions";
 
 type StateProps = {
@@ -30,11 +30,11 @@ const About: React.SFC<ThisProps> = ({ isDisplayed, onClose }) =>
 
 export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   (state: State.T) => ({
-    isDisplayed: state.meta.about
+    isDisplayed: metaDuck.isAboutDisplayedSelector(state)
   }),
   (dispatch: Actions.ThisDispatch) => ({
     onClose: () => {
-      dispatch(duckMetaAbout.clear());
+      dispatch(metaDuck.actions.hideAbout());
     }
   })
 )(About);

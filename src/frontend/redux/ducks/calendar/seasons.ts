@@ -3,8 +3,7 @@ import * as reduxThunk from "redux-thunk";
 import * as Domain from "tv/shared/domain";
 import * as calendarDataFetcher from "tv/frontend/services/calendarDataFetcher";
 import * as Actions from "tv/frontend/redux/actions";
-import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
-import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
+import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as State from "tv/frontend/redux/state";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
 
@@ -41,7 +40,7 @@ export const fetch = (): Actions.TT<void> => {
       );
       dispatch(loaded(seasons));
     } catch (e) {
-      dispatch(duckMetaHasGlobalError.set());
+      dispatch(metaDuck.actions.registerGlobalError());
     }
   };
 };
