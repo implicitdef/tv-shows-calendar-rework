@@ -2,10 +2,10 @@ import * as redux from "redux";
 import * as reduxThunk from "redux-thunk";
 import * as Domain from "tv/shared/domain";
 import * as api from "tv/frontend/services/api";
-import * as Actions from "tv/frontend/redux/ducks/actions";
+import * as Actions from "tv/frontend/redux/actions";
 import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
 import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as State from "tv/frontend/redux/state";
 
 export type ThisAction = {
   type: "calendar/year/SET";

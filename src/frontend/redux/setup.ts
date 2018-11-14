@@ -1,10 +1,10 @@
 import * as redux from "redux";
 import reduxThunk from "redux-thunk";
 import * as google from "tv/frontend/services/google";
-import * as authThunk from "tv/frontend/redux/ducks/authThunk";
-import * as Reducer from "tv/frontend/redux/ducks/reducer";
-import * as State from "tv/frontend/redux/ducks/state";
-import * as Actions from "tv/frontend/redux/ducks/actions";
+import * as authThunk from "tv/frontend/redux/thunks/auth";
+import * as Reducer from "tv/frontend/redux/reducer";
+import * as State from "tv/frontend/redux/state";
+import * as Actions from "tv/frontend/redux/actions";
 import * as $ from "jquery";
 const reduxCompose: any =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux.compose;

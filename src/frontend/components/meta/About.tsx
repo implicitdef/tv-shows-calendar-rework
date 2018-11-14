@@ -1,8 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as State from "tv/frontend/redux/state";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
-import * as Actions from "tv/frontend/redux/ducks/actions";
+import * as Actions from "tv/frontend/redux/actions";
 
 type StateProps = {
   isDisplayed: boolean;

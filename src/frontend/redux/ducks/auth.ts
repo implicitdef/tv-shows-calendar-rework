@@ -3,7 +3,7 @@ import * as google from "tv/frontend/services/google";
 import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 
 import { createSelector } from "reselect";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as State from "tv/frontend/redux/state";
 
 export const LOGIN = "auth.LOGIN";
 export const LOGOUT = "auth.LOGOUT";

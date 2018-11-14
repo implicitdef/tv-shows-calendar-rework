@@ -1,10 +1,10 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import * as Constants from "tv/shared/constants";
-import * as authThunk from "tv/frontend/redux/ducks/authThunk";
+import * as authThunk from "tv/frontend/redux/thunks/auth";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as runningCallsDuck from "tv/frontend/redux/ducks/meta/runningCalls";
-import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as Actions from "tv/frontend/redux/actions";
+import * as State from "tv/frontend/redux/state";
 
 export type Wirings = {
   dispatch: Actions.ThisDispatch;

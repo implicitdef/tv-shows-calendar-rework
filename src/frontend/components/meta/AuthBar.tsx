@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import * as Actions from "tv/frontend/redux/ducks/actions";
-import * as duckNewAuth from "tv/frontend/redux/ducks/auth";
-import * as authThunk from "tv/frontend/redux/ducks/authThunk";
+import * as Actions from "tv/frontend/redux/actions";
+import * as authDuck from "tv/frontend/redux/ducks/auth";
+import * as authThunk from "tv/frontend/redux/thunks/auth";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as State from "tv/frontend/redux/state";
 
 type StateProps = {
   loggedIn: boolean;
@@ -47,8 +47,8 @@ export default AuthBar;
 
 export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   (state: State.T) => ({
-    loggedIn: !!duckNewAuth.isUserLoggedInSelector(state),
-    email: duckNewAuth.userEmailSelector(state)
+    loggedIn: !!authDuck.isUserLoggedInSelector(state),
+    email: authDuck.userEmailSelector(state)
   }),
   (dispatch: Actions.ThisDispatch) => ({
     onClickAbout: () => {

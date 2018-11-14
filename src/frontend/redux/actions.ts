@@ -7,7 +7,7 @@ import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
 import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
 import * as duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 import * as duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as State from "tv/frontend/redux/state";
 
 export type T = redux.Action<String> &
   (

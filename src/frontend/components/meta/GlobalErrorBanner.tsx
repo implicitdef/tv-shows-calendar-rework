@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as State from "tv/frontend/redux/state";
 
 type StateProps = {
   hasError: boolean;

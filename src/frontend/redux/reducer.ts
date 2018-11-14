@@ -6,7 +6,7 @@ import duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
 import duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
 import duckMetaAbout from "tv/frontend/redux/ducks/meta/about";
 import duckMetaRunningCalls from "tv/frontend/redux/ducks/meta/runningCalls";
-import * as State from "tv/frontend/redux/ducks/state";
+import * as State from "tv/frontend/redux/state";
 
 export const f: redux.Reducer<State.T> = redux.combineReducers({
   auth,

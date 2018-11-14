@@ -1,4 +1,4 @@
-import * as Actions from "tv/frontend/redux/ducks/actions";
+import * as Actions from "tv/frontend/redux/actions";
 import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
 import * as duckCalendarSeasons from "tv/frontend/redux/ducks/calendar/seasons";
 import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";

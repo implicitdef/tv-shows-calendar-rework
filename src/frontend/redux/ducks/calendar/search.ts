@@ -1,4 +1,4 @@
-import * as Actions from "tv/frontend/redux/ducks/actions";
+import * as Actions from "tv/frontend/redux/actions";
 import * as duckMetaHasGlobalError from "tv/frontend/redux/ducks/meta/hasGlobalError";
 import * as api from "tv/frontend/services/api";
 import * as Domain from "tv/shared/domain";
