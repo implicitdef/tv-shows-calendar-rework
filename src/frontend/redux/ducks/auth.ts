@@ -15,14 +15,14 @@ export const initial = {
   user: null
 };
 
-const authSelector = (state: State.T) => state.auth;
+const rootSelector = (state: State.T) => state.auth;
 const userInfoSelector = createSelector(
-  authSelector,
-  auth => auth.user
+  rootSelector,
+  _ => _.user
 );
 export const tokenSelector: State.Selector<string | null> = createSelector(
-  authSelector,
-  auth => auth.token
+  rootSelector,
+  _ => _.token
 );
 export const isUserLoggedInSelector: State.Selector<boolean> = createSelector(
   tokenSelector,

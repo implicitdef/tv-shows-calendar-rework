@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import SearchBox from "tv/frontend/components/calendar-wrap/SearchBox";
 import * as Actions from "tv/frontend/redux/actions";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
-import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
+import * as duckCalendar from "tv/frontend/redux/ducks/calendar";
 import * as searchDuck from "tv/frontend/redux/ducks/search";
 import * as State from "tv/frontend/redux/state";
 import * as followingThunk from "tv/frontend/redux/thunks/following";
@@ -19,7 +19,8 @@ type StateProps = {
 };
 
 type DispatchProps = {
-  onSetYear: (year: number) => void;
+  onPreviousYear: () => void;
+  onNextYear: () => void;
   searchOnInput: (input: string) => void;
   searchOnSubmit: (selectedShow: Domain.Show) => void;
   searchOnBlur: () => void;
@@ -31,7 +32,8 @@ type ThisProps = StateProps & DispatchProps & OwnProps;
 const CalendarBar: React.SFC<ThisProps> = ({
   year,
   showAddShowButton,
-  onSetYear,
+  onPreviousYear,
+  onNextYear,
   searchShows,
   searchInput,
   searchOpen,
@@ -40,12 +42,6 @@ const CalendarBar: React.SFC<ThisProps> = ({
   searchOnBlur,
   searchOnOpen
 }) => {
-  const onPreviousYear = () => {
-    onSetYear(year - 1);
-  };
-  const onNextYear = () => {
-    onSetYear(year + 1);
-  };
   const searchProps = {
     shows: searchShows,
     input: searchInput,
@@ -85,8 +81,11 @@ export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
     searchOpen: searchDuck.isOpenSelector(state)
   }),
   (dispatch: Actions.ThisDispatch) => ({
-    onSetYear: (year: number) => {
-      dispatch(duckCalendarYear.set(year));
+    onPreviousYear: () => {
+      dispatch(duckCalendar.actions.decrementYear());
+    },
+    onNextYear: () => {
+      dispatch(duckCalendar.actions.incrementYear());
     },
     searchOnInput: (input: string) => {
       dispatch(searchThunk.searchShows(input));

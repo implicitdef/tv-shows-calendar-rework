@@ -20,24 +20,24 @@ export const initial = {
   isOpen: false
 };
 
-const searchSelector = (state: State.T) => state.search;
+const rootSelector = (state: State.T) => state.search;
 export const resultsSelector = createSelector(
-  searchSelector,
-  search => search.results
+  rootSelector,
+  _ => _.results
 );
 export const inputSelector = createSelector(
-  searchSelector,
-  search => search.input || ""
+  rootSelector,
+  _ => _.input || ""
 );
 export const isOpenSelector = createSelector(
-  searchSelector,
-  search => search.isOpen
+  rootSelector,
+  _ => _.isOpen
 );
 
-export const SET_RESULTS = "meta.SET_RESULTS";
-export const SET_INPUT = "meta.SET_INPUT";
-export const SET_IS_OPEN = "meta.SET_IS_OPEN";
-export const CLEAR = "meta.CLEAR";
+export const SET_RESULTS = "search.SET_RESULTS";
+export const SET_INPUT = "search.SET_INPUT";
+export const SET_IS_OPEN = "search.SET_IS_OPEN";
+export const CLEAR = "search.CLEAR";
 
 export const actions = {
   setResults: (value: Domain.Show[]) => createAction(SET_RESULTS, value),

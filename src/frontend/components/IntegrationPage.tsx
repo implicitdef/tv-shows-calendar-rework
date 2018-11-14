@@ -21,7 +21,8 @@ const IntegrationPage: React.SFC<{}> = ({}) => {
       <CalendarBar
         year={2000}
         showAddShowButton
-        onSetYear={noop}
+        onNextYear={noop}
+        onPreviousYear={noop}
         searchShows={[]}
         searchInput={""}
         searchOpen={true}
@@ -33,7 +34,8 @@ const IntegrationPage: React.SFC<{}> = ({}) => {
       <CalendarBar
         year={2000}
         showAddShowButton
-        onSetYear={noop}
+        onNextYear={noop}
+        onPreviousYear={noop}
         searchShows={[
           { id: 33, name: "A show" },
           { id: 35, name: "Another" },

@@ -15,14 +15,14 @@ export const initial = {
   hasGlobalError: false
 };
 
-const metaSelector = (state: State.T) => state.meta;
+const rootSelector = (state: State.T) => state.meta;
 export const isAboutDisplayedSelector = createSelector(
-  metaSelector,
-  auth => auth.isAboutDisplayed
+  rootSelector,
+  _ => _.isAboutDisplayed
 );
 export const hasGlobalErrorSelector = createSelector(
-  metaSelector,
-  auth => auth.hasGlobalError
+  rootSelector,
+  _ => _.hasGlobalError
 );
 
 export const SET_IS_ABOUT_DISPLAYED = "meta.SET_IS_ABOUT_DISPLAYED";
