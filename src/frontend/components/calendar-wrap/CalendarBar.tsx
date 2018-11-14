@@ -1,21 +1,14 @@
-import * as moment from "moment";
 import * as React from "react";
 import { connect } from "react-redux";
-import * as Domain from "tv/shared/domain";
-import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
-import * as searchDuck from "tv/frontend/redux/ducks/search";
-import * as searchThunk from "tv/frontend/redux/thunks/search";
-import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
-import * as authDuck from "tv/frontend/redux/ducks/auth";
-import * as State from "tv/frontend/redux/state";
-import * as Actions from "tv/frontend/redux/actions";
-import * as DateUtils from "tv/frontend/services/dateUtils";
-import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
-import Marker from "tv/frontend/components/calendar-core/parts/Marker";
-import MonthsBackground from "tv/frontend/components/calendar-core/parts/MonthsBackground";
-import MonthsRow from "tv/frontend/components/calendar-core/parts/MonthsRow";
-import SeasonRow from "tv/frontend/components/calendar-core/parts/SeasonRow";
 import SearchBox from "tv/frontend/components/calendar-wrap/SearchBox";
+import * as Actions from "tv/frontend/redux/actions";
+import * as authDuck from "tv/frontend/redux/ducks/auth";
+import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
+import * as searchDuck from "tv/frontend/redux/ducks/search";
+import * as State from "tv/frontend/redux/state";
+import * as followingThunk from "tv/frontend/redux/thunks/following";
+import * as searchThunk from "tv/frontend/redux/thunks/search";
+import * as Domain from "tv/shared/domain";
 
 type StateProps = {
   year: number;
@@ -99,7 +92,7 @@ export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
       dispatch(searchThunk.searchShows(input));
     },
     searchOnSubmit: (show: Domain.Show) => {
-      dispatch(calendarFollowing.followShow(show.id));
+      dispatch(followingThunk.followShow(show.id));
     },
     searchOnBlur: () => {
       dispatch(searchDuck.actions.close());

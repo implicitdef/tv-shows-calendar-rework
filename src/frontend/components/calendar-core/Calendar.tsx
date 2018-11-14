@@ -6,7 +6,7 @@ import MonthsBackground from "tv/frontend/components/calendar-core/parts/MonthsB
 import MonthsRow from "tv/frontend/components/calendar-core/parts/MonthsRow";
 import SeasonRow from "tv/frontend/components/calendar-core/parts/SeasonRow";
 import * as Actions from "tv/frontend/redux/actions";
-import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
+import * as followingThunk from "tv/frontend/redux/thunks/following";
 import * as State from "tv/frontend/redux/state";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 import * as Domain from "tv/shared/domain";
@@ -72,7 +72,7 @@ export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   }),
   (dispatch: Actions.ThisDispatch) => ({
     onShowRemove: (show: Domain.Show) => {
-      dispatch(calendarFollowing.unfollowShow(show.id));
+      dispatch(followingThunk.unfollowShow(show.id));
     }
   })
 )(Calendar);
