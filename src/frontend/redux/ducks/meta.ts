@@ -5,9 +5,6 @@ import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 import { createSelector } from "reselect";
 import * as State from "tv/frontend/redux/state";
 
-export const SET_IS_ABOUT_DISPLAYED = "meta.SET_IS_ABOUT_DISPLAYED";
-export const SET_HAS_GLOBAL_ERROR = "meta.SET_GLOBAL_ERROR";
-
 export type ThisState = {
   isAboutDisplayed: boolean;
   hasGlobalError: boolean;
@@ -27,6 +24,9 @@ export const hasGlobalErrorSelector = createSelector(
   metaSelector,
   auth => auth.hasGlobalError
 );
+
+export const SET_IS_ABOUT_DISPLAYED = "meta.SET_IS_ABOUT_DISPLAYED";
+export const SET_HAS_GLOBAL_ERROR = "meta.SET_GLOBAL_ERROR";
 
 export const actions = {
   displayAbout: () => createAction(SET_IS_ABOUT_DISPLAYED, true),

@@ -5,9 +5,6 @@ import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 import { createSelector } from "reselect";
 import * as State from "tv/frontend/redux/state";
 
-export const LOGIN = "auth.LOGIN";
-export const LOGOUT = "auth.LOGOUT";
-
 export type ThisState = {
   token: string | null;
   user: google.User | null;
@@ -37,6 +34,9 @@ export const userEmailSelector: State.Selector<string | null> = createSelector(
   (isUserLoggedIn, userInfo) =>
     isUserLoggedIn && userInfo ? userInfo.email : null
 );
+
+export const LOGIN = "auth.LOGIN";
+export const LOGOUT = "auth.LOGOUT";
 
 export const actions = {
   login: (value: { token: string; user: google.User }) =>

@@ -3,7 +3,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import * as Domain from "tv/shared/domain";
 import * as calendarFollowing from "tv/frontend/redux/ducks/calendar/following";
-import * as duckCalendarSearch from "tv/frontend/redux/ducks/calendar/search";
+import * as searchDuck from "tv/frontend/redux/ducks/search";
+import * as searchThunk from "tv/frontend/redux/thunks/search";
 import * as duckCalendarYear from "tv/frontend/redux/ducks/calendar/year";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as State from "tv/frontend/redux/state";
@@ -86,25 +87,25 @@ export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   (state: State.T) => ({
     year: state.calendar.year,
     showAddShowButton: authDuck.isUserLoggedInSelector(state),
-    searchShows: state.calendar.search.results,
-    searchInput: state.calendar.search.input,
-    searchOpen: state.calendar.search.open
+    searchShows: searchDuck.resultsSelector(state),
+    searchInput: searchDuck.inputSelector(state),
+    searchOpen: searchDuck.isOpenSelector(state)
   }),
   (dispatch: Actions.ThisDispatch) => ({
     onSetYear: (year: number) => {
       dispatch(duckCalendarYear.set(year));
     },
     searchOnInput: (input: string) => {
-      dispatch(duckCalendarSearch.searchShows(input));
+      dispatch(searchThunk.searchShows(input));
     },
     searchOnSubmit: (show: Domain.Show) => {
       dispatch(calendarFollowing.followShow(show.id));
     },
     searchOnBlur: () => {
-      dispatch(duckCalendarSearch.close());
+      dispatch(searchDuck.actions.close());
     },
     searchOnOpen: () => {
-      dispatch(duckCalendarSearch.open());
+      dispatch(searchDuck.actions.open());
     }
   })
 )(CalendarBar);
