@@ -1,9 +1,6 @@
-- mettre reselect et des selecteurs
 - rebosser un peu le css, essayer de passer à un container non-fluide
 - utiliser css modules, virer BEM ?
-- revoir un peu les ducks : genre tester de merger loggedIn et userInfo maybe ? voir à quoi ça ressemblerait
-- maybe move to redux-actions or something like that
-- cleaner dépendences inutilisées
+- optimiser perfs : essayer d'importer que ce que j'ai besoin de bootstrap (la grid)
 - optimiser perfs : cf les warnings quand on build comme en prod
 - ptet afficher un loader discret pour quand les series se rechargent
 - distinguer quand on a pas encore l'info de auth : ne pas afficher logged out, ou mettre un loader
