@@ -22,6 +22,5 @@ export default GlobalErrorBanner;
 export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
   (state: State.T) => ({
     hasError: state.meta.hasGlobalError
-  }),
-  () => {}
+  })
 )(GlobalErrorBanner);
