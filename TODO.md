@@ -7,3 +7,4 @@
 - updater les shows par défaut
 - un jour faire un affichage décent sur mobile
 - mettre graphql, d'abord coté server puis faire coté front
+- mettre en place storybook. Si ça marche virer la IntegrationPage et connecter les components directement
