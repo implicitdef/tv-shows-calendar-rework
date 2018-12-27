@@ -1,6 +1,6 @@
 import * as moment from "moment";
 import * as React from "react";
-import { connect } from "react-redux";
+import { connect, DispatchProp } from "react-redux";
 import Marker from "tv/frontend/components/calendar-core/parts/Marker";
 import MonthsBackground from "tv/frontend/components/calendar-core/parts/MonthsBackground";
 import MonthsRow from "tv/frontend/components/calendar-core/parts/MonthsRow";
@@ -17,20 +17,20 @@ type StateProps = {
   seasons: Domain.SeasonWithShow[];
   showRemoveButtons: boolean;
 };
-type DispatchProps = {
-  onShowRemove: (show: Domain.Show) => void;
-};
 type OwnProps = {
   mockedNow?: moment.Moment;
 };
-type ThisProps = StateProps & DispatchProps & OwnProps;
+type ThisProps = StateProps &
+  OwnProps & {
+    dispatch: Actions.ThisDispatch;
+  };
 
 const Calendar: React.SFC<ThisProps> = ({
   year,
   mockedNow,
   seasons,
   showRemoveButtons,
-  onShowRemove
+  dispatch
 }) => {
   const now = mockedNow || moment();
   const marker = now.year() === year ? <Marker now={now} /> : "";
@@ -45,7 +45,8 @@ const Calendar: React.SFC<ThisProps> = ({
             return DateUtils.isTimeRangeInYear(season.time, year);
           })
           .map((season, index) => {
-            const onClose = () => onShowRemove(season.show);
+            const onClose = () =>
+              dispatch(followingThunk.unfollowShow(season.show.id));
             return (
               <SeasonRow
                 key={`${season.show.id}S${season.number}`}
@@ -64,15 +65,10 @@ const Calendar: React.SFC<ThisProps> = ({
 
 export default Calendar;
 
-export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
+export const connected = connect<StateProps, {}, OwnProps, State.T>(
   (state: State.T) => ({
     year: state.calendar.year,
     seasons: state.calendar.seasons,
     showRemoveButtons: authDuck.isUserLoggedInSelector(state)
-  }),
-  (dispatch: Actions.ThisDispatch) => ({
-    onShowRemove: (show: Domain.Show) => {
-      dispatch(followingThunk.unfollowShow(show.id));
-    }
   })
 )(Calendar);

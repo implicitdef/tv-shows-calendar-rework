@@ -18,38 +18,36 @@ type StateProps = {
   searchOpen: boolean;
 };
 
-type DispatchProps = {
-  onPreviousYear: () => void;
-  onNextYear: () => void;
-  searchOnInput: (input: string) => void;
-  searchOnSubmit: (selectedShow: Domain.Show) => void;
-  searchOnBlur: () => void;
-  searchOnOpen: () => void;
-};
 type OwnProps = {};
-type ThisProps = StateProps & DispatchProps & OwnProps;
+type ThisProps = StateProps &
+  OwnProps & {
+    dispatch: Actions.ThisDispatch;
+  };
 
 const CalendarBar: React.SFC<ThisProps> = ({
   year,
   showAddShowButton,
-  onPreviousYear,
-  onNextYear,
   searchShows,
   searchInput,
   searchOpen,
-  searchOnInput,
-  searchOnSubmit,
-  searchOnBlur,
-  searchOnOpen
+  dispatch
 }) => {
   const searchProps = {
     shows: searchShows,
     input: searchInput,
     open: searchOpen,
-    onInput: searchOnInput,
-    onSubmit: searchOnSubmit,
-    onBlur: searchOnBlur,
-    onOpen: searchOnOpen
+    onInput: (input: string) => {
+      dispatch(searchThunk.searchShows(input));
+    },
+    onSubmit: (show: Domain.Show) => {
+      dispatch(followingThunk.followShow(show.id));
+    },
+    onBlur: () => {
+      dispatch(searchDuck.actions.close());
+    },
+    onOpen: () => {
+      dispatch(searchDuck.actions.open());
+    }
   };
   const searchBoxOrNot = showAddShowButton ? (
     <SearchBox {...searchProps} />
@@ -58,11 +56,21 @@ const CalendarBar: React.SFC<ThisProps> = ({
     <div className="calendar-bar row no-gutters">
       <div className="col-md-3 col-sm-6">{searchBoxOrNot}</div>
       <div className="calendar-bar__nav col-md-6 col-sm-6">
-        <a className="calendar-bar__back" onClick={onPreviousYear}>
+        <a
+          className="calendar-bar__back"
+          onClick={() => {
+            dispatch(duckCalendar.actions.decrementYear());
+          }}
+        >
           {"<"}
         </a>
         <span className="calendar-bar__year">{year}</span>
-        <a className="calendar-bar__forward" onClick={onNextYear}>
+        <a
+          className="calendar-bar__forward"
+          onClick={() => {
+            dispatch(duckCalendar.actions.incrementYear());
+          }}
+        >
           >
         </a>
       </div>
@@ -72,32 +80,12 @@ const CalendarBar: React.SFC<ThisProps> = ({
 
 export default CalendarBar;
 
-export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
+export const connected = connect<StateProps, {}, OwnProps, State.T>(
   (state: State.T) => ({
     year: state.calendar.year,
     showAddShowButton: authDuck.isUserLoggedInSelector(state),
     searchShows: searchDuck.resultsSelector(state),
     searchInput: searchDuck.inputSelector(state),
     searchOpen: searchDuck.isOpenSelector(state)
-  }),
-  (dispatch: Actions.ThisDispatch) => ({
-    onPreviousYear: () => {
-      dispatch(duckCalendar.actions.decrementYear());
-    },
-    onNextYear: () => {
-      dispatch(duckCalendar.actions.incrementYear());
-    },
-    searchOnInput: (input: string) => {
-      dispatch(searchThunk.searchShows(input));
-    },
-    searchOnSubmit: (show: Domain.Show) => {
-      dispatch(followingThunk.followShow(show.id));
-    },
-    searchOnBlur: () => {
-      dispatch(searchDuck.actions.close());
-    },
-    searchOnOpen: () => {
-      dispatch(searchDuck.actions.open());
-    }
   })
 )(CalendarBar);

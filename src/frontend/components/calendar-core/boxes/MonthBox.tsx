@@ -3,7 +3,7 @@ import * as React from "react";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
 
-// Generic div to represente an arbitrary period of time in a year
+// Generic div to represente a month of some year
 // with automatic width and horizontal position
 
 type ThisProps = {

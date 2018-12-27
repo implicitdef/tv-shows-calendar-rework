@@ -29,13 +29,9 @@ const colors = [
   "#4CAF50",
   "#8BC34A",
   "#CDDC39",
-  // "#FFEB3B",
   "#FFC107",
   "#FF9800",
   "#FF5722"
-  // "#795548",
-  // "#9E9E9E",
-  // "#607D8B",
 ];
 
 const alwaysPositiveModulo = (nb: number, divider: number): number => {
