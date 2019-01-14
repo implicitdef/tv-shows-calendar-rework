@@ -1,3 +1,4 @@
+- replacer redux par le context des hooks React
 - rebosser un peu le css, essayer de passer à un container non-fluide
 - utiliser css modules, virer BEM ?
 - optimiser perfs : essayer d'importer que ce que j'ai besoin de bootstrap (la grid)
