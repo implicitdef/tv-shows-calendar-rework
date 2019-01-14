@@ -4,18 +4,11 @@ import * as SearchBox from "tv/frontend/components/calendar-wrap/SearchBox";
 import * as Actions from "tv/frontend/redux/actions";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as duckCalendar from "tv/frontend/redux/ducks/calendar";
-import * as searchDuck from "tv/frontend/redux/ducks/search";
 import * as State from "tv/frontend/redux/state";
-import * as followingThunk from "tv/frontend/redux/thunks/following";
-import * as searchThunk from "tv/frontend/redux/thunks/search";
-import * as Domain from "tv/shared/domain";
 
 type StateProps = {
   year: number;
   showAddShowButton: boolean;
-  searchShows: Domain.Show[];
-  searchInput: string;
-  searchOpen: boolean;
 };
 
 type OwnProps = {};
@@ -27,25 +20,8 @@ type ThisProps = StateProps &
 const CalendarBar: React.SFC<ThisProps> = ({
   year,
   showAddShowButton,
-  searchShows,
-  searchInput,
-  searchOpen,
   dispatch
 }) => {
-  const searchProps = {
-    shows: searchShows,
-    input: searchInput,
-    open: searchOpen,
-    onInput: (input: string) => {
-      dispatch(searchThunk.searchShows(input));
-    },
-    onSubmit: (show: Domain.Show) => {
-      dispatch(followingThunk.followShow(show.id));
-    },
-    onOpen: () => {
-      dispatch(searchDuck.actions.open());
-    }
-  };
   const searchBoxOrNot = showAddShowButton ? <SearchBox.connected /> : null;
   return (
     <div className="calendar-bar row no-gutters">
