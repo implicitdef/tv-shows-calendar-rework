@@ -21,21 +21,14 @@ const IntegrationPage: React.SFC<{}> = ({}) => {
       <CalendarBar
         year={2000}
         showAddShowButton
-        onNextYear={noop}
-        onPreviousYear={noop}
         searchShows={[]}
         searchInput={""}
         searchOpen={true}
-        searchOnInput={noop}
-        searchOnSubmit={noop}
-        searchOnBlur={noop}
-        searchOnOpen={noop}
+        dispatch={noop}
       />
       <CalendarBar
         year={2000}
         showAddShowButton
-        onNextYear={noop}
-        onPreviousYear={noop}
         searchShows={[
           { id: 33, name: "A show" },
           { id: 35, name: "Another" },
@@ -43,10 +36,7 @@ const IntegrationPage: React.SFC<{}> = ({}) => {
         ]}
         searchInput={""}
         searchOpen={true}
-        searchOnInput={noop}
-        searchOnSubmit={noop}
-        searchOnBlur={noop}
-        searchOnOpen={noop}
+        dispatch={noop}
       />
       <Calendar
         year={1492}
@@ -86,7 +76,7 @@ const IntegrationPage: React.SFC<{}> = ({}) => {
           }
         ]}
         showRemoveButtons={true}
-        onShowRemove={noop}
+        dispatch={noop}
       />
     </div>
   );
