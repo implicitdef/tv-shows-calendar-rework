@@ -15,7 +15,7 @@ const MonthsBackground: React.SFC<ThisProps> = ({ year }) => (
           year={year}
           key={monthNumber}
           monthNumber={monthNumber}
-          specificClassName="calendar__month-column"
+          className="calendar__month-column"
         />
       );
     })}

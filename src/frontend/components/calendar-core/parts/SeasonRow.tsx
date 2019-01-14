@@ -1,10 +1,6 @@
-import * as _ from "lodash";
-import * as moment from "moment";
 import * as React from "react";
-import * as Domain from "tv/shared/domain";
-import * as DateUtils from "tv/frontend/services/dateUtils";
-import MonthBox from "tv/frontend/components/calendar-core/boxes/MonthBox";
 import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
+import * as Domain from "tv/shared/domain";
 
 // displays a given season of a serie
 
@@ -75,7 +71,7 @@ const SeasonRow: React.SFC<ThisProps> = ({
   return (
     <div className="calendar__season-row">
       <PeriodInYearBox
-        specificClassName="calendar__season"
+        className="calendar__season"
         year={year}
         start={start}
         zIndex={100 + index}

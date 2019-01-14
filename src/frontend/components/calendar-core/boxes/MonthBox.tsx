@@ -1,6 +1,5 @@
 import * as moment from "moment";
 import * as React from "react";
-import * as DateUtils from "tv/frontend/services/dateUtils";
 import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
 
 // Generic div to represente a month of some year
@@ -10,17 +9,17 @@ type ThisProps = {
   year: number;
   monthNumber: number;
   children?: React.ReactNode;
-  specificClassName?: string;
+  className?: string;
 };
 
 const MonthBox: React.SFC<ThisProps> = ({
   year,
   monthNumber,
   children,
-  specificClassName
+  className: className
 }) => (
   <PeriodInYearBox
-    specificClassName={specificClassName}
+    className={className}
     year={year}
     start={moment(year, "YYYY")
       .month(monthNumber)

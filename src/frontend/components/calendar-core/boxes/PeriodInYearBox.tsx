@@ -6,7 +6,7 @@ import * as DateUtils from "tv/frontend/services/dateUtils";
 // with automatic width and horizontal position
 
 type ThisProps = {
-  specificClassName?: string;
+  className?: string;
   year: number;
   start: moment.Moment;
   end: moment.Moment;
@@ -16,7 +16,7 @@ type ThisProps = {
 };
 
 const PeriodInYearBox: React.SFC<ThisProps> = ({
-  specificClassName,
+  className,
   year,
   start,
   end,
@@ -39,7 +39,7 @@ const PeriodInYearBox: React.SFC<ThisProps> = ({
     backgroundColor: specificColor
   };
   return (
-    <div className={specificClassName} style={style}>
+    <div className={className} style={style}>
       {children}
     </div>
   );

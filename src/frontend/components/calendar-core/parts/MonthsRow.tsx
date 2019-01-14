@@ -1,7 +1,6 @@
 import * as _ from "lodash";
 import * as moment from "moment";
 import * as React from "react";
-import * as DateUtils from "tv/frontend/services/dateUtils";
 import MonthBox from "tv/frontend/components/calendar-core/boxes/MonthBox";
 
 type ThisProps = {
@@ -17,7 +16,7 @@ const MonthsRow: React.SFC<ThisProps> = ({ year }) => (
           year={year}
           key={monthNumber}
           monthNumber={monthNumber}
-          specificClassName="calendar__month-name"
+          className="calendar__month-name"
         >
           {moment(year, "YYYY")
             .month(monthNumber)
