@@ -15,5 +15,5 @@ window.addEventListener("load", () => {
   google.setup();
   const dispatch = Store.dispatch as Actions.ThisDispatch;
   dispatch(authThunk.checkStatusOnStartupAndFetch());
-  ReactDOM.render(App.rootElement, document.getElementById("root"));
+  ReactDOM.render(App.instance, document.getElementById("root"));
 });
