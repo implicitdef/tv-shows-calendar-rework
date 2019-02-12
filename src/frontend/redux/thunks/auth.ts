@@ -1,11 +1,11 @@
-import * as Actions from "tv/frontend/redux/actions";
 import * as calendarDuck from "tv/frontend/redux/ducks/calendar";
 import * as calendarThunk from "tv/frontend/redux/thunks/calendar";
 import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as google from "tv/frontend/services/google";
+import { SomeThunkAction } from "tv/frontend/redux/actions";
 
-export const login = (): Actions.TT<void> => {
+export const login = (): SomeThunkAction<void> => {
   return async dispatch => {
     try {
       await google.login();
@@ -19,7 +19,7 @@ export const login = (): Actions.TT<void> => {
   };
 };
 
-export const logout = (): Actions.TT<void> => {
+export const logout = (): SomeThunkAction<void> => {
   return async dispatch => {
     try {
       await google.logout();
@@ -31,7 +31,7 @@ export const logout = (): Actions.TT<void> => {
   };
 };
 
-export const checkStatusOnStartupAndFetch = (): Actions.TT<void> => {
+export const checkStatusOnStartupAndFetch = (): SomeThunkAction<void> => {
   return async dispatch => {
     try {
       const isLoggedIn = await google.isLoggedIn();

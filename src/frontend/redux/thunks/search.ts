@@ -1,9 +1,9 @@
-import * as Actions from "tv/frontend/redux/actions";
 import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as searchDuck from "tv/frontend/redux/ducks/search";
 import * as api from "tv/frontend/services/api";
+import { SomeThunkAction } from "tv/frontend/redux/actions";
 
-export const searchShows = (input: string): Actions.TT<void> => {
+export const searchShows = (input: string): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
     try {
       if (input.trim().length === 0) {

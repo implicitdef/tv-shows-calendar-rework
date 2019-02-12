@@ -2,11 +2,12 @@ import axios, { AxiosInstance, AxiosResponse } from "axios";
 import * as Constants from "tv/shared/constants";
 import * as authThunk from "tv/frontend/redux/thunks/auth";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
-import * as Actions from "tv/frontend/redux/actions";
+
 import { TheState } from "tv/frontend/redux/state";
+import { TheDispatch } from "tv/frontend/redux/actions";
 
 export type Wirings = {
-  dispatch: Actions.ThisDispatch;
+  dispatch: TheDispatch;
   getState: () => TheState;
 };
 
