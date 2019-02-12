@@ -1,8 +1,7 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import { useCallback } from "react";
 import { State } from "tv/frontend/redux/state";
-import { useThisMappedState, useThisDispatch } from "tv/frontend/redux/utils";
+import { useThisMappedState } from "tv/frontend/redux/utils";
 
 export default function GlobalErrorBanner() {
   const mapState = useCallback(

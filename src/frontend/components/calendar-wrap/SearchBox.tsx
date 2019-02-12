@@ -3,22 +3,23 @@ import * as Domain from "tv/shared/domain";
 import { connect } from "react-redux";
 import * as Actions from "tv/frontend/redux/actions";
 import * as searchDuck from "tv/frontend/redux/ducks/search";
-import * as State from "tv/frontend/redux/state";
+import { State } from "tv/frontend/redux/state";
 import * as followingThunk from "tv/frontend/redux/thunks/following";
 import * as searchThunk from "tv/frontend/redux/thunks/search";
+import { useCallback } from "react";
+import { useThisMappedState, useThisDispatch } from "tv/frontend/redux/utils";
 
-type StateProps = {
-  shows: Domain.Show[];
-  open: boolean;
-  input: string;
-};
-type OwnProps = {};
-type ThisProps = StateProps &
-  OwnProps & {
-    dispatch: Actions.ThisDispatch;
-  };
-
-const SearchBox: React.SFC<ThisProps> = ({ shows, open, input, dispatch }) => {
+export default function SearchBox() {
+  const mapState = useCallback(
+    (state: State) => ({
+      shows: searchDuck.resultsSelector(state),
+      input: searchDuck.inputSelector(state),
+      open: searchDuck.isOpenSelector(state)
+    }),
+    []
+  );
+  const { shows, input, open } = useThisMappedState(mapState);
+  const dispatch = useThisDispatch();
   const onInput = (input: string) => dispatch(searchThunk.searchShows(input));
   const onSubmit = (show: Domain.Show) =>
     dispatch(followingThunk.followShow(show.id));
@@ -50,12 +51,4 @@ const SearchBox: React.SFC<ThisProps> = ({ shows, open, input, dispatch }) => {
       </div>
     </div>
   );
-};
-
-export const connected = connect<StateProps, {}, OwnProps, State.T>(
-  (state: State.T) => ({
-    shows: searchDuck.resultsSelector(state),
-    input: searchDuck.inputSelector(state),
-    open: searchDuck.isOpenSelector(state)
-  })
-)(SearchBox);
+}

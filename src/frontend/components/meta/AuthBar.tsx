@@ -1,12 +1,10 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import * as Actions from "tv/frontend/redux/actions";
-import * as authDuck from "tv/frontend/redux/ducks/auth";
-import * as authThunk from "tv/frontend/redux/thunks/auth";
-import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import { useCallback } from "react";
-import { useThisMappedState, useThisDispatch } from "tv/frontend/redux/utils";
+import * as authDuck from "tv/frontend/redux/ducks/auth";
+import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import { State } from "tv/frontend/redux/state";
+import * as authThunk from "tv/frontend/redux/thunks/auth";
+import { useThisDispatch, useThisMappedState } from "tv/frontend/redux/utils";
 
 export default function AuthBar() {
   const mapState = useCallback(
