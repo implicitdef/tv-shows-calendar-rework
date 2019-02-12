@@ -3,7 +3,7 @@ import * as google from "tv/frontend/services/google";
 import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 
 import { createSelector } from "reselect";
-import * as State from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 
 export type ThisState = {
   token: string | null;
@@ -15,7 +15,7 @@ export const initial = {
   user: null
 };
 
-const rootSelector = (state: State.T) => state.auth;
+const rootSelector = (state: TheState) => state.auth;
 const userInfoSelector = createSelector(
   rootSelector,
   _ => _.user

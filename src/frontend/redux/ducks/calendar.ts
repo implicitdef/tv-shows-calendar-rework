@@ -1,7 +1,7 @@
 import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 import * as moment from "moment";
 import { createSelector } from "reselect";
-import * as State from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 import * as Domain from "tv/shared/domain";
 
 export type ThisState = {
@@ -14,7 +14,7 @@ export const initial = {
   seasons: []
 };
 
-const rootSelector = (state: State.T) => state.calendar;
+const rootSelector = (state: TheState) => state.calendar;
 export const yearSelector = createSelector(
   rootSelector,
   _ => _.year

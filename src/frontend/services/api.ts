@@ -3,7 +3,7 @@ import * as moment from "moment";
 import * as redux from "redux";
 import * as Domain from "tv/shared/domain";
 import * as Actions from "tv/frontend/redux/actions";
-import * as State from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 import { getAxios, Wirings } from "tv/frontend/services/axiosConfig";
 import * as cache from "tv/frontend/services/cache";
 import * as conf from "tv/frontend/services/conf";

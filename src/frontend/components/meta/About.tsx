@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useCallback } from "react";
 import * as metaDuck from "tv/frontend/redux/ducks/meta";
-import { State } from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 import { useThisDispatch, useThisMappedState } from "tv/frontend/redux/utils";
 
 export default function About() {
   const mapState = useCallback(
-    (state: State) => ({
+    (state: TheState) => ({
       isDisplayed: metaDuck.isAboutDisplayedSelector(state)
     }),
     []

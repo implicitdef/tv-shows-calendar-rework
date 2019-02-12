@@ -4,7 +4,7 @@ import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as metaDuck from "tv/frontend/redux/ducks/meta";
 import * as searchDuck from "tv/frontend/redux/ducks/search";
 import * as calendarDuck from "tv/frontend/redux/ducks/calendar";
-import * as State from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 
 export type T = redux.Action<String> &
   (
@@ -14,6 +14,6 @@ export type T = redux.Action<String> &
     | calendarDuck.ThisAction);
 
 // alias for our redux-thunk actions
-export type TT<R> = reduxThunk.ThunkAction<Promise<R>, State.T, null, T>;
+export type TT<R> = reduxThunk.ThunkAction<Promise<R>, TheState, null, T>;
 
-export type ThisDispatch = reduxThunk.ThunkDispatch<State.T, null, T>;
+export type ThisDispatch = reduxThunk.ThunkDispatch<TheState, null, T>;

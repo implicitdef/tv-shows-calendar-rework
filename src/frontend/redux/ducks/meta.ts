@@ -3,7 +3,7 @@ import * as google from "tv/frontend/services/google";
 import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 
 import { createSelector } from "reselect";
-import * as State from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 
 export type ThisState = {
   isAboutDisplayed: boolean;
@@ -15,7 +15,7 @@ export const initial = {
   hasGlobalError: false
 };
 
-const rootSelector = (state: State.T) => state.meta;
+const rootSelector = (state: TheState) => state.meta;
 export const isAboutDisplayedSelector = createSelector(
   rootSelector,
   _ => _.isAboutDisplayed

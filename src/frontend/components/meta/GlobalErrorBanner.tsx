@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useCallback } from "react";
-import { State } from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 import { useThisMappedState } from "tv/frontend/redux/utils";
 
 export default function GlobalErrorBanner() {
   const mapState = useCallback(
-    (state: State) => ({
+    (state: TheState) => ({
       hasError: state.meta.hasGlobalError
     }),
     []

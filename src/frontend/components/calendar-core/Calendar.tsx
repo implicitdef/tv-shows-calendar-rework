@@ -5,14 +5,14 @@ import MonthsBackground from "tv/frontend/components/calendar-core/parts/MonthsB
 import MonthsRow from "tv/frontend/components/calendar-core/parts/MonthsRow";
 import SeasonRow from "tv/frontend/components/calendar-core/parts/SeasonRow";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
-import { State } from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 import * as followingThunk from "tv/frontend/redux/thunks/following";
 import { useThisDispatch, useThisMappedState } from "tv/frontend/redux/utils";
 import * as DateUtils from "tv/frontend/services/dateUtils";
 
 export default function Calendar() {
   const mapState = React.useCallback(
-    (state: State) => ({
+    (state: TheState) => ({
       year: state.calendar.year,
       seasons: state.calendar.seasons,
       showRemoveButtons: authDuck.isUserLoggedInSelector(state)

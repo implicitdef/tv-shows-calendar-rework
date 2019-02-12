@@ -6,7 +6,7 @@ import * as Domain from "tv/shared/domain";
 import * as metaDuck from "tv/frontend/redux/ducks/meta";
 
 import { createSelector } from "reselect";
-import * as State from "tv/frontend/redux/state";
+import { TheState } from "tv/frontend/redux/state";
 
 export type ThisState = {
   results: Domain.Show[];
@@ -20,7 +20,7 @@ export const initial = {
   isOpen: false
 };
 
-const rootSelector = (state: State.T) => state.search;
+const rootSelector = (state: TheState) => state.search;
 export const resultsSelector = createSelector(
   rootSelector,
   _ => _.results
