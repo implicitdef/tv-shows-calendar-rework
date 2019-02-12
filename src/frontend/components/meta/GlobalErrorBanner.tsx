@@ -1,26 +1,21 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import * as State from "tv/frontend/redux/state";
+import { useCallback } from "react";
+import { State } from "tv/frontend/redux/state";
+import { useThisMappedState, useThisDispatch } from "tv/frontend/redux/utils";
 
-type StateProps = {
-  hasError: boolean;
-};
-type DispatchProps = {};
-type OwnProps = {};
-type ThisProps = StateProps & DispatchProps & OwnProps;
-
-const GlobalErrorBanner: React.SFC<ThisProps> = ({ hasError }) =>
-  hasError ? (
+export default function GlobalErrorBanner() {
+  const mapState = useCallback(
+    (state: State) => ({
+      hasError: state.meta.hasGlobalError
+    }),
+    []
+  );
+  const { hasError } = useThisMappedState(mapState);
+  return hasError ? (
     <div className="global-error-banner">
       Oops, it looks like something didn't work as it should. Please refresh
       this page to see if things get better.
     </div>
   ) : null;
-
-export default GlobalErrorBanner;
-
-export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
-  (state: State.T) => ({
-    hasError: state.meta.hasGlobalError
-  })
-)(GlobalErrorBanner);
+}
