@@ -1,13 +1,11 @@
 import * as React from "react";
-import * as Domain from "tv/shared/domain";
-import { connect } from "react-redux";
-import * as Actions from "tv/frontend/redux/actions";
+import { useCallback } from "react";
 import * as searchDuck from "tv/frontend/redux/ducks/search";
 import { State } from "tv/frontend/redux/state";
 import * as followingThunk from "tv/frontend/redux/thunks/following";
 import * as searchThunk from "tv/frontend/redux/thunks/search";
-import { useCallback } from "react";
-import { useThisMappedState, useThisDispatch } from "tv/frontend/redux/utils";
+import { useThisDispatch, useThisMappedState } from "tv/frontend/redux/utils";
+import * as Domain from "tv/shared/domain";
 
 export default function SearchBox() {
   const mapState = useCallback(
