@@ -1,20 +1,20 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import * as State from "tv/frontend/redux/state";
-import * as metaDuck from "tv/frontend/redux/ducks/meta";
+import { useCallback } from "react";
+import { useDispatch, useMappedState } from "redux-react-hook";
 import * as Actions from "tv/frontend/redux/actions";
+import * as metaDuck from "tv/frontend/redux/ducks/meta";
 
-type StateProps = {
-  isDisplayed: boolean;
-};
-type DispatchProps = {
-  onClose: () => void;
-};
-type OwnProps = {};
-type ThisProps = StateProps & DispatchProps & OwnProps;
-
-const About: React.SFC<ThisProps> = ({ isDisplayed, onClose }) =>
-  isDisplayed ? (
+export default function About() {
+  const mapState = useCallback(
+    state => ({
+      isDisplayed: metaDuck.isAboutDisplayedSelector(state)
+    }),
+    []
+  );
+  const { isDisplayed } = useMappedState(mapState);
+  const dispatch = useDispatch<Actions.T>();
+  const onClose = () => dispatch(metaDuck.actions.hideAbout());
+  return isDisplayed ? (
     <div className="about">
       <p>
         This calendar helps you keep track of when your favorites TV shows are
@@ -27,14 +27,4 @@ const About: React.SFC<ThisProps> = ({ isDisplayed, onClose }) =>
       </button>
     </div>
   ) : null;
-
-export const connected = connect<StateProps, DispatchProps, OwnProps, State.T>(
-  (state: State.T) => ({
-    isDisplayed: metaDuck.isAboutDisplayedSelector(state)
-  }),
-  (dispatch: Actions.ThisDispatch) => ({
-    onClose: () => {
-      dispatch(metaDuck.actions.hideAbout());
-    }
-  })
-)(About);
+}
