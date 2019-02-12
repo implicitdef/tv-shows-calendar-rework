@@ -1,14 +1,12 @@
 import * as React from "react";
+import { Provider } from "react-redux";
+import { StoreContext } from "redux-react-hook";
 import * as Calendar from "tv/frontend/components/calendar-core/Calendar";
 import * as CalendarBar from "tv/frontend/components/calendar-wrap/CalendarBar";
 import About from "tv/frontend/components/meta/About";
-import * as AuthBar from "tv/frontend/components/meta/AuthBar";
+import AuthBar from "tv/frontend/components/meta/AuthBar";
 import * as GlobalErrorBanner from "tv/frontend/components/meta/GlobalErrorBanner";
-import { Provider } from "react-redux";
-import { StoreContext } from "redux-react-hook";
 import Store from "tv/frontend/redux/store";
-
-// TODO improve setup of useDispatch so that we can dispatch only our action and our thunks
 
 const App: React.SFC<{}> = ({}) => {
   return (
@@ -16,7 +14,7 @@ const App: React.SFC<{}> = ({}) => {
       <Provider store={Store}>
         <div className="page container-fluid">
           <GlobalErrorBanner.connected />
-          <AuthBar.connected />
+          <AuthBar />
           <About />
           <CalendarBar.connected />
           <Calendar.connected />
