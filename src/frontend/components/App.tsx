@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Provider } from "react-redux";
-import * as Calendar from "tv/frontend/components/calendar-core/Calendar";
-import * as CalendarBar from "tv/frontend/components/calendar-wrap/CalendarBar";
 import About from "tv/frontend/components/meta/About";
 import AuthBar from "tv/frontend/components/meta/AuthBar";
 import Store from "tv/frontend/redux/store";
 import GlobalErrorBanner from "tv/frontend/components/meta/GlobalErrorBanner";
 import { StoreContext } from "redux-react-hook";
+import CalendarBar from "tv/frontend/components/calendar-wrap/CalendarBar";
+import Calendar from "tv/frontend/components/calendar-core/Calendar";
 
 const App: React.SFC<{}> = ({}) => {
   return (
@@ -16,8 +16,8 @@ const App: React.SFC<{}> = ({}) => {
           <GlobalErrorBanner />
           <AuthBar />
           <About />
-          <CalendarBar.connected />
-          <Calendar.connected />
+          <CalendarBar />
+          <Calendar />
         </div>
       </Provider>
     </StoreContext.Provider>

@@ -4,24 +4,20 @@ import * as SearchBox from "tv/frontend/components/calendar-wrap/SearchBox";
 import * as Actions from "tv/frontend/redux/actions";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
 import * as duckCalendar from "tv/frontend/redux/ducks/calendar";
-import * as State from "tv/frontend/redux/state";
+import { useCallback } from "react";
+import { State } from "tv/frontend/redux/state";
+import { useThisMappedState, useThisDispatch } from "tv/frontend/redux/utils";
 
-type StateProps = {
-  year: number;
-  showAddShowButton: boolean;
-};
-
-type OwnProps = {};
-type ThisProps = StateProps &
-  OwnProps & {
-    dispatch: Actions.ThisDispatch;
-  };
-
-const CalendarBar: React.SFC<ThisProps> = ({
-  year,
-  showAddShowButton,
-  dispatch
-}) => {
+export default function CalendarBar() {
+  const mapState = useCallback(
+    (state: State) => ({
+      year: state.calendar.year,
+      showAddShowButton: authDuck.isUserLoggedInSelector(state)
+    }),
+    []
+  );
+  const { year, showAddShowButton } = useThisMappedState(mapState);
+  const dispatch = useThisDispatch();
   const searchBoxOrNot = showAddShowButton ? <SearchBox.connected /> : null;
   return (
     <div className="calendar-bar row no-gutters">
@@ -47,13 +43,4 @@ const CalendarBar: React.SFC<ThisProps> = ({
       </div>
     </div>
   );
-};
-
-export default CalendarBar;
-
-export const connected = connect<StateProps, {}, OwnProps, State.T>(
-  (state: State.T) => ({
-    year: state.calendar.year,
-    showAddShowButton: authDuck.isUserLoggedInSelector(state)
-  })
-)(CalendarBar);
+}

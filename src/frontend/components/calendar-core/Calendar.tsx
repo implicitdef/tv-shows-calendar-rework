@@ -1,38 +1,27 @@
 import * as moment from "moment";
 import * as React from "react";
-import { connect, DispatchProp } from "react-redux";
 import Marker from "tv/frontend/components/calendar-core/parts/Marker";
 import MonthsBackground from "tv/frontend/components/calendar-core/parts/MonthsBackground";
 import MonthsRow from "tv/frontend/components/calendar-core/parts/MonthsRow";
 import SeasonRow from "tv/frontend/components/calendar-core/parts/SeasonRow";
-import * as Actions from "tv/frontend/redux/actions";
-import * as followingThunk from "tv/frontend/redux/thunks/following";
-import * as State from "tv/frontend/redux/state";
-import * as DateUtils from "tv/frontend/services/dateUtils";
-import * as Domain from "tv/shared/domain";
 import * as authDuck from "tv/frontend/redux/ducks/auth";
+import { State } from "tv/frontend/redux/state";
+import * as followingThunk from "tv/frontend/redux/thunks/following";
+import { useThisDispatch, useThisMappedState } from "tv/frontend/redux/utils";
+import * as DateUtils from "tv/frontend/services/dateUtils";
 
-type StateProps = {
-  year: number;
-  seasons: Domain.SeasonWithShow[];
-  showRemoveButtons: boolean;
-};
-type OwnProps = {
-  mockedNow?: moment.Moment;
-};
-type ThisProps = StateProps &
-  OwnProps & {
-    dispatch: Actions.ThisDispatch;
-  };
-
-const Calendar: React.SFC<ThisProps> = ({
-  year,
-  mockedNow,
-  seasons,
-  showRemoveButtons,
-  dispatch
-}) => {
-  const now = mockedNow || moment();
+export default function Calendar() {
+  const mapState = React.useCallback(
+    (state: State) => ({
+      year: state.calendar.year,
+      seasons: state.calendar.seasons,
+      showRemoveButtons: authDuck.isUserLoggedInSelector(state)
+    }),
+    []
+  );
+  const { year, seasons, showRemoveButtons } = useThisMappedState(mapState);
+  const dispatch = useThisDispatch();
+  const now = moment();
   const marker = now.year() === year ? <Marker now={now} /> : "";
   return (
     <div className="calendar">
@@ -61,14 +50,4 @@ const Calendar: React.SFC<ThisProps> = ({
       </div>
     </div>
   );
-};
-
-export default Calendar;
-
-export const connected = connect<StateProps, {}, OwnProps, State.T>(
-  (state: State.T) => ({
-    year: state.calendar.year,
-    seasons: state.calendar.seasons,
-    showRemoveButtons: authDuck.isUserLoggedInSelector(state)
-  })
-)(Calendar);
+}
