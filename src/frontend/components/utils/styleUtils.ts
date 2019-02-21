@@ -3,6 +3,29 @@ import * as DateUtils from 'tv/frontend/services/dateUtils'
 import { CSSProperties } from 'react'
 
 // Computes the CSS to apply to a div to represent
+// some month of a certain year
+// The subperiod might actually overlap on some other year.
+export function getStyleForMonthInYear({
+  year,
+  monthNumber,
+}: {
+  year: number
+  monthNumber: number
+}): CSSProperties {
+  const start = moment(year, 'YYYY')
+    .month(monthNumber)
+    .startOf('month')
+  const end = moment(year, 'YYYY')
+    .month(monthNumber)
+    .endOf('month')
+  return getStyleForPeriodInYear({
+    year,
+    start,
+    end,
+  })
+}
+
+// Computes the CSS to apply to a div to represent
 // some subperiod of a certain year
 // The subperiod might actually overlap on some other year.
 export function getStyleForPeriodInYear({

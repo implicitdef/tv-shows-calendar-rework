@@ -2,12 +2,9 @@ import * as moment from 'moment'
 import * as React from 'react'
 import * as DateUtils from 'tv/frontend/services/dateUtils'
 
-type ThisProps = {
+const Marker: React.SFC<{
   now: moment.Moment
-}
-
-// Columns suggesting the months behind the series
-const Marker: React.SFC<ThisProps> = ({ now }) => (
+}> = ({ now }) => (
   <div
     className='calendar__marker'
     style={{ left: `${DateUtils.dateLeftOffset(now)}%` }}

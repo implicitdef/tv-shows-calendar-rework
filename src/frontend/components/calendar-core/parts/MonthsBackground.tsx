@@ -1,20 +1,17 @@
 import * as _ from 'lodash'
 import * as React from 'react'
-import MonthBox from 'tv/frontend/components/calendar-core/parts/MonthBox'
-
-type ThisProps = {
-  year: number
-}
+import { getStyleForMonthInYear } from 'tv/frontend/components/utils/styleUtils'
 
 // Columns suggesting the months behind the series
-const MonthsBackground: React.SFC<ThisProps> = ({ year }) => (
+const MonthsBackground: React.SFC<{
+  year: number
+}> = ({ year }) => (
   <div className='calendar__months-background'>
     {_.range(0, 12).map(monthNumber => {
       return (
-        <MonthBox
-          year={year}
+        <div
+          style={getStyleForMonthInYear({ year, monthNumber })}
           key={monthNumber}
-          monthNumber={monthNumber}
           className='calendar__month-column'
         />
       )
