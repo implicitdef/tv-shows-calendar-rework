@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2016" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */,
-    "module": "commonjs" /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd' or 'es2015'. */,
-    "jsx": "react" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
-    "strict": true /* Enable all strict type-checking options. */,
-    "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
+    "target": "ES2016",
+    "module": "commonjs",
+    "jsx": "react",
+    "strict": true,
+    "baseUrl": "./",
     "paths": {
       "tv/*": ["src/*"]
     },
-    "typeRoots": ["node_modules/@types"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
@@ -17,5 +16,5 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true
   },
-  "includes": ["./custom_typings/**/*"]
+  "exclude": ["app/dist", "node_modules"]
 }
