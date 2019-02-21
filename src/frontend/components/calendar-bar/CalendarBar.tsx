@@ -4,7 +4,7 @@ import * as authDuck from 'tv/frontend/redux/ducks/auth'
 import * as duckCalendar from 'tv/frontend/redux/ducks/calendar'
 import { TheState } from 'tv/frontend/redux/state'
 import { useThisDispatch, useThisMappedState } from 'tv/frontend/redux/utils'
-import SearchBox from 'tv/frontend/components/calendar-wrap/SearchBox'
+import SearchBox from 'tv/frontend/components/calendar-bar/SearchBox'
 
 export default function CalendarBar() {
   const mapState = useCallback(
