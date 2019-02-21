@@ -67,5 +67,8 @@
     "webpack-dev-middleware": "^3.5.2",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-node-externals": "^1.6.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
   }
 }
