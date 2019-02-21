@@ -41,7 +41,7 @@
   }
 
   .calendar-core__months-background {
-    .calendar__month-column {
+    .calendar-core__month-column {
       @extend .absolute-box;
       border-left: 1px solid #cccccc;
       z-index: 70;
@@ -51,7 +51,7 @@
   .calendar-core__months-names-row {
     height: 30px;
     position: relative;
-    .calendar__month-name {
+    .calendar-core__month-name {
       @extend .absolute-box;
       @extend .centering;
       color: white;
@@ -59,7 +59,7 @@
     }
   }
 
-  .calendar__season-row {
+  .calendar-core__season-row {
     height: 50px;
     position: relative;
     margin: 0 0 -15px;
@@ -67,7 +67,7 @@
       margin: 0;
     }
 
-    .calendar__season {
+    .calendar-core__season {
       @extend .absolute-box;
       overflow: hidden;
       white-space: nowrap;
@@ -92,16 +92,16 @@
         min-width: 0 !important;
         transition: width 0.15s ease-out, margin-top 0.15s ease-out,
           box-shadow 0.15s ease-out;
-        .calendar__season-close {
+        .calendar-core__season-close {
           display: none !important;
           vertical-align: middle;
         }
       }
-      .calendar__season-name {
+      .calendar-core__season-name {
         vertical-align: middle;
         cursor: default;
       }
-      .calendar__season-close {
+      .calendar-core__season-close {
         background: transparent;
         border: none;
         outline: none;

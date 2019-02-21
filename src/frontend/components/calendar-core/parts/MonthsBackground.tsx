@@ -12,7 +12,7 @@ const MonthsBackground: React.SFC<{
         <div
           style={getStyleForMonthInYear({ year, monthNumber })}
           key={monthNumber}
-          className='calendar__month-column'
+          className='calendar-core__month-column'
         />
       )
     })}

@@ -14,14 +14,14 @@ const SeasonRow: React.SFC<{
   const { show, number: seasonNumber, time } = season
   const { start, end } = time
   const closingButton = showRemoveButtons ? (
-    <button onClick={onClose} className='calendar__season-close'>
+    <button onClick={onClose} className='calendar-core__season-close'>
       &times;
     </button>
   ) : null
   return (
-    <div className='calendar__season-row'>
+    <div className='calendar-core__season-row'>
       <div
-        className='calendar__season'
+        className='calendar-core__season'
         style={{
           ...getStyleForPeriodInYear({
             year,
@@ -33,7 +33,7 @@ const SeasonRow: React.SFC<{
         }}
       >
         {closingButton}
-        <span className='calendar__season-name'>
+        <span className='calendar-core__season-name'>
           {show.name.toUpperCase()}&nbsp;S{seasonNumber}
         </span>
       </div>

@@ -13,7 +13,7 @@ const MonthsNamesRow: React.SFC<{
         <div
           style={getStyleForMonthInYear({ year, monthNumber })}
           key={monthNumber}
-          className='calendar__month-name'
+          className='calendar-core__month-name'
         >
           {moment(year, 'YYYY')
             .month(monthNumber)
