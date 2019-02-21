@@ -6,10 +6,10 @@ const Marker: React.SFC<{
   now: moment.Moment
 }> = ({ now }) => (
   <div
-    className='calendar__marker'
+    className='calendar-core__marker'
     style={{ left: `${DateUtils.dateLeftOffset(now)}%` }}
   >
-    <div className='calendar__marker-bar' />
+    <div className='calendar-core__marker-bar' />
   </div>
 )
 

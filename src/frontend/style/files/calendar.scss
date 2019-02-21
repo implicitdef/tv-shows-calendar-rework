@@ -4,18 +4,18 @@
   top: 0;
 }
 
-.calendar {
+.calendar-core {
   flex: 1;
   position: relative;
   display: flex;
   flex-direction: column;
 
-  .calendar__inner {
+  .calendar-core__inner {
     @extend .padding-clean;
     flex: 1;
   }
 
-  .calendar__marker {
+  .calendar-core__marker {
     $marker-color: #b0bec5;
 
     @extend .absolute-box;
@@ -33,14 +33,14 @@
       top: -25px;
       left: -20px;
     }
-    .calendar__marker-bar {
+    .calendar-core__marker-bar {
       @extend .absolute-box;
       width: 1px;
       background: $marker-color;
     }
   }
 
-  .calendar__months-background {
+  .calendar-core__months-background {
     .calendar__month-column {
       @extend .absolute-box;
       border-left: 1px solid #cccccc;
@@ -48,7 +48,7 @@
     }
   }
 
-  .calendar__months-row {
+  .calendar-core__months-names-row {
     height: 30px;
     position: relative;
     .calendar__month-name {

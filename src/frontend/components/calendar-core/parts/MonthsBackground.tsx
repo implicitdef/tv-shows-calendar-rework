@@ -6,7 +6,7 @@ import { getStyleForMonthInYear } from 'tv/frontend/components/utils/styleUtils'
 const MonthsBackground: React.SFC<{
   year: number
 }> = ({ year }) => (
-  <div className='calendar__months-background'>
+  <div className='calendar-core__months-background'>
     {_.range(0, 12).map(monthNumber => {
       return (
         <div

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { StoreContext } from 'redux-react-hook'
-import Calendar from 'tv/frontend/components/calendar-core/Calendar'
+import CalendarCore from 'tv/frontend/components/calendar-core/CalendarCore'
 import CalendarBar from 'tv/frontend/components/calendar-wrap/CalendarBar'
 import About from 'tv/frontend/components/meta/About'
 import AuthBar from 'tv/frontend/components/meta/AuthBar'
@@ -15,7 +15,7 @@ const App: React.SFC<{}> = ({}) => {
         <AuthBar />
         <About />
         <CalendarBar />
-        <Calendar />
+        <CalendarCore />
       </div>
     </StoreContext.Provider>
   )
