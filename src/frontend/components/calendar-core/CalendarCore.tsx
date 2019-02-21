@@ -4,18 +4,18 @@ import Marker from 'tv/frontend/components/calendar-core/Marker'
 import MonthsBackground from 'tv/frontend/components/calendar-core/MonthsBackground'
 import MonthsNamesRow from 'tv/frontend/components/calendar-core/MonthsNamesRow'
 import SeasonRow from 'tv/frontend/components/calendar-core/SeasonRow'
-import * as authDuck from 'tv/frontend/redux/ducks/auth'
 import { TheState } from 'tv/frontend/redux/state'
 import * as followingThunk from 'tv/frontend/redux/thunks/following'
 import { useThisDispatch, useThisMappedState } from 'tv/frontend/redux/utils'
 import * as DateUtils from 'tv/frontend/services/dateUtils'
+import { loggedInStatusSelector } from 'tv/frontend/redux/ducks/auth'
 
 export default function CalendarCore() {
   const mapState = React.useCallback(
     (state: TheState) => ({
       year: state.calendar.year,
       seasons: state.calendar.seasons,
-      showRemoveButtons: authDuck.loggedInStatusSelector(state) === 'loggedIn',
+      showRemoveButtons: loggedInStatusSelector(state) === 'loggedIn',
     }),
     [],
   )

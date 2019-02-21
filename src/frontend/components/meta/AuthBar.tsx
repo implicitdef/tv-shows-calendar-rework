@@ -1,16 +1,19 @@
 import * as React from 'react'
 import { useCallback } from 'react'
-import * as authDuck from 'tv/frontend/redux/ducks/auth'
 import * as metaDuck from 'tv/frontend/redux/ducks/meta'
 import { TheState } from 'tv/frontend/redux/state'
 import * as authThunk from 'tv/frontend/redux/thunks/auth'
 import { useThisDispatch, useThisMappedState } from 'tv/frontend/redux/utils'
+import {
+  loggedInStatusSelector,
+  userEmailSelector,
+} from 'tv/frontend/redux/ducks/auth'
 
 export default function AuthBar() {
   const mapState = useCallback(
     (state: TheState) => ({
-      loggedInStatus: authDuck.loggedInStatusSelector(state),
-      email: authDuck.userEmailSelector(state),
+      loggedInStatus: loggedInStatusSelector(state),
+      email: userEmailSelector(state),
     }),
     [],
   )

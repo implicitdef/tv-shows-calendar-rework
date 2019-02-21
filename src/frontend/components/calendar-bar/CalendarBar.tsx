@@ -1,16 +1,16 @@
 import * as React from 'react'
 import { useCallback } from 'react'
-import * as authDuck from 'tv/frontend/redux/ducks/auth'
 import * as duckCalendar from 'tv/frontend/redux/ducks/calendar'
 import { TheState } from 'tv/frontend/redux/state'
 import { useThisDispatch, useThisMappedState } from 'tv/frontend/redux/utils'
 import SearchBox from 'tv/frontend/components/calendar-bar/SearchBox'
+import { loggedInStatusSelector } from 'tv/frontend/redux/ducks/auth'
 
 export default function CalendarBar() {
   const mapState = useCallback(
     (state: TheState) => ({
       year: state.calendar.year,
-      showAddShowButton: authDuck.loggedInStatusSelector(state) === 'loggedIn',
+      showAddShowButton: loggedInStatusSelector(state) === 'loggedIn',
     }),
     [],
   )
