@@ -40,13 +40,13 @@ export const userEmailSelector = createSelector(
   userInfo => userInfo && userInfo.email,
 )
 
-export const actions = {
+export const authActions = {
   setLoggedIn: (value: { token: string; user: google.User }) =>
     createAction('AUTH_SET_LOGGED_IN', value),
   setLoggedOut: () => createAction('AUTH_SET_LOGGED_OUT'),
 }
 
-export type AuthAction = ActionsUnion<typeof actions>
+export type AuthAction = ActionsUnion<typeof authActions>
 
 export default (state: AuthState = initial, action: AuthAction): AuthState => {
   switch (action.type) {

@@ -1,11 +1,11 @@
-import * as authDuck from 'tv/frontend/redux/ducks/auth'
-import * as calendarDuck from 'tv/frontend/redux/ducks/calendar'
-import * as metaDuck from 'tv/frontend/redux/ducks/meta'
-import * as searchDuck from 'tv/frontend/redux/ducks/search'
+import { AuthState } from 'tv/frontend/redux/ducks/auth'
+import { MetaState } from 'tv/frontend/redux/ducks/meta'
+import { SearchState } from 'tv/frontend/redux/ducks/search'
+import { CalendarState } from 'tv/frontend/redux/ducks/calendar'
 
 export type TheState = {
-  auth: authDuck.AuthState
-  meta: metaDuck.ThisState
-  search: searchDuck.ThisState
-  calendar: calendarDuck.CalendarState
+  auth: AuthState
+  meta: MetaState
+  search: SearchState
+  calendar: CalendarState
 }

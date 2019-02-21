@@ -7,15 +7,15 @@ export const searchShows = (input: string): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
     try {
       if (input.trim().length === 0) {
-        dispatch(searchDuck.actions.clear())
+        dispatch(searchDuck.searchActions.clear())
       } else {
-        dispatch(searchDuck.actions.setInput(input))
+        dispatch(searchDuck.searchActions.setInput(input))
         const shows = await api.searchShows({ dispatch, getState }, input)
-        dispatch(searchDuck.actions.setResults(shows))
+        dispatch(searchDuck.searchActions.setResults(shows))
       }
-      dispatch(searchDuck.actions.open())
+      dispatch(searchDuck.searchActions.open())
     } catch (e) {
-      dispatch(metaDuck.actions.registerGlobalError())
+      dispatch(metaDuck.metaActions.registerGlobalError())
     }
   }
 }

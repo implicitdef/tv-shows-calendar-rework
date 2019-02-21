@@ -24,7 +24,7 @@ export default function CalendarBar() {
         <a
           className='calendar-bar__back'
           onClick={() => {
-            dispatch(duckCalendar.actions.decrementYear())
+            dispatch(duckCalendar.calendarActions.decrementYear())
           }}
         >
           {'<'}
@@ -33,7 +33,7 @@ export default function CalendarBar() {
         <a
           className='calendar-bar__forward'
           onClick={() => {
-            dispatch(duckCalendar.actions.incrementYear())
+            dispatch(duckCalendar.calendarActions.incrementYear())
           }}
         >
           >

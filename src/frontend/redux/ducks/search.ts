@@ -3,7 +3,7 @@ import { createSelector } from 'reselect'
 import { TheState } from 'tv/frontend/redux/state'
 import * as Domain from 'tv/shared/domain'
 
-export type ThisState = {
+export type SearchState = {
   results: Domain.Show[]
   input: string | null
   isOpen: boolean
@@ -34,7 +34,7 @@ export const SET_INPUT = 'search.SET_INPUT'
 export const SET_IS_OPEN = 'search.SET_IS_OPEN'
 export const CLEAR = 'search.CLEAR'
 
-export const actions = {
+export const searchActions = {
   setResults: (value: Domain.Show[]) => createAction(SET_RESULTS, value),
   setInput: (value: string) => createAction(SET_INPUT, value),
   clear: () => createAction(CLEAR),
@@ -42,9 +42,12 @@ export const actions = {
   close: () => createAction(SET_IS_OPEN, false),
 }
 
-export type ThisAction = ActionsUnion<typeof actions>
+export type SearchAction = ActionsUnion<typeof searchActions>
 
-export default (state: ThisState = initial, action: ThisAction): ThisState => {
+export default (
+  state: SearchState = initial,
+  action: SearchAction,
+): SearchState => {
   switch (action.type) {
     case SET_RESULTS: {
       return {

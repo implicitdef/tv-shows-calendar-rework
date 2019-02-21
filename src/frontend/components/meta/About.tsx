@@ -13,7 +13,7 @@ export default function About() {
   )
   const { isDisplayed } = useThisMappedState(mapState)
   const dispatch = useThisDispatch()
-  const onClose = () => dispatch(metaDuck.actions.hideAbout())
+  const onClose = () => dispatch(metaDuck.metaActions.hideAbout())
   return isDisplayed ? (
     <div className='about'>
       <p>

@@ -21,7 +21,7 @@ export default function SearchBox() {
   const onInput = (input: string) => dispatch(searchThunk.searchShows(input))
   const onSubmit = (show: Domain.Show) =>
     dispatch(followingThunk.followShow(show.id))
-  const onOpen = () => dispatch(searchDuck.actions.open())
+  const onOpen = () => dispatch(searchDuck.searchActions.open())
   return (
     <div className='search-box'>
       <input

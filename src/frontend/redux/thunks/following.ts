@@ -10,7 +10,7 @@ export const unfollowShow = (id: number): SomeThunkAction<void> => {
       await api.unfollowShow({ dispatch, getState }, id)
       dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
-      dispatch(metaDuck.actions.registerGlobalError())
+      dispatch(metaDuck.metaActions.registerGlobalError())
     }
   }
 }
@@ -18,11 +18,11 @@ export const unfollowShow = (id: number): SomeThunkAction<void> => {
 export const followShow = (id: number): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
     try {
-      dispatch(searchDuck.actions.clear())
+      dispatch(searchDuck.searchActions.clear())
       await api.followShow({ dispatch, getState }, id)
       dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
-      dispatch(metaDuck.actions.registerGlobalError())
+      dispatch(metaDuck.metaActions.registerGlobalError())
     }
   }
 }

@@ -11,9 +11,9 @@ export const fetchSeasons = (): SomeThunkAction<void> => {
         { dispatch, getState },
         authDuck.loggedInStatusSelector(getState()) === 'loggedIn',
       )
-      dispatch(calendarDuck.actions.registerSeasons(seasons))
+      dispatch(calendarDuck.calendarActions.registerSeasons(seasons))
     } catch (e) {
-      dispatch(metaDuck.actions.registerGlobalError())
+      dispatch(metaDuck.metaActions.registerGlobalError())
     }
   }
 }

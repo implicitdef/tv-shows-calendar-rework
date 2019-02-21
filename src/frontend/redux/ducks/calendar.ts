@@ -9,7 +9,7 @@ export type CalendarState = {
   seasons: Domain.SeasonWithShow[]
 }
 
-export const initial = {
+export const initial: CalendarState = {
   year: moment().year(),
   seasons: [],
 }
@@ -27,14 +27,14 @@ export const seasonsSelector = createSelector(
 export const SET_SEASONS = 'calendar.SET_SEASONS'
 export const MODIFY_YEAR = 'calendar.MODIFY_YEAR'
 
-export const actions = {
+export const calendarActions = {
   registerSeasons: (value: Domain.SeasonWithShow[]) =>
     createAction(SET_SEASONS, value),
   incrementYear: () => createAction(MODIFY_YEAR, 1),
   decrementYear: () => createAction(MODIFY_YEAR, -1),
 }
 
-export type CalendarAction = ActionsUnion<typeof actions>
+export type CalendarAction = ActionsUnion<typeof calendarActions>
 
 export default (
   state: CalendarState = initial,

@@ -16,7 +16,7 @@ export default function AuthBar() {
   )
   const { loggedInStatus, email } = useThisMappedState(mapState)
   const dispatch = useThisDispatch()
-  const onClickAbout = () => dispatch(metaDuck.actions.displayAbout())
+  const onClickAbout = () => dispatch(metaDuck.metaActions.displayAbout())
   const onLogin = () => {
     dispatch(authThunk.login())
   }
