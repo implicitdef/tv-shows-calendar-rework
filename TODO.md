@@ -1,9 +1,8 @@
-- ptet rassembler certains components dans un seul fichier pour simplifier un peu l'arbo
 - fixer display des seasons en toute fin de calendrier (cf black mirror en 2017)
 - mettre graphql, d'abord coté server puis faire coté front
 - ptet faire certains trucs avec des hooks au lieu de redux (la search par exemple ?)
 - rebosser un peu le css, essayer de passer à un container non-fluide
-- utiliser css modules, virer BEM ?
+- utiliser css modules, virer BEM ? ou inline CSS ?
 - optimiser perfs : essayer d'importer que ce que j'ai besoin de bootstrap (la grid)
 - optimiser perfs : cf les warnings quand on build comme en prod
 - ptet afficher un loader discret pour quand les series se rechargent
