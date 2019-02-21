@@ -1,21 +1,21 @@
-import * as metaDuck from 'tv/frontend/redux/ducks/meta'
-import * as searchDuck from 'tv/frontend/redux/ducks/search'
 import * as api from 'tv/frontend/services/api'
 import { SomeThunkAction } from 'tv/frontend/redux/actions'
+import { searchActions } from 'tv/frontend/redux/ducks/search'
+import { metaActions } from 'tv/frontend/redux/ducks/meta'
 
 export const searchShows = (input: string): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
     try {
       if (input.trim().length === 0) {
-        dispatch(searchDuck.searchActions.clear())
+        dispatch(searchActions.clear())
       } else {
-        dispatch(searchDuck.searchActions.setInput(input))
+        dispatch(searchActions.setInput(input))
         const shows = await api.searchShows({ dispatch, getState }, input)
-        dispatch(searchDuck.searchActions.setResults(shows))
+        dispatch(searchActions.setResults(shows))
       }
-      dispatch(searchDuck.searchActions.open())
+      dispatch(searchActions.open())
     } catch (e) {
-      dispatch(metaDuck.metaActions.registerGlobalError())
+      dispatch(metaActions.registerGlobalError())
     }
   }
 }

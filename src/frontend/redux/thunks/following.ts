@@ -1,8 +1,8 @@
-import * as searchDuck from 'tv/frontend/redux/ducks/search'
-import * as metaDuck from 'tv/frontend/redux/ducks/meta'
 import * as calendarThunk from 'tv/frontend/redux/thunks/calendar'
 import * as api from 'tv/frontend/services/api'
 import { SomeThunkAction } from 'tv/frontend/redux/actions'
+import { metaActions } from 'tv/frontend/redux/ducks/meta';
+import { searchActions } from 'tv/frontend/redux/ducks/search';
 
 export const unfollowShow = (id: number): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
@@ -10,7 +10,7 @@ export const unfollowShow = (id: number): SomeThunkAction<void> => {
       await api.unfollowShow({ dispatch, getState }, id)
       dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
-      dispatch(metaDuck.metaActions.registerGlobalError())
+      dispatch(metaActions.registerGlobalError())
     }
   }
 }
@@ -18,11 +18,11 @@ export const unfollowShow = (id: number): SomeThunkAction<void> => {
 export const followShow = (id: number): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
     try {
-      dispatch(searchDuck.searchActions.clear())
+      dispatch(searchActions.clear())
       await api.followShow({ dispatch, getState }, id)
       dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
-      dispatch(metaDuck.metaActions.registerGlobalError())
+      dispatch(metaActions.registerGlobalError())
     }
   }
 }

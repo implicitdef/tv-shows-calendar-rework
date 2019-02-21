@@ -1,19 +1,22 @@
 import * as React from 'react'
 import { useCallback } from 'react'
-import * as metaDuck from 'tv/frontend/redux/ducks/meta'
 import { TheState } from 'tv/frontend/redux/state'
 import { useThisDispatch, useThisMappedState } from 'tv/frontend/redux/utils'
+import {
+  isAboutDisplayedSelector,
+  metaActions,
+} from 'tv/frontend/redux/ducks/meta'
 
 export default function About() {
   const mapState = useCallback(
     (state: TheState) => ({
-      isDisplayed: metaDuck.isAboutDisplayedSelector(state),
+      isDisplayed: isAboutDisplayedSelector(state),
     }),
     [],
   )
   const { isDisplayed } = useThisMappedState(mapState)
   const dispatch = useThisDispatch()
-  const onClose = () => dispatch(metaDuck.metaActions.hideAbout())
+  const onClose = () => dispatch(metaActions.hideAbout())
   return isDisplayed ? (
     <div className='about'>
       <p>

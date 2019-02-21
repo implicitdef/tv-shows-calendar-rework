@@ -1,8 +1,8 @@
-import * as metaDuck from 'tv/frontend/redux/ducks/meta'
-import * as calendarDuck from 'tv/frontend/redux/ducks/calendar'
 import * as calendarDataFetcher from 'tv/frontend/services/calendarDataFetcher'
 import { SomeThunkAction } from 'tv/frontend/redux/actions'
 import { loggedInStatusSelector } from 'tv/frontend/redux/ducks/auth'
+import { calendarActions } from 'tv/frontend/redux/ducks/calendar';
+import { metaActions } from 'tv/frontend/redux/ducks/meta';
 
 export const fetchSeasons = (): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
@@ -11,9 +11,9 @@ export const fetchSeasons = (): SomeThunkAction<void> => {
         { dispatch, getState },
         loggedInStatusSelector(getState()) === 'loggedIn',
       )
-      dispatch(calendarDuck.calendarActions.registerSeasons(seasons))
+      dispatch(calendarActions.registerSeasons(seasons))
     } catch (e) {
-      dispatch(metaDuck.metaActions.registerGlobalError())
+      dispatch(metaActions.registerGlobalError())
     }
   }
 }

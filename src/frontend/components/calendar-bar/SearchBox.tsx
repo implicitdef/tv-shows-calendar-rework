@@ -1,18 +1,23 @@
 import * as React from 'react'
 import { useCallback } from 'react'
-import * as searchDuck from 'tv/frontend/redux/ducks/search'
 import { TheState } from 'tv/frontend/redux/state'
 import * as followingThunk from 'tv/frontend/redux/thunks/following'
 import * as searchThunk from 'tv/frontend/redux/thunks/search'
 import { useThisDispatch, useThisMappedState } from 'tv/frontend/redux/utils'
 import * as Domain from 'tv/shared/domain'
+import {
+  resultsSelector,
+  inputSelector,
+  isOpenSelector,
+  searchActions,
+} from 'tv/frontend/redux/ducks/search'
 
 export default function SearchBox() {
   const mapState = useCallback(
     (state: TheState) => ({
-      shows: searchDuck.resultsSelector(state),
-      input: searchDuck.inputSelector(state),
-      open: searchDuck.isOpenSelector(state),
+      shows: resultsSelector(state),
+      input: inputSelector(state),
+      open: isOpenSelector(state),
     }),
     [],
   )
@@ -21,7 +26,7 @@ export default function SearchBox() {
   const onInput = (input: string) => dispatch(searchThunk.searchShows(input))
   const onSubmit = (show: Domain.Show) =>
     dispatch(followingThunk.followShow(show.id))
-  const onOpen = () => dispatch(searchDuck.searchActions.open())
+  const onOpen = () => dispatch(searchActions.open())
   return (
     <div className='search-box'>
       <input

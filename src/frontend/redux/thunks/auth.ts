@@ -1,8 +1,8 @@
 import { SomeThunkAction } from 'tv/frontend/redux/actions'
-import * as metaDuck from 'tv/frontend/redux/ducks/meta'
 import * as calendarThunk from 'tv/frontend/redux/thunks/calendar'
 import * as google from 'tv/frontend/services/google'
 import { authActions } from 'tv/frontend/redux/ducks/auth'
+import { metaActions } from 'tv/frontend/redux/ducks/meta'
 
 export const login = (): SomeThunkAction<void> => {
   return async dispatch => {
@@ -13,7 +13,7 @@ export const login = (): SomeThunkAction<void> => {
       dispatch(authActions.setLoggedIn({ token, user }))
       await dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
-      dispatch(metaDuck.metaActions.registerGlobalError())
+      dispatch(metaActions.registerGlobalError())
     }
   }
 }
@@ -25,7 +25,7 @@ export const logout = (): SomeThunkAction<void> => {
       dispatch(authActions.setLoggedOut())
       await dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
-      dispatch(metaDuck.metaActions.registerGlobalError())
+      dispatch(metaActions.registerGlobalError())
     }
   }
 }

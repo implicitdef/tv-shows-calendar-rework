@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { useCallback } from 'react'
-import * as duckCalendar from 'tv/frontend/redux/ducks/calendar'
 import { TheState } from 'tv/frontend/redux/state'
 import { useThisDispatch, useThisMappedState } from 'tv/frontend/redux/utils'
 import SearchBox from 'tv/frontend/components/calendar-bar/SearchBox'
 import { loggedInStatusSelector } from 'tv/frontend/redux/ducks/auth'
+import { calendarActions } from 'tv/frontend/redux/ducks/calendar'
 
 export default function CalendarBar() {
   const mapState = useCallback(
@@ -24,7 +24,7 @@ export default function CalendarBar() {
         <a
           className='calendar-bar__back'
           onClick={() => {
-            dispatch(duckCalendar.calendarActions.decrementYear())
+            dispatch(calendarActions.decrementYear())
           }}
         >
           {'<'}
@@ -33,7 +33,7 @@ export default function CalendarBar() {
         <a
           className='calendar-bar__forward'
           onClick={() => {
-            dispatch(duckCalendar.calendarActions.incrementYear())
+            dispatch(calendarActions.incrementYear())
           }}
         >
           >
