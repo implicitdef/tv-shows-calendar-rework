@@ -1,9 +1,8 @@
-import * as calendarDuck from 'tv/frontend/redux/ducks/calendar'
-import * as calendarThunk from 'tv/frontend/redux/thunks/calendar'
-import * as metaDuck from 'tv/frontend/redux/ducks/meta'
-import * as authDuck from 'tv/frontend/redux/ducks/auth'
-import * as google from 'tv/frontend/services/google'
 import { SomeThunkAction } from 'tv/frontend/redux/actions'
+import * as authDuck from 'tv/frontend/redux/ducks/auth'
+import * as metaDuck from 'tv/frontend/redux/ducks/meta'
+import * as calendarThunk from 'tv/frontend/redux/thunks/calendar'
+import * as google from 'tv/frontend/services/google'
 
 export const login = (): SomeThunkAction<void> => {
   return async dispatch => {

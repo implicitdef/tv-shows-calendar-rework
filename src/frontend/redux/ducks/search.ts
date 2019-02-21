@@ -1,12 +1,7 @@
-import * as google from 'tv/frontend/services/google'
-
 import { ActionsUnion, createAction } from '@martin_hotell/rex-tils'
-import * as api from 'tv/frontend/services/api'
-import * as Domain from 'tv/shared/domain'
-import * as metaDuck from 'tv/frontend/redux/ducks/meta'
-
 import { createSelector } from 'reselect'
 import { TheState } from 'tv/frontend/redux/state'
+import * as Domain from 'tv/shared/domain'
 
 export type ThisState = {
   results: Domain.Show[]

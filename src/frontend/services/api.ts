@@ -1,13 +1,10 @@
 import * as axios from 'axios'
 import * as moment from 'moment'
-import * as redux from 'redux'
-import * as Domain from 'tv/shared/domain'
-
-import { TheState } from 'tv/frontend/redux/state'
 import { getAxios, Wirings } from 'tv/frontend/services/axiosConfig'
 import * as cache from 'tv/frontend/services/cache'
 import * as conf from 'tv/frontend/services/conf'
-import { StatelessComponent } from 'react'
+import * as Domain from 'tv/shared/domain'
+
 const base = conf.serverUrl
 
 function extractData(response: axios.AxiosResponse): any {

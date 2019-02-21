@@ -1,8 +1,7 @@
 import * as Knex from 'knex'
-import * as Domain from 'tv/shared/domain'
-import * as Conf from 'tv/server/utils/conf'
-import * as Utils from 'tv/server/utils/utils'
 import * as DbQueries from 'tv/server/services/dbQueries'
+import * as Conf from 'tv/server/utils/conf'
+import * as Domain from 'tv/shared/domain'
 
 const knexClient = Knex({
   client: 'postgres',

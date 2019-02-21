@@ -1,12 +1,11 @@
 import * as express from 'express'
-import * as path from 'path'
-import * as webpack from 'webpack'
-import * as webpackDevMiddleware from 'webpack-dev-middleware'
-import * as webpackHotMiddleware from 'webpack-hot-middleware'
-import { isDev, port } from 'tv/server/utils/conf'
 import frontendConfig, {
   frontendConfigOutputPublicPath,
 } from 'tv/../webpack/webpack.frontend.config'
+import { isDev, port } from 'tv/server/utils/conf'
+import * as webpack from 'webpack'
+import * as webpackDevMiddleware from 'webpack-dev-middleware'
+import * as webpackHotMiddleware from 'webpack-hot-middleware'
 
 export class NotFoundError extends Error {
   constructor(message: string) {
@@ -24,9 +23,9 @@ const PublicFolder = 'src/public'
 
 const errorHandler = (
   err: any,
-  req: express.Request,
+  _req: express.Request,
   res: express.Response,
-  next: express.NextFunction,
+  _next: express.NextFunction,
 ) => {
   if (err instanceof NotFoundError) {
     res.status(404).send({ message: err.message })
@@ -44,7 +43,7 @@ const listeningHandler = () => {
 
 export function finishExpressAppSetupAndLaunch(app: express.Express): void {
   app.use(errorHandler)
-  app.get('/', (req, res) => {
+  app.get('/', (_, res) => {
     res.sendFile('index.html', { root: PublicFolder })
   })
   if (isDev) {

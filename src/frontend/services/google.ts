@@ -12,12 +12,12 @@ export type User = {
 // to ensure our calls are made after gapi is loaded
 // we have to wrap it in a promise
 let gapiPromiseResolve: (googleAuth: any) => void
-const gapiPromise = new Promise<any>((resolve, reject) => {
+const gapiPromise = new Promise<any>(resolve => {
   gapiPromiseResolve = resolve
 })
 let googleAuth: any = null
 const googleAuthPromise = gapiPromise.then(gapi => {
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<void>(resolve => {
     gapi.load('auth2', () => {
       // normally here we'd resolve the promise with
       // the returned object.

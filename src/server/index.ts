@@ -1,12 +1,10 @@
+import * as bodyParser from 'body-parser'
 import * as express from 'express'
-import * as moment from 'moment'
 import 'source-map-support/register'
-import * as Domain from 'tv/shared/domain'
 import * as Auth from 'tv/server/auth/auth'
 import * as DbService from 'tv/server/services/dbService'
 import * as Conf from 'tv/server/utils/conf'
 import * as Web from 'tv/server/utils/web'
-import * as bodyParser from 'body-parser'
 
 console.log(`Server started with process.env.NODE_ENV = `, process.env.NODE_ENV)
 
@@ -30,7 +28,7 @@ app.get('/shows', async (req, res, next) => {
 })
 
 // Return a selection of shows for the unconnected user
-app.get('/shows/default', async (req, res, next) => {
+app.get('/shows/default', async (_, res, next) => {
   try {
     const data = await DbService.loadData()
     const series = data.map(serieAndSeasons => serieAndSeasons.serie)
@@ -112,7 +110,6 @@ app.post(
   bodyParser.text({ type: '*/*', limit: '50mb' }),
   async (req, res, next) => {
     try {
-      const keyParamName = 'key'
       if (req.query.key !== Conf.pushDataApiKey) {
         throw new Web.AuthError()
       }

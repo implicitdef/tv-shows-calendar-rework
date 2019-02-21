@@ -1,7 +1,4 @@
-import * as google from 'tv/frontend/services/google'
-
 import { ActionsUnion, createAction } from '@martin_hotell/rex-tils'
-
 import { createSelector } from 'reselect'
 import { TheState } from 'tv/frontend/redux/state'
 

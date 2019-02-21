@@ -15,7 +15,7 @@ export type LoggedInRequest = express.Request & {
 
 export const middleware: express.RequestHandler = async (
   req,
-  res,
+  _,
   next,
 ): Promise<void> => {
   // if headers missing, refuse request

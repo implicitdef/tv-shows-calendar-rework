@@ -1,12 +1,11 @@
-import { CheckerPlugin } from 'awesome-typescript-loader'
 import * as webpack from 'webpack'
 import {
   buildPath,
-  resolve,
-  mode,
-  rules,
-  plugins,
   isProd,
+  mode,
+  plugins,
+  resolve,
+  rules,
   watchOptions,
 } from './webpackConfUtils'
 

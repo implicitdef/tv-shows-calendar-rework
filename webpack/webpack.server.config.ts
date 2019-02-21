@@ -5,10 +5,8 @@ import {
   mode,
   watchOptions,
   plugins,
-  isProd,
 } from './webpackConfUtils'
 import * as nodeExternals from 'webpack-node-externals'
-import { CheckerPlugin } from 'awesome-typescript-loader'
 import * as webpack from 'webpack'
 
 export const serverConfig: webpack.Configuration = {
