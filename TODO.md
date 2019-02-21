@@ -1,3 +1,4 @@
+- tune prettier stuff and tsconfig stuff like in neon
 - ptet rassembler certains components dans un seul fichier pour simplifier un peu l'arbo
 - mettre graphql, d'abord coté server puis faire coté front
 - ptet faire certains trucs avec des hooks au lieu de redux (la search par exemple ?)

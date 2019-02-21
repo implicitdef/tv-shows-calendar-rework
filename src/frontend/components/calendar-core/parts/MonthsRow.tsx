@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import * as moment from "moment";
 import * as React from "react";
-import MonthBox from "tv/frontend/components/calendar-core/boxes/MonthBox";
+import MonthBox from "tv/frontend/components/calendar-core/parts/MonthBox";
 
 type ThisProps = {
   year: number;

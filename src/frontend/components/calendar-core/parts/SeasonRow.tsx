@@ -1,16 +1,6 @@
 import * as React from "react";
-import PeriodInYearBox from "tv/frontend/components/calendar-core/boxes/PeriodInYearBox";
 import * as Domain from "tv/shared/domain";
-
-// displays a given season of a serie
-
-type ThisProps = {
-  year: number;
-  season: Domain.SeasonWithShow;
-  index: number;
-  showRemoveButtons: boolean;
-  onClose: () => void;
-};
+import { getStyleForPeriodInYear } from "tv/frontend/components/utils/getPeriodInYearStyle";
 
 const colors = [
   "#f44336",
@@ -54,13 +44,14 @@ const pickColor = (inputStr: string): string => {
   return colors[alwaysPositiveModulo(hashOfStr(inputStr), colors.length)];
 };
 
-const SeasonRow: React.SFC<ThisProps> = ({
-  year,
-  season,
-  index,
-  showRemoveButtons,
-  onClose
-}) => {
+// Displays a given season of a serie
+const SeasonRow: React.SFC<{
+  year: number;
+  season: Domain.SeasonWithShow;
+  index: number;
+  showRemoveButtons: boolean;
+  onClose: () => void;
+}> = ({ year, season, index, showRemoveButtons, onClose }) => {
   const { show, number: seasonNumber, time } = season;
   const { start, end } = time;
   const closingButton = showRemoveButtons ? (
@@ -70,19 +61,23 @@ const SeasonRow: React.SFC<ThisProps> = ({
   ) : null;
   return (
     <div className="calendar__season-row">
-      <PeriodInYearBox
+      <div
         className="calendar__season"
-        year={year}
-        start={start}
-        zIndex={100 + index}
-        end={end}
-        specificColor={pickColor(show.name)}
+        style={{
+          ...getStyleForPeriodInYear({
+            year,
+            start,
+            end
+          }),
+          backgroundColor: pickColor(show.name),
+          zIndex: 100 + index
+        }}
       >
         {closingButton}
         <span className="calendar__season-name">
           {show.name.toUpperCase()}&nbsp;S{seasonNumber}
         </span>
-      </PeriodInYearBox>
+      </div>
     </div>
   );
 };
