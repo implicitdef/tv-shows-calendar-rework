@@ -7,8 +7,8 @@ import SeasonRow from 'tv/frontend/components/calendar-core/SeasonRow'
 import { TheState } from 'tv/frontend/redux/state'
 import * as followingThunk from 'tv/frontend/redux/thunks/following'
 import { useThisDispatch, useThisMappedState } from 'tv/frontend/redux/utils'
-import * as DateUtils from 'tv/frontend/services/dateUtils'
 import { loggedInStatusSelector } from 'tv/frontend/redux/ducks/auth'
+import { isTimeRangeInYear } from 'tv/frontend/services/dateUtils'
 
 export default function CalendarCore() {
   const mapState = React.useCallback(
@@ -31,7 +31,7 @@ export default function CalendarCore() {
         <MonthsNamesRow year={year} />
         {seasons
           .filter(season => {
-            return DateUtils.isTimeRangeInYear(season.time, year)
+            return isTimeRangeInYear(season.time, year)
           })
           .map((season, index) => {
             const onClose = () =>

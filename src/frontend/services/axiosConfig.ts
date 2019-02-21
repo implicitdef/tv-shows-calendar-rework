@@ -1,10 +1,10 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
-import * as Constants from 'tv/shared/constants'
 import * as authThunk from 'tv/frontend/redux/thunks/auth'
 
 import { TheState } from 'tv/frontend/redux/state'
 import { TheDispatch } from 'tv/frontend/redux/actions'
 import { tokenSelector } from 'tv/frontend/redux/ducks/auth'
+import { AUTH_TOKEN_HEADER } from 'tv/shared/constants'
 
 export type Wirings = {
   dispatch: TheDispatch
@@ -18,7 +18,7 @@ export function getAxios({ dispatch, getState }: Wirings): AxiosInstance {
     if (token == null) {
       return config
     } else {
-      config.headers[Constants.AUTH_TOKEN_HEADER] = token
+      config.headers[AUTH_TOKEN_HEADER] = token
       return config
     }
   })

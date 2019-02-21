@@ -3,7 +3,7 @@ import * as moment from 'moment'
 import { getAxios, Wirings } from 'tv/frontend/services/axiosConfig'
 import * as cache from 'tv/frontend/services/cache'
 import * as conf from 'tv/frontend/services/conf'
-import * as Domain from 'tv/shared/domain'
+import { Show, MSeason, Season } from 'tv/shared/domain'
 
 const base = conf.serverUrl
 
@@ -11,7 +11,7 @@ function extractData(response: axios.AxiosResponse): any {
   return response.data
 }
 
-export function allShows(wirings: Wirings): Promise<Domain.Show[]> {
+export function allShows(wirings: Wirings): Promise<Show[]> {
   return cache.cached('all-shows', () => {
     return getAxios(wirings)
       .get(`${base}/shows`)
@@ -19,10 +19,7 @@ export function allShows(wirings: Wirings): Promise<Domain.Show[]> {
   })
 }
 
-export function searchShows(
-  wirings: Wirings,
-  q: string,
-): Promise<Domain.Show[]> {
+export function searchShows(wirings: Wirings, q: string): Promise<Show[]> {
   return cache.cached('all-shows-' + q, () => {
     return getAxios(wirings)
       .get(`${base}/shows`, { params: { q } })
@@ -33,12 +30,12 @@ export function searchShows(
 export function seasonsOfShow(
   wirings: Wirings,
   showId: number,
-): Promise<Domain.MSeason[]> {
+): Promise<MSeason[]> {
   return cache.cached(`seasons-of-${showId}`, () => {
     return getAxios(wirings)
       .get(`${base}/shows/${showId}/seasons`)
       .then(extractData)
-      .then((data: Domain.Season[]) => {
+      .then((data: Season[]) => {
         return data.map(season => {
           return {
             ...season,
@@ -52,14 +49,14 @@ export function seasonsOfShow(
   })
 }
 
-export function userShows(wirings: Wirings): Promise<Domain.Show[]> {
+export function userShows(wirings: Wirings): Promise<Show[]> {
   return getAxios(wirings)
     .get(`${base}/me/shows`)
     .then()
     .then(extractData)
 }
 
-export function defaultShows(wirings: Wirings): Promise<Domain.Show[]> {
+export function defaultShows(wirings: Wirings): Promise<Show[]> {
   return cache.cached('default-shows', () => {
     return getAxios(wirings)
       .get(`${base}/shows/default`)
