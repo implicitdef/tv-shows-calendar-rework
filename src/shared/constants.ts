@@ -1,1 +1,1 @@
-export const AUTH_TOKEN_HEADER = "TvShowsCalendar-Token";
+export const AUTH_TOKEN_HEADER = 'TvShowsCalendar-Token'

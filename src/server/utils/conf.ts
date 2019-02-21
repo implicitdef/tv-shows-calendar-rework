@@ -1,19 +1,19 @@
 function reverse(s: string): string {
   return s
-    .split("")
+    .split('')
     .reverse()
-    .join("");
+    .join('')
 }
 
 export const googleClientId = reverse(
-  "moc.tnetnocresuelgoog.sppa.8ro4a1m8c1e349slnqhhti7nurp81l2o-412795760244"
-);
+  'moc.tnetnocresuelgoog.sppa.8ro4a1m8c1e349slnqhhti7nurp81l2o-412795760244',
+)
 export const db = process.env.DATABASE_URL || {
-  host: "127.0.0.1",
-  user: "manu",
-  password: "",
-  database: "tv_shows_calendar"
-};
+  host: '127.0.0.1',
+  user: 'manu',
+  password: '',
+  database: 'tv_shows_calendar',
+}
 export const defaultShowsIds = [
   1399, // Game of Thrones
   1402, // Walking dead
@@ -29,9 +29,9 @@ export const defaultShowsIds = [
   38472, // jessica jones
   61889, // daredevil
   67136, // this is us
-  42009 // black mirror
-];
-export const port = process.env.PORT || 3333;
-export const pushDataApiKey = process.env.PUSH_DATA_API_KEY || "pushDataApiKey";
-export const isProd = process.env.NODE_ENV === "production";
-export const isDev = !isProd;
+  42009, // black mirror
+]
+export const port = process.env.PORT || 3333
+export const pushDataApiKey = process.env.PUSH_DATA_API_KEY || 'pushDataApiKey'
+export const isProd = process.env.NODE_ENV === 'production'
+export const isDev = !isProd

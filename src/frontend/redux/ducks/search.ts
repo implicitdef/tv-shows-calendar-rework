@@ -1,82 +1,82 @@
-import * as google from "tv/frontend/services/google";
+import * as google from 'tv/frontend/services/google'
 
-import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
-import * as api from "tv/frontend/services/api";
-import * as Domain from "tv/shared/domain";
-import * as metaDuck from "tv/frontend/redux/ducks/meta";
+import { ActionsUnion, createAction } from '@martin_hotell/rex-tils'
+import * as api from 'tv/frontend/services/api'
+import * as Domain from 'tv/shared/domain'
+import * as metaDuck from 'tv/frontend/redux/ducks/meta'
 
-import { createSelector } from "reselect";
-import { TheState } from "tv/frontend/redux/state";
+import { createSelector } from 'reselect'
+import { TheState } from 'tv/frontend/redux/state'
 
 export type ThisState = {
-  results: Domain.Show[];
-  input: string | null;
-  isOpen: boolean;
-};
+  results: Domain.Show[]
+  input: string | null
+  isOpen: boolean
+}
 
 export const initial = {
   results: [],
   input: null,
-  isOpen: false
-};
+  isOpen: false,
+}
 
-const rootSelector = (state: TheState) => state.search;
+const rootSelector = (state: TheState) => state.search
 export const resultsSelector = createSelector(
   rootSelector,
-  _ => _.results
-);
+  _ => _.results,
+)
 export const inputSelector = createSelector(
   rootSelector,
-  _ => _.input || ""
-);
+  _ => _.input || '',
+)
 export const isOpenSelector = createSelector(
   rootSelector,
-  _ => _.isOpen
-);
+  _ => _.isOpen,
+)
 
-export const SET_RESULTS = "search.SET_RESULTS";
-export const SET_INPUT = "search.SET_INPUT";
-export const SET_IS_OPEN = "search.SET_IS_OPEN";
-export const CLEAR = "search.CLEAR";
+export const SET_RESULTS = 'search.SET_RESULTS'
+export const SET_INPUT = 'search.SET_INPUT'
+export const SET_IS_OPEN = 'search.SET_IS_OPEN'
+export const CLEAR = 'search.CLEAR'
 
 export const actions = {
   setResults: (value: Domain.Show[]) => createAction(SET_RESULTS, value),
   setInput: (value: string) => createAction(SET_INPUT, value),
   clear: () => createAction(CLEAR),
   open: () => createAction(SET_IS_OPEN, true),
-  close: () => createAction(SET_IS_OPEN, false)
-};
+  close: () => createAction(SET_IS_OPEN, false),
+}
 
-export type ThisAction = ActionsUnion<typeof actions>;
+export type ThisAction = ActionsUnion<typeof actions>
 
 export default (state: ThisState = initial, action: ThisAction): ThisState => {
   switch (action.type) {
     case SET_RESULTS: {
       return {
         ...state,
-        results: action.payload
-      };
+        results: action.payload,
+      }
     }
     case SET_INPUT: {
       return {
         ...state,
-        input: action.payload
-      };
+        input: action.payload,
+      }
     }
     case CLEAR: {
       return {
         ...state,
         results: [],
-        input: null
-      };
+        input: null,
+      }
     }
     case SET_IS_OPEN: {
       return {
         ...state,
-        isOpen: action.payload
-      };
+        isOpen: action.payload,
+      }
     }
     default:
-      return state;
+      return state
   }
-};
+}

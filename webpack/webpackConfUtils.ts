@@ -1,38 +1,38 @@
-import * as path from "path";
-import { CheckerPlugin } from "awesome-typescript-loader";
+import * as path from 'path'
+import { CheckerPlugin } from 'awesome-typescript-loader'
 
-export const isProd = process.env.NODE_ENV === "production";
+export const isProd = process.env.NODE_ENV === 'production'
 
 export function buildPath(relativePath: string) {
-  return path.resolve(__dirname, relativePath);
+  return path.resolve(__dirname, relativePath)
 }
 
-export const mode = isProd ? "production" : "development";
+export const mode = isProd ? 'production' : 'development'
 
 export const resolve = {
   // Add .ts/.tsx to the resolve.extensions array.
-  extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
+  extensions: ['.ts', '.tsx', '.wasm', '.mjs', '.js', '.json'],
   alias: {
-    tv: buildPath("../src")
-  }
-};
+    tv: buildPath('../src'),
+  },
+}
 
 export const rules = [
   {
     test: /\.tsx?$/,
     use: [
       {
-        loader: "awesome-typescript-loader",
+        loader: 'awesome-typescript-loader',
         options: {
-          configFileName: buildPath("../tsconfig.json")
-        }
-      }
-    ]
-  }
-];
+          configFileName: buildPath('../tsconfig.json'),
+        },
+      },
+    ],
+  },
+]
 
-export const plugins = [new CheckerPlugin()];
+export const plugins = [new CheckerPlugin()]
 
 export const watchOptions = {
-  ignored: /node_modules/
-};
+  ignored: /node_modules/,
+}
