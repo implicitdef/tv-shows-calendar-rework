@@ -11,7 +11,7 @@ export const login = (): SomeThunkAction<void> => {
       await google.login();
       const token = await google.getToken();
       const user = await google.getUserInfo();
-      dispatch(authDuck.actions.login({ token, user }));
+      dispatch(authDuck.actions.setLoggedIn({ token, user }));
       await dispatch(calendarThunk.fetchSeasons());
     } catch (e) {
       dispatch(metaDuck.actions.registerGlobalError());
@@ -23,7 +23,7 @@ export const logout = (): SomeThunkAction<void> => {
   return async dispatch => {
     try {
       await google.logout();
-      dispatch(authDuck.actions.logout());
+      dispatch(authDuck.actions.setLoggedOut());
       await dispatch(calendarThunk.fetchSeasons());
     } catch (e) {
       dispatch(metaDuck.actions.registerGlobalError());
@@ -38,11 +38,13 @@ export const checkStatusOnStartupAndFetch = (): SomeThunkAction<void> => {
       if (isLoggedIn) {
         const user = await google.getUserInfo();
         const token = await google.getToken();
-        dispatch(authDuck.actions.login({ token, user }));
+        dispatch(authDuck.actions.setLoggedIn({ token, user }));
+      } else {
+        dispatch(authDuck.actions.setLoggedOut());
       }
       await dispatch(calendarThunk.fetchSeasons());
     } catch (e) {
-      dispatch(authDuck.actions.logout());
+      dispatch(authDuck.actions.setLoggedOut());
     }
   };
 };

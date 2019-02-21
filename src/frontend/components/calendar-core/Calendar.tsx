@@ -15,7 +15,7 @@ export default function Calendar() {
     (state: TheState) => ({
       year: state.calendar.year,
       seasons: state.calendar.seasons,
-      showRemoveButtons: authDuck.isUserLoggedInSelector(state)
+      showRemoveButtons: authDuck.loggedInStatusSelector(state) === "loggedIn"
     }),
     []
   );

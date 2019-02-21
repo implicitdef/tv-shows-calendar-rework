@@ -9,7 +9,7 @@ export const fetchSeasons = (): SomeThunkAction<void> => {
     try {
       const seasons = await calendarDataFetcher.getSeasonsWithShows(
         { dispatch, getState },
-        authDuck.isUserLoggedInSelector(getState())
+        authDuck.loggedInStatusSelector(getState()) === "loggedIn"
       );
       dispatch(calendarDuck.actions.registerSeasons(seasons));
     } catch (e) {

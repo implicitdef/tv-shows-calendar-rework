@@ -8,10 +8,10 @@ import { TheState } from "tv/frontend/redux/state";
 
 export type PlainAction = redux.Action<String> &
   (
-    | authDuck.ThisAction
+    | authDuck.AuthAction
     | metaDuck.ThisAction
     | searchDuck.ThisAction
-    | calendarDuck.ThisAction);
+    | calendarDuck.CalendarAction);
 
 // alias for our redux-thunk actions
 export type SomeThunkAction<R> = reduxThunk.ThunkAction<

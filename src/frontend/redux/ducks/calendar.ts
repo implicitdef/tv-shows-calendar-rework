@@ -4,7 +4,7 @@ import { createSelector } from "reselect";
 import { TheState } from "tv/frontend/redux/state";
 import * as Domain from "tv/shared/domain";
 
-export type ThisState = {
+export type CalendarState = {
   year: number;
   seasons: Domain.SeasonWithShow[];
 };
@@ -34,9 +34,12 @@ export const actions = {
   decrementYear: () => createAction(MODIFY_YEAR, -1)
 };
 
-export type ThisAction = ActionsUnion<typeof actions>;
+export type CalendarAction = ActionsUnion<typeof actions>;
 
-export default (state: ThisState = initial, action: ThisAction): ThisState => {
+export default (
+  state: CalendarState = initial,
+  action: CalendarAction
+): CalendarState => {
   switch (action.type) {
     case SET_SEASONS: {
       return {

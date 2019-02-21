@@ -10,7 +10,7 @@ export default function CalendarBar() {
   const mapState = useCallback(
     (state: TheState) => ({
       year: state.calendar.year,
-      showAddShowButton: authDuck.isUserLoggedInSelector(state)
+      showAddShowButton: authDuck.loggedInStatusSelector(state) === "loggedIn"
     }),
     []
   );

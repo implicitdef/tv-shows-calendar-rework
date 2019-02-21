@@ -9,12 +9,12 @@ import { useThisDispatch, useThisMappedState } from "tv/frontend/redux/utils";
 export default function AuthBar() {
   const mapState = useCallback(
     (state: TheState) => ({
-      loggedIn: !!authDuck.isUserLoggedInSelector(state),
+      loggedInStatus: authDuck.loggedInStatusSelector(state),
       email: authDuck.userEmailSelector(state)
     }),
     []
   );
-  const { loggedIn, email } = useThisMappedState(mapState);
+  const { loggedInStatus, email } = useThisMappedState(mapState);
   const dispatch = useThisDispatch();
   const onClickAbout = () => dispatch(metaDuck.actions.displayAbout());
   const onLogin = () => {
@@ -28,13 +28,13 @@ export default function AuthBar() {
       <a className="auth-bar__button" onClick={onClickAbout}>
         about
       </a>
-      {loggedIn && email ? <span>{email}</span> : ""}
-      {loggedIn || (
+      {loggedInStatus === "loggedIn" && email ? <span>{email}</span> : ""}
+      {loggedInStatus === "loggedOut" && (
         <a className="auth-bar__button" onClick={onLogin}>
           sign in with Google
         </a>
       )}
-      {loggedIn && (
+      {loggedInStatus === "loggedIn" && (
         <a className="auth-bar__button" onClick={onLogout}>
           sign out
         </a>

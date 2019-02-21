@@ -1,11 +1,10 @@
-- replacer redux par le context des hooks React
+- ptet rassembler certains components dans un seul fichier pour simplifier un peu l'arbo
+- mettre graphql, d'abord coté server puis faire coté front
+- ptet faire certains trucs avec des hooks au lieu de redux (la search par exemple ?)
 - rebosser un peu le css, essayer de passer à un container non-fluide
 - utiliser css modules, virer BEM ?
 - optimiser perfs : essayer d'importer que ce que j'ai besoin de bootstrap (la grid)
 - optimiser perfs : cf les warnings quand on build comme en prod
 - ptet afficher un loader discret pour quand les series se rechargent
-- distinguer quand on a pas encore l'info de auth : ne pas afficher logged out, ou mettre un loader
 - updater les shows par défaut
 - un jour faire un affichage décent sur mobile
-- mettre graphql, d'abord coté server puis faire coté front
-- mettre en place storybook. Si ça marche virer la IntegrationPage et connecter les components directement

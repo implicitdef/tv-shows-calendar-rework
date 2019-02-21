@@ -5,60 +5,61 @@ import { ActionsUnion, createAction } from "@martin_hotell/rex-tils";
 import { createSelector } from "reselect";
 import { TheState } from "tv/frontend/redux/state";
 
-export type ThisState = {
-  token: string | null;
-  user: google.User | null;
-};
+export type AuthState =
+  | {
+      status: "unknown";
+    }
+  | {
+      status: "loggedOut";
+    }
+  | {
+      status: "loggedIn";
+      token: string;
+      user: google.User;
+    };
 
-export const initial = {
-  token: null,
-  user: null
+export const initial: AuthState = {
+  status: "unknown"
 };
 
 const rootSelector = (state: TheState) => state.auth;
 const userInfoSelector = createSelector(
   rootSelector,
-  _ => _.user
+  _ => (_.status === "loggedIn" ? _.user : null)
 );
 export const tokenSelector = createSelector(
   rootSelector,
-  _ => _.token
+  _ => (_.status === "loggedIn" ? _.token : null)
 );
-export const isUserLoggedInSelector = createSelector(
-  tokenSelector,
-  token => !!token
+export const loggedInStatusSelector = createSelector(
+  rootSelector,
+  _ => _.status
 );
 export const userEmailSelector = createSelector(
-  isUserLoggedInSelector,
   userInfoSelector,
-  (isUserLoggedIn, userInfo) =>
-    isUserLoggedIn && userInfo ? userInfo.email : null
+  userInfo => userInfo && userInfo.email
 );
 
-export const LOGIN = "auth.LOGIN";
-export const LOGOUT = "auth.LOGOUT";
-
 export const actions = {
-  login: (value: { token: string; user: google.User }) =>
-    createAction(LOGIN, value),
-  logout: () => createAction(LOGOUT)
+  setLoggedIn: (value: { token: string; user: google.User }) =>
+    createAction("AUTH_SET_LOGGED_IN", value),
+  setLoggedOut: () => createAction("AUTH_SET_LOGGED_OUT")
 };
 
-export type ThisAction = ActionsUnion<typeof actions>;
+export type AuthAction = ActionsUnion<typeof actions>;
 
-export default (state: ThisState = initial, action: ThisAction): ThisState => {
+export default (state: AuthState = initial, action: AuthAction): AuthState => {
   switch (action.type) {
-    case LOGIN: {
+    case "AUTH_SET_LOGGED_IN": {
       return {
         ...state,
+        status: "loggedIn",
         ...action.payload
       };
     }
-    case LOGOUT: {
+    case "AUTH_SET_LOGGED_OUT": {
       return {
-        ...state,
-        user: null,
-        token: null
+        status: "loggedOut"
       };
     }
     default:
