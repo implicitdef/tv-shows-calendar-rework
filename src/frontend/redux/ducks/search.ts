@@ -1,10 +1,10 @@
 import { ActionsUnion, createAction } from '@martin_hotell/rex-tils'
 import { createSelector } from 'reselect'
 import { TheState } from 'tv/frontend/redux/state'
-import * as Domain from 'tv/shared/domain'
+import { Show } from 'tv/shared/domain'
 
 export type SearchState = {
-  results: Domain.Show[]
+  results: Show[]
   input: string | null
   isOpen: boolean
 }
@@ -35,7 +35,7 @@ export const SET_IS_OPEN = 'search.SET_IS_OPEN'
 export const CLEAR = 'search.CLEAR'
 
 export const searchActions = {
-  setResults: (value: Domain.Show[]) => createAction(SET_RESULTS, value),
+  setResults: (value: Show[]) => createAction(SET_RESULTS, value),
   setInput: (value: string) => createAction(SET_INPUT, value),
   clear: () => createAction(CLEAR),
   open: () => createAction(SET_IS_OPEN, true),

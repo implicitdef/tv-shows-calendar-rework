@@ -1,4 +1,4 @@
-import * as moment from 'moment'
+import { Moment } from 'moment'
 
 export type Show = {
   id: number
@@ -27,8 +27,8 @@ export type TimeRange = {
 }
 
 export type MTimeRange = {
-  start: moment.Moment
-  end: moment.Moment
+  start: Moment
+  end: Moment
 }
 
 export type SeasonWithShow = {

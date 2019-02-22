@@ -1,13 +1,13 @@
-import * as moment from 'moment'
 import * as React from 'react'
-import * as DateUtils from 'tv/frontend/services/dateUtils'
+import { dateLeftOffset } from 'tv/frontend/services/dateUtils'
+import { Moment } from 'moment'
 
 const Marker: React.SFC<{
-  now: moment.Moment
+  now: Moment
 }> = ({ now }) => (
   <div
     className='calendar-core__marker'
-    style={{ left: `${DateUtils.dateLeftOffset(now)}%` }}
+    style={{ left: `${dateLeftOffset(now)}%` }}
   >
     <div className='calendar-core__marker-bar' />
   </div>

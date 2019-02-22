@@ -2,11 +2,11 @@ import { ActionsUnion, createAction } from '@martin_hotell/rex-tils'
 import * as moment from 'moment'
 import { createSelector } from 'reselect'
 import { TheState } from 'tv/frontend/redux/state'
-import * as Domain from 'tv/shared/domain'
+import { SeasonWithShow } from 'tv/shared/domain'
 
 export type CalendarState = {
   year: number
-  seasons: Domain.SeasonWithShow[]
+  seasons: SeasonWithShow[]
 }
 
 export const initial: CalendarState = {
@@ -28,7 +28,7 @@ export const SET_SEASONS = 'calendar.SET_SEASONS'
 export const MODIFY_YEAR = 'calendar.MODIFY_YEAR'
 
 export const calendarActions = {
-  registerSeasons: (value: Domain.SeasonWithShow[]) =>
+  registerSeasons: (value: SeasonWithShow[]) =>
     createAction(SET_SEASONS, value),
   incrementYear: () => createAction(MODIFY_YEAR, 1),
   decrementYear: () => createAction(MODIFY_YEAR, -1),

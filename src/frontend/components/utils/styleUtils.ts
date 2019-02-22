@@ -1,6 +1,11 @@
 import * as moment from 'moment'
-import * as DateUtils from 'tv/frontend/services/dateUtils'
 import { CSSProperties } from 'react'
+import {
+  bringDateInYear,
+  dateLeftOffset,
+  offsetBetween,
+} from 'tv/frontend/services/dateUtils'
+import { Moment } from 'moment'
 
 // Computes the CSS to apply to a div to represent
 // some month of a certain year
@@ -34,13 +39,13 @@ export function getStyleForPeriodInYear({
   end,
 }: {
   year: number
-  start: moment.Moment
-  end: moment.Moment
+  start: Moment
+  end: Moment
 }): CSSProperties {
-  const startInYear = DateUtils.bringDateInYear(start, year)
-  const endInYear = DateUtils.bringDateInYear(end, year)
-  const leftOffset = DateUtils.dateLeftOffset(startInYear)
-  const width = DateUtils.offsetBetween(startInYear, endInYear)
+  const startInYear = bringDateInYear(start, year)
+  const endInYear = bringDateInYear(end, year)
+  const leftOffset = dateLeftOffset(startInYear)
+  const width = offsetBetween(startInYear, endInYear)
   return {
     left: `${leftOffset}%`,
     // We set both width and minWidth, but only one of them

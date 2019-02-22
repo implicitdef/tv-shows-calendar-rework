@@ -1,14 +1,14 @@
 import * as Knex from 'knex'
 import * as DbQueries from 'tv/server/services/dbQueries'
 import * as Conf from 'tv/server/utils/conf'
-import * as Domain from 'tv/shared/domain'
+import { ShowAndSeasons } from 'tv/shared/domain'
 
 const knexClient = Knex({
   client: 'postgres',
   connection: Conf.db,
 })
 
-export async function loadData(): Promise<Domain.ShowAndSeasons[]> {
+export async function loadData(): Promise<ShowAndSeasons[]> {
   return DbQueries.loadData(knexClient)
 }
 export async function saveOrGetUser(googleUserId: string): Promise<number> {

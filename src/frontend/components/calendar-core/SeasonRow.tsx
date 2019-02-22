@@ -1,12 +1,12 @@
 import * as React from 'react'
-import * as Domain from 'tv/shared/domain'
 import { getStyleForPeriodInYear } from 'tv/frontend/components/utils/styleUtils'
 import { pickFunkyColor } from 'tv/frontend/components/utils/funkyColor'
+import { SeasonWithShow } from 'tv/shared/domain'
 
 // Displays a given season of a serie
 const SeasonRow: React.SFC<{
   year: number
-  season: Domain.SeasonWithShow
+  season: SeasonWithShow
   index: number
   showRemoveButtons: boolean
   onClose: () => void

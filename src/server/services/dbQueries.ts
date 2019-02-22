@@ -1,6 +1,6 @@
 import * as Knex from 'knex'
-import * as Domain from 'tv/shared/domain'
-import * as Utils from 'tv/server/utils/utils'
+import { ShowAndSeasons } from 'tv/shared/domain'
+import { bluebirdToNative } from 'tv/server/utils/utils'
 
 type RawJsonDataRow = {
   id: number
@@ -18,8 +18,8 @@ type UserSerieRow = {
 
 export async function loadData(
   knex: Knex.QueryInterface,
-): Promise<Domain.ShowAndSeasons[]> {
-  const rows = await Utils.bluebirdToNative(
+): Promise<ShowAndSeasons[]> {
+  const rows = await bluebirdToNative(
     knex
       .select()
       .from('raw_json_data')
@@ -28,14 +28,14 @@ export async function loadData(
   )
   const rowsCasted = rows as RawJsonDataRow[]
   const json = JSON.parse(rowsCasted[0].content)
-  return json as Domain.ShowAndSeasons[]
+  return json as ShowAndSeasons[]
 }
 
 export async function getUserByGoogleUserId(
   knex: Knex.QueryInterface,
   googleUserId: string,
 ): Promise<User | null> {
-  const rows = await Utils.bluebirdToNative(
+  const rows = await bluebirdToNative(
     knex
       .select()
       .where({
@@ -55,7 +55,7 @@ export async function saveUser(
   knex: Knex.QueryInterface,
   googleUserId: string,
 ): Promise<number> {
-  const rows = await Utils.bluebirdToNative(
+  const rows = await bluebirdToNative(
     knex
       .insert({
         google_user_id: googleUserId,
@@ -79,7 +79,7 @@ export async function addSerieToUser(
   serieId: number,
 ): Promise<void> {
   try {
-    await Utils.bluebirdToNative(
+    await bluebirdToNative(
       knex
         .insert({
           user_id: userId,
@@ -100,7 +100,7 @@ export async function removeSerieFromUser(
   userId: number,
   serieId: number,
 ): Promise<void> {
-  return Utils.bluebirdToNative(
+  return bluebirdToNative(
     knex
       .del()
       .where({
@@ -115,7 +115,7 @@ export async function getSeriesOfUser(
   knex: Knex.QueryInterface,
   userId: number,
 ): Promise<number[]> {
-  const rows = await Utils.bluebirdToNative(
+  const rows = await bluebirdToNative(
     knex
       .select()
       .from('users_series')
@@ -132,7 +132,7 @@ export async function pushData(
   knex: Knex.QueryInterface,
   data: string,
 ): Promise<void> {
-  return await Utils.bluebirdToNative(
+  return await bluebirdToNative(
     knex.insert({ content: data }).into('raw_json_data'),
   )
 }
