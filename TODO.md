@@ -1,4 +1,4 @@
-- fixer display des seasons en toute fin de calendrier (cf black mirror en 2017)
+- updater les shows par défaut
 - mettre graphql, d'abord coté server puis faire coté front
 - ptet faire certains trucs avec des hooks au lieu de redux (la search par exemple ?)
 - rebosser un peu le css, essayer de passer à un container non-fluide
@@ -6,5 +6,4 @@
 - optimiser perfs : essayer d'importer que ce que j'ai besoin de bootstrap (la grid)
 - optimiser perfs : cf les warnings quand on build comme en prod
 - ptet afficher un loader discret pour quand les series se rechargent
-- updater les shows par défaut
 - un jour faire un affichage décent sur mobile
