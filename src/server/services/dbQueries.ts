@@ -1,5 +1,5 @@
 import { ShowAndSeasons } from 'tv/shared/domain'
-import { bluebirdToNative } from 'tv/server/utils/utils'
+import { knexToPromise } from 'tv/server/utils/utils'
 import { QueryInterface } from 'knex'
 
 type RawJsonDataRow = {
@@ -19,15 +19,14 @@ type UserSerieRow = {
 export async function loadData(
   knex: QueryInterface,
 ): Promise<ShowAndSeasons[]> {
-  const rows = await bluebirdToNative(
+  const rows = await knexToPromise<RawJsonDataRow[]>(
     knex
       .select()
       .from('raw_json_data')
       .orderBy('creation_time', 'desc')
       .limit(1),
   )
-  const rowsCasted = rows as RawJsonDataRow[]
-  const json = JSON.parse(rowsCasted[0].content)
+  const json = JSON.parse(rows[0].content)
   return json as ShowAndSeasons[]
 }
 
@@ -35,7 +34,7 @@ export async function getUserByGoogleUserId(
   knex: QueryInterface,
   googleUserId: string,
 ): Promise<User | null> {
-  const rows = await bluebirdToNative(
+  const rows = await knexToPromise<User[]>(
     knex
       .select()
       .where({
@@ -43,19 +42,18 @@ export async function getUserByGoogleUserId(
       })
       .from('users'),
   )
-  const rowsCasted = rows as User[]
-  if (rowsCasted.length > 0) {
-    return rowsCasted[0]
+  if (rows.length > 0) {
+    return rows[0]
   } else {
     return null
   }
 }
 
 export async function saveUser(
-  knex: Knex.QueryInterface,
+  knex: QueryInterface,
   googleUserId: string,
 ): Promise<number> {
-  const rows = await bluebirdToNative(
+  const rows = await knexToPromise<number[]>(
     knex
       .insert({
         google_user_id: googleUserId,
@@ -63,23 +61,20 @@ export async function saveUser(
       .into('users')
       .returning('id'),
   )
-  const rowsCasted = rows as number[]
-  if (rowsCasted.length === 1) {
-    return rowsCasted[0]
+  if (rows.length === 1) {
+    return rows[0]
   } else {
-    throw new Error(
-      `${rowsCasted.length} rows were created by the saveUser query`,
-    )
+    throw new Error(`${rows.length} rows were created by the saveUser query`)
   }
 }
 
 export async function addSerieToUser(
-  knex: Knex.QueryInterface,
+  knex: QueryInterface,
   userId: number,
   serieId: number,
 ): Promise<void> {
   try {
-    await bluebirdToNative(
+    await knexToPromise<unknown>(
       knex
         .insert({
           user_id: userId,
@@ -96,11 +91,11 @@ export async function addSerieToUser(
 }
 
 export async function removeSerieFromUser(
-  knex: Knex.QueryInterface,
+  knex: QueryInterface,
   userId: number,
   serieId: number,
 ): Promise<void> {
-  return bluebirdToNative(
+  return knexToPromise<void>(
     knex
       .del()
       .where({
@@ -112,10 +107,10 @@ export async function removeSerieFromUser(
 }
 
 export async function getSeriesOfUser(
-  knex: Knex.QueryInterface,
+  knex: QueryInterface,
   userId: number,
 ): Promise<number[]> {
-  const rows = await bluebirdToNative(
+  const rows = await knexToPromise<UserSerieRow[]>(
     knex
       .select()
       .from('users_series')
@@ -124,15 +119,14 @@ export async function getSeriesOfUser(
       })
       .orderBy('serie_id', 'asc'),
   )
-  const rowsCasted = rows as UserSerieRow[]
-  return rowsCasted.map(row => row.serie_id)
+  return rows.map(row => row.serie_id)
 }
 
 export async function pushData(
-  knex: Knex.QueryInterface,
+  knex: QueryInterface,
   data: string,
 ): Promise<void> {
-  return await bluebirdToNative(
+  return await knexToPromise<void>(
     knex.insert({ content: data }).into('raw_json_data'),
   )
 }

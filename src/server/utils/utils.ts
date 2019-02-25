@@ -1,10 +1,11 @@
-import * as Bluebird from 'bluebird'
+import { QueryBuilder } from 'knex'
 
-export function bluebirdToNative<A>(bluebirdPromise: Bluebird<A>): Promise<A> {
+// Turns it into a Promise, and also cast the result type
+export function knexToPromise<A>(knexQueryBuilder: QueryBuilder): Promise<A> {
   return new Promise((resolve, reject) => {
-    bluebirdPromise.then(
+    knexQueryBuilder.then(
       a => {
-        resolve(a)
+        resolve(a as A)
       },
       err => {
         reject(err)

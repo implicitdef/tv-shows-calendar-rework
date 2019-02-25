@@ -1,9 +1,9 @@
-import * as Knex from 'knex'
+import knex from 'knex'
 import * as DbQueries from 'tv/server/services/dbQueries'
 import * as Conf from 'tv/server/utils/conf'
 import { ShowAndSeasons } from 'tv/shared/domain'
 
-const knexClient = Knex({
+const knexClient = knex({
   client: 'postgres',
   connection: Conf.db,
 })
