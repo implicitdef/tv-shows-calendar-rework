@@ -1,4 +1,4 @@
-import * as moment from 'moment'
+import moment from 'moment'
 import * as React from 'react'
 import Marker from 'tv/frontend/components/calendar-core/Marker'
 import MonthsBackground from 'tv/frontend/components/calendar-core/MonthsBackground'

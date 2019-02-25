@@ -1,10 +1,15 @@
 import * as bodyParser from 'body-parser'
-import * as express from 'express'
+import express from 'express'
 import 'source-map-support/register'
 import * as Auth from 'tv/server/auth/auth'
 import * as DbService from 'tv/server/services/dbService'
 import * as Conf from 'tv/server/utils/conf'
-import * as Web from 'tv/server/utils/web'
+import {
+  finishExpressAppSetupAndLaunch,
+  NotFoundError,
+  AuthError,
+} from 'tv/server/utils/web'
+import { apolloServer } from 'tv/server/graphqlProto'
 
 console.log(`Server started with process.env.NODE_ENV = `, process.env.NODE_ENV)
 
@@ -50,7 +55,7 @@ app.get('/shows/:showId/seasons', async (req, res, next) => {
       serieAndSeasons => String(serieAndSeasons.serie.id) === showId,
     )
     if (!serieAndSeason) {
-      throw new Web.NotFoundError(`Serie ${showId} not found`)
+      throw new NotFoundError(`Serie ${showId} not found`)
     }
     res.json(serieAndSeason.seasons)
   } catch (err) {
@@ -111,7 +116,7 @@ app.post(
   async (req, res, next) => {
     try {
       if (req.query.key !== Conf.pushDataApiKey) {
-        throw new Web.AuthError()
+        throw new AuthError()
       }
       await DbService.pushData(req.body)
       res.json({ message: 'Done' })
@@ -121,4 +126,6 @@ app.post(
   },
 )
 
-Web.finishExpressAppSetupAndLaunch(app)
+apolloServer.applyMiddleware({ app })
+
+finishExpressAppSetupAndLaunch(app)

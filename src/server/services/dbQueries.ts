@@ -1,6 +1,6 @@
-import * as Knex from 'knex'
 import { ShowAndSeasons } from 'tv/shared/domain'
 import { bluebirdToNative } from 'tv/server/utils/utils'
+import { QueryInterface } from 'knex'
 
 type RawJsonDataRow = {
   id: number
@@ -17,7 +17,7 @@ type UserSerieRow = {
 }
 
 export async function loadData(
-  knex: Knex.QueryInterface,
+  knex: QueryInterface,
 ): Promise<ShowAndSeasons[]> {
   const rows = await bluebirdToNative(
     knex
@@ -32,7 +32,7 @@ export async function loadData(
 }
 
 export async function getUserByGoogleUserId(
-  knex: Knex.QueryInterface,
+  knex: QueryInterface,
   googleUserId: string,
 ): Promise<User | null> {
   const rows = await bluebirdToNative(

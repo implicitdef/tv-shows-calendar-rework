@@ -3,9 +3,9 @@ import frontendConfig, {
   frontendConfigOutputPublicPath,
 } from 'tv/../webpack/webpack.frontend.config'
 import { isDev, port } from 'tv/server/utils/conf'
-import * as webpack from 'webpack'
-import * as webpackDevMiddleware from 'webpack-dev-middleware'
-import * as webpackHotMiddleware from 'webpack-hot-middleware'
+import webpack from 'webpack'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
 
 export class NotFoundError extends Error {
   constructor(message: string) {

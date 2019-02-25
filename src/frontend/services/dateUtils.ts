@@ -1,6 +1,5 @@
-import * as moment from 'moment'
+import moment, { Moment } from 'moment'
 import { MTimeRange } from 'tv/shared/domain'
-import { Moment } from 'moment'
 
 // date : a momentjs object
 // returns the offset in percentage

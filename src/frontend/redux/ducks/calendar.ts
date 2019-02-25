@@ -1,5 +1,5 @@
 import { ActionsUnion, createAction } from '@martin_hotell/rex-tils'
-import * as moment from 'moment'
+import moment from 'moment'
 import { createSelector } from 'reselect'
 import { TheState } from 'tv/frontend/redux/state'
 import { SeasonWithShow } from 'tv/shared/domain'

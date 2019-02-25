@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-import * as moment from 'moment'
+import moment from 'moment'
 import { getAxios, Wirings } from 'tv/frontend/services/axiosConfig'
 import * as cache from 'tv/frontend/services/cache'
 import * as conf from 'tv/frontend/services/conf'

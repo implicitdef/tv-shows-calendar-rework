@@ -6,8 +6,8 @@ import {
   watchOptions,
   plugins,
 } from './webpackConfUtils'
-import * as nodeExternals from 'webpack-node-externals'
 import * as webpack from 'webpack'
+import webpackNodeExternals from 'webpack-node-externals'
 
 export const serverConfig: webpack.Configuration = {
   mode,
@@ -23,7 +23,7 @@ export const serverConfig: webpack.Configuration = {
     __dirname: false,
     __filename: false,
   },
-  externals: [nodeExternals()], // ignores all modules in node_modules folder
+  externals: [webpackNodeExternals()], // ignores all modules in node_modules folder
   output: {
     filename: 'bundle-server.js',
     path: buildPath('../dist'),
