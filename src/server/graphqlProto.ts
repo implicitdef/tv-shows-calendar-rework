@@ -9,6 +9,7 @@ import { Season, Show } from 'tv/shared/domain'
 
 // TODO include other endpoints (reading with auth)
 // TODO include last endpoints (mutations)
+// TODO use from the frontend
 const typeDefs = gql`
   type TimeRange {
     start: String!
