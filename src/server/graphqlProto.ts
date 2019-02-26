@@ -2,7 +2,9 @@ import {
   gql,
   ApolloServer,
   defaultPlaygroundOptions,
+  IResolvers,
 } from 'apollo-server-express'
+import * as DbService from 'tv/server/services/dbService'
 
 const typeDefs = gql`
   # This "Book" type can be used in other type declarations.
@@ -11,32 +13,45 @@ const typeDefs = gql`
     author: String
   }
 
+  type Show {
+    id: ID!
+    name: String!
+    # TODO consider how the seasons should be part of the shows itself
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     books: [Book]
+    shows(input: String): [Show!]!
   }
 `
 
-// This is a (sample) collection of books we'll be able to query
-// the GraphQL server for.  A more complete example might fetch
-// from an existing data source like a REST API or database.
-const books = [
-  {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
-]
-
 // Resolvers define the technique for fetching the types in the
 // schema.  We'll retrieve books from the "books" array above.
-const resolvers = {
+// TODO give correct parametrized type to get automatic typing
+const resolvers: IResolvers = {
   Query: {
-    books: () => books,
+    books: () => [
+      {
+        title: 'Harry Potter and the Chamber of Secrets',
+        author: 'J.K. Rowling',
+      },
+      {
+        title: 'Jurassic Park',
+        author: 'Michael Crichton',
+      },
+    ],
+    shows: async (_: unknown, { input }: { input?: string }) => {
+      const data = await DbService.loadData()
+      const shows = data.map(serieAndSeasons => serieAndSeasons.serie)
+      const showsFiltered = input
+        ? shows.filter(serie =>
+            serie.name.toLowerCase().includes(input.toLowerCase()),
+          )
+        : shows
+      return showsFiltered
+    },
   },
 }
 
