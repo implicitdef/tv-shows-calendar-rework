@@ -5,9 +5,8 @@ import {
   IResolvers,
 } from 'apollo-server-express'
 import * as DbService from 'tv/server/services/dbService'
-import { Season } from 'tv/shared/domain'
+import { Season, Show } from 'tv/shared/domain'
 
-// TODO maybe turn all ids into strings to be iso with graphql. maybe transform that after reading them from the DB. Maybe change everything, the feed, etc.
 // TODO include other endpoints (reading with auth)
 // TODO include last endpoints (mutations)
 const typeDefs = gql`
@@ -36,11 +35,11 @@ const resolvers: IResolvers<unknown, unknown> = {
   Query: {
     shows: async (_, { input }: { input?: string }) => {
       const data = await DbService.loadData()
-      const dataTransformed: Array<{
-        id: number
-        name: string
-        seasons: Season<string>[]
-      }> = data.map(({ serie, seasons }) => ({
+      const dataTransformed: Array<
+        Show & {
+          seasons: Season<string>[]
+        }
+      > = data.map(({ serie, seasons }) => ({
         ...serie,
         seasons,
       }))

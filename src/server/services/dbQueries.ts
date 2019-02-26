@@ -1,6 +1,6 @@
-import { ShowAndSeasons } from 'tv/shared/domain'
-import { knexToPromise } from 'tv/server/utils/utils'
 import { QueryInterface } from 'knex'
+import { knexToPromise } from 'tv/server/utils/utils'
+import { DataFromDb } from 'tv/shared/domain'
 
 type RawJsonDataRow = {
   id: number
@@ -16,9 +16,7 @@ type UserSerieRow = {
   serie_id: number
 }
 
-export async function loadData(
-  knex: QueryInterface,
-): Promise<ShowAndSeasons[]> {
+export async function loadData(knex: QueryInterface): Promise<DataFromDb> {
   const rows = await knexToPromise<RawJsonDataRow[]>(
     knex
       .select()
@@ -27,7 +25,7 @@ export async function loadData(
       .limit(1),
   )
   const json = JSON.parse(rows[0].content)
-  return json as ShowAndSeasons[]
+  return json as DataFromDb
 }
 
 export async function getUserByGoogleUserId(

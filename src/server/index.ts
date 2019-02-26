@@ -68,6 +68,7 @@ app.get('/me/shows', Auth.middleware, async (req, res, next) => {
   try {
     const liReq = req as Auth.LoggedInRequest
     const seriesIds = await DbService.getSeriesOfUser(liReq.userId)
+    console.log('@@@@ seriesIds', seriesIds)
     const data = await DbService.loadData()
     const series = data.map(serieAndSeasons => serieAndSeasons.serie)
     const seriesFiltered = series.filter(serie => seriesIds.includes(serie.id))
@@ -81,10 +82,7 @@ app.get('/me/shows', Auth.middleware, async (req, res, next) => {
 app.post('/me/shows/:serieId', Auth.middleware, async (req, res, next) => {
   try {
     const liReq = req as Auth.LoggedInRequest
-    await DbService.addSerieToUser(
-      liReq.userId,
-      parseInt(req.params.serieId, 10),
-    )
+    await DbService.addSerieToUser(liReq.userId, req.params.serieId)
     res.json({ message: 'Done' })
   } catch (err) {
     next(err)
@@ -95,10 +93,7 @@ app.post('/me/shows/:serieId', Auth.middleware, async (req, res, next) => {
 app.delete('/me/shows/:serieId', Auth.middleware, async (req, res, next) => {
   try {
     const liReq = req as Auth.LoggedInRequest
-    await DbService.removeSerieFromUser(
-      liReq.userId,
-      parseInt(req.params.serieId, 10),
-    )
+    await DbService.removeSerieFromUser(liReq.userId, req.params.serieId)
     res.json({ message: 'Done' })
   } catch (err) {
     next(err)
