@@ -1,5 +1,5 @@
 import moment, { Moment } from 'moment'
-import { MTimeRange } from 'tv/shared/domain'
+import { TimeRange } from 'tv/shared/domain'
 
 // date : a momentjs object
 // returns the offset in percentage
@@ -29,7 +29,7 @@ export function offsetBetween(before: Moment, after: Moment): number {
 }
 
 export function isTimeRangeInYear(
-  { start, end }: MTimeRange,
+  { start, end }: TimeRange<Moment>,
   year: number,
 ): boolean {
   return start.year() <= year && end.year() >= year

@@ -1,12 +1,13 @@
 import * as Api from 'tv/frontend/services/api'
 import { Wirings } from 'tv/frontend/services/axiosConfig'
-import { MSeason, Show, SeasonWithShow } from 'tv/shared/domain'
+import { Show, SeasonWithShow, Season } from 'tv/shared/domain'
+import { Moment } from 'moment'
 
 function flatten<A>(arrayOfArrays: A[][]): A[] {
   return arrayOfArrays.reduce((a, b) => a.concat(b), [])
 }
 
-function reformatSeason(season: MSeason, show: Show): SeasonWithShow {
+function reformatSeason(season: Season<Moment>, show: Show): SeasonWithShow {
   return {
     show,
     number: season.number,

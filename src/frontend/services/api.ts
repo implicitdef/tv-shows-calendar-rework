@@ -1,9 +1,9 @@
 import * as axios from 'axios'
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 import { getAxios, Wirings } from 'tv/frontend/services/axiosConfig'
 import * as cache from 'tv/frontend/services/cache'
 import * as conf from 'tv/frontend/services/conf'
-import { Show, MSeason, Season } from 'tv/shared/domain'
+import { Show, Season } from 'tv/shared/domain'
 
 const base = conf.serverUrl
 
@@ -30,12 +30,12 @@ export function searchShows(wirings: Wirings, q: string): Promise<Show[]> {
 export function seasonsOfShow(
   wirings: Wirings,
   showId: number,
-): Promise<MSeason[]> {
+): Promise<Season<Moment>[]> {
   return cache.cached(`seasons-of-${showId}`, () => {
     return getAxios(wirings)
       .get(`${base}/shows/${showId}/seasons`)
       .then(extractData)
-      .then((data: Season[]) => {
+      .then((data: Season<string>[]) => {
         return data.map(season => {
           return {
             ...season,

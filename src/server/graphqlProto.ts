@@ -1,4 +1,8 @@
-import { gql, ApolloServer } from 'apollo-server-express'
+import {
+  gql,
+  ApolloServer,
+  defaultPlaygroundOptions,
+} from 'apollo-server-express'
 
 const typeDefs = gql`
   # This "Book" type can be used in other type declarations.
@@ -39,4 +43,13 @@ const resolvers = {
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
 // responsible for fetching the data for those types.
-export const apolloServer = new ApolloServer({ typeDefs, resolvers })
+export const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: {
+    settings: {
+      ...defaultPlaygroundOptions.settings,
+      'editor.theme': 'light',
+    },
+  },
+})
