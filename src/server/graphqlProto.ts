@@ -8,6 +8,8 @@ import * as DbService from 'tv/server/services/dbService'
 import { Season } from 'tv/shared/domain'
 
 // TODO maybe turn all ids into strings to be iso with graphql. maybe transform that after reading them from the DB. Maybe change everything, the feed, etc.
+// TODO include other endpoints (reading with auth)
+// TODO include last endpoints (mutations)
 const typeDefs = gql`
   type TimeRange {
     start: String!
