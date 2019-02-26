@@ -16,7 +16,6 @@ export type SeasonWithShow = {
   time: TimeRange<Moment>
 }
 export type Season<T extends TimesType> = {
-  id: number
   number: number
   time: TimeRange<T>
 }
