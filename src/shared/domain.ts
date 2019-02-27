@@ -7,6 +7,11 @@ export type Show<I extends IdType = string> = {
   id: I
   name: string
 }
+export type ShowForGraphql = {
+  id: string
+  name: string
+  seasons: Season<string>[]
+}
 export type ShowAndSeasons<I extends IdType = string> = {
   serie: Show<I>
   seasons: Season<string>[]

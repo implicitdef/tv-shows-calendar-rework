@@ -1,7 +1,6 @@
 import * as bodyParser from 'body-parser'
 import express from 'express'
 import 'source-map-support/register'
-import * as Auth from 'tv/server/auth/auth'
 import * as DbService from 'tv/server/services/dbService'
 import * as Conf from 'tv/server/utils/conf'
 import {
@@ -10,6 +9,11 @@ import {
   AuthError,
 } from 'tv/server/utils/web'
 import { apolloServer } from 'tv/server/graphqlProto'
+import {
+  authRequiredMiddleware,
+  LoggedInRequest,
+  maybeAuthMiddleware,
+} from 'tv/server/auth/auth'
 
 console.log(`Server started with process.env.NODE_ENV = `, process.env.NODE_ENV)
 
@@ -64,11 +68,10 @@ app.get('/shows/:showId/seasons', async (req, res, next) => {
 })
 
 // Returns the shows of a user
-app.get('/me/shows', Auth.middleware, async (req, res, next) => {
+app.get('/me/shows', authRequiredMiddleware, async (req, res, next) => {
   try {
-    const liReq = req as Auth.LoggedInRequest
+    const liReq = req as LoggedInRequest
     const seriesIds = await DbService.getSeriesOfUser(liReq.userId)
-    console.log('@@@@ seriesIds', seriesIds)
     const data = await DbService.loadData()
     const series = data.map(serieAndSeasons => serieAndSeasons.serie)
     const seriesFiltered = series.filter(serie => seriesIds.includes(serie.id))
@@ -79,26 +82,34 @@ app.get('/me/shows', Auth.middleware, async (req, res, next) => {
 })
 
 // Add a serie to a user
-app.post('/me/shows/:serieId', Auth.middleware, async (req, res, next) => {
-  try {
-    const liReq = req as Auth.LoggedInRequest
-    await DbService.addSerieToUser(liReq.userId, req.params.serieId)
-    res.json({ message: 'Done' })
-  } catch (err) {
-    next(err)
-  }
-})
+app.post(
+  '/me/shows/:serieId',
+  authRequiredMiddleware,
+  async (req, res, next) => {
+    try {
+      const liReq = req as LoggedInRequest
+      await DbService.addSerieToUser(liReq.userId, req.params.serieId)
+      res.json({ message: 'Done' })
+    } catch (err) {
+      next(err)
+    }
+  },
+)
 
 // Remove a serie from a user
-app.delete('/me/shows/:serieId', Auth.middleware, async (req, res, next) => {
-  try {
-    const liReq = req as Auth.LoggedInRequest
-    await DbService.removeSerieFromUser(liReq.userId, req.params.serieId)
-    res.json({ message: 'Done' })
-  } catch (err) {
-    next(err)
-  }
-})
+app.delete(
+  '/me/shows/:serieId',
+  authRequiredMiddleware,
+  async (req, res, next) => {
+    try {
+      const liReq = req as LoggedInRequest
+      await DbService.removeSerieFromUser(liReq.userId, req.params.serieId)
+      res.json({ message: 'Done' })
+    } catch (err) {
+      next(err)
+    }
+  },
+)
 
 // Overrides the underlying data (shows, seasons, etc.) in one big HTTP POST
 // Actually will just inserts a new line in the DB, for safety
@@ -110,6 +121,7 @@ app.post(
   bodyParser.text({ type: '*/*', limit: '50mb' }),
   async (req, res, next) => {
     try {
+      // this should be in a dedicated middleware
       if (req.query.key !== Conf.pushDataApiKey) {
         throw new AuthError()
       }
@@ -121,6 +133,7 @@ app.post(
   },
 )
 
-apolloServer.applyMiddleware({ app })
+app.use('/apollo', maybeAuthMiddleware)
+apolloServer.applyMiddleware({ app, path: '/apollo' })
 
 finishExpressAppSetupAndLaunch(app)
