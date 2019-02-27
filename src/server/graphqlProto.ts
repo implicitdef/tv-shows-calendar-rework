@@ -3,14 +3,13 @@ import {
   defaultPlaygroundOptions,
   gql,
   IResolvers,
+  AuthenticationError,
 } from 'apollo-server-express'
-import { MaybeLoggedInRequest } from 'tv/server/auth/auth'
+import { authenticationLogic } from 'tv/server/auth/auth'
 import * as DbService from 'tv/server/services/dbService'
 import { defaultShowsIds } from 'tv/server/utils/conf'
 import { ShowForGraphql as GraphqlShow } from 'tv/shared/domain'
 
-// TODO include other endpoints (reading with auth)
-// -----> modéliser le 'me', avec ses shows (avec fallback sur les show par defauts)
 // TODO include last endpoints (mutations)
 // TODO use from the frontend
 const typeDefs = gql`
@@ -80,9 +79,19 @@ const resolvers: IResolvers<unknown, Context> = {
 export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }: { req: MaybeLoggedInRequest }): Context => {
-    return {
-      userId: req.userId,
+  context: async ({ req }): Promise<Context> => {
+    const status = await authenticationLogic(req)
+    switch (status.kind) {
+      case 'authentication_failed':
+        throw new AuthenticationError('Failed to authenticate')
+      case 'unauthenticated':
+        return {
+          userId: undefined,
+        }
+      case 'authenticated':
+        return {
+          userId: status.userId,
+        }
     }
   },
   playground: {
