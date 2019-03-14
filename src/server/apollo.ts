@@ -11,8 +11,8 @@ import { defaultShowsIds } from 'tv/server/utils/conf'
 import { ShowForGraphql as GraphqlShow } from 'tv/shared/domain'
 import { ContextFunction } from 'apollo-server-core'
 import { ExpressContext } from 'apollo-server-express/dist/ApolloServer'
+import { Express } from 'express'
 
-// TODO use from the frontend
 const typeDefs = gql`
   type TimeRange {
     start: String!
@@ -120,7 +120,7 @@ const context: ContextFunction<ExpressContext, Context> = async ({
   }
 }
 
-export const apolloServer = new ApolloServer({
+const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context,
@@ -131,3 +131,7 @@ export const apolloServer = new ApolloServer({
     },
   },
 })
+
+export function addApolloServer(app: Express): void {
+  apolloServer.applyMiddleware({ app, path: '/graphql' })
+}

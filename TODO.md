@@ -1,5 +1,4 @@
-- mettre graphql, d'abord coté server
-- puis faire coté front
+- utiliser graphql coté front
 - ptet faire certains trucs avec des hooks au lieu de redux (la search par exemple ?)
 - rebosser un peu le css, essayer de passer à un container non-fluide
 - utiliser css modules, virer BEM ? ou inline CSS ?
