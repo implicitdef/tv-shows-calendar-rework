@@ -11,6 +11,8 @@ import { defaultShowsIds } from 'tv/server/utils/conf'
 import { ShowForGraphql as GraphqlShow } from 'tv/shared/domain'
 
 // TODO include last endpoints (mutations)
+// ----> add a serie to current user's shows
+// ----> remove serie from current user's shows
 // TODO use from the frontend
 const typeDefs = gql`
   type TimeRange {
