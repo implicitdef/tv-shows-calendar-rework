@@ -129,6 +129,6 @@ app.post(
   },
 )
 
-apolloServer.applyMiddleware({ app, path: '/apollo' })
+apolloServer.applyMiddleware({ app, path: '/graphql' })
 
 finishExpressAppSetupAndLaunch(app)

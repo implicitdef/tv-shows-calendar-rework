@@ -9,10 +9,9 @@ import { authenticationLogic } from 'tv/server/auth/auth'
 import * as DbService from 'tv/server/services/dbService'
 import { defaultShowsIds } from 'tv/server/utils/conf'
 import { ShowForGraphql as GraphqlShow } from 'tv/shared/domain'
+import { ContextFunction } from 'apollo-server-core'
+import { ExpressContext } from 'apollo-server-express/dist/ApolloServer'
 
-// TODO include last endpoints (mutations)
-// ----> add a serie to current user's shows
-// ----> remove serie from current user's shows
 // TODO use from the frontend
 const typeDefs = gql`
   type TimeRange {
@@ -41,6 +40,11 @@ const typeDefs = gql`
     shows(input: String): [Show!]!
     me: Me
   }
+
+  type Mutation {
+    addShow(showId: String!): Boolean!
+    removeShow(showId: String!): Boolean!
+  }
 `
 
 type Context = {
@@ -53,6 +57,14 @@ async function loadDataAndShapeItForGraphql(): Promise<GraphqlShow[]> {
     ...serie,
     seasons,
   }))
+}
+
+function extractMandatoryUserId(context: Context): number {
+  if (context.userId === undefined)
+    throw new AuthenticationError(
+      'You need to be authenticated to use this endpoint',
+    )
+  return context.userId
 }
 
 const resolvers: IResolvers<unknown, Context> = {
@@ -76,26 +88,42 @@ const resolvers: IResolvers<unknown, Context> = {
       }
     },
   },
+  Mutation: {
+    addShow: async (_, { showId }: { showId: string }, context) => {
+      const userId = extractMandatoryUserId(context)
+      await DbService.addSerieToUser(userId, showId)
+      return true
+    },
+    removeShow: async (_, { showId }: { showId: string }, context) => {
+      const userId = extractMandatoryUserId(context)
+      await DbService.removeSerieFromUser(userId, showId)
+      return true
+    },
+  },
+}
+
+const context: ContextFunction<ExpressContext, Context> = async ({
+  req,
+}): Promise<Context> => {
+  const status = await authenticationLogic(req)
+  switch (status.kind) {
+    case 'authentication_failed':
+      throw new AuthenticationError('Failed to authenticate')
+    case 'unauthenticated':
+      return {
+        userId: undefined,
+      }
+    case 'authenticated':
+      return {
+        userId: status.userId,
+      }
+  }
 }
 
 export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req }): Promise<Context> => {
-    const status = await authenticationLogic(req)
-    switch (status.kind) {
-      case 'authentication_failed':
-        throw new AuthenticationError('Failed to authenticate')
-      case 'unauthenticated':
-        return {
-          userId: undefined,
-        }
-      case 'authenticated':
-        return {
-          userId: status.userId,
-        }
-    }
-  },
+  context,
   playground: {
     settings: {
       ...defaultPlaygroundOptions.settings,
