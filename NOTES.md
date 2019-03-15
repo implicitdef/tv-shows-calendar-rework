@@ -1,9 +1,5 @@
 ### How to work locally
 
-`yarn start`
-
-##### Or for more fine-grained control:
-
 `yarn server:compile-w` in a tab
 
 `yarn server:run-w` in the other
