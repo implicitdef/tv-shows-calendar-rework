@@ -1,18 +1,13 @@
 import * as axios from 'axios'
+import 'babel-polyfill'
+import 'bootstrap/dist/css/bootstrap.css'
+import gql from 'graphql-tag'
 import moment, { Moment } from 'moment'
 import { getAxios, Wirings } from 'tv/frontend/services/axiosAndApolloConfig'
 import * as cache from 'tv/frontend/services/cache'
 import * as conf from 'tv/frontend/services/conf'
-import { Show, Season } from 'tv/shared/domain'
-import ApolloClient from 'apollo-boost'
-import 'babel-polyfill'
-import 'bootstrap/dist/css/bootstrap.css'
-import gql from 'graphql-tag'
-import { serverUrl } from 'tv/frontend/services/conf'
-
-export const apolloClient = new ApolloClient({
-  uri: `${serverUrl}/graphql`,
-})
+import { Season, Show } from 'tv/shared/domain'
+import { apolloClientSelector } from 'tv/frontend/redux/ducks/meta'
 
 const base = conf.serverUrl
 
@@ -20,11 +15,17 @@ function extractData(response: axios.AxiosResponse): any {
   return response.data
 }
 
-export function searchShows(_wirings: Wirings, q: string): Promise<Show[]> {
+function getApolloClient({ getState }: Wirings) {
+  const client = apolloClientSelector(getState())
+  if (client === undefined) throw new Error('Apollo client missing from store')
+  return client
+}
+
+export function searchShows(wirings: Wirings, q: string): Promise<Show[]> {
   // TODO see if apollo cache doesn't handle that already somehow
   // TODO if not, recode cache with memoisation from lodash or something like that
   return cache.cached('all-shows-' + q, () => {
-    return apolloClient
+    return getApolloClient(wirings)
       .query({
         query: gql`
           query SEARCH_SHOWS($q: String!) {
@@ -35,22 +36,17 @@ export function searchShows(_wirings: Wirings, q: string): Promise<Show[]> {
           }
         `,
         variables: { q },
-        context: {
-          headers: {
-            foo: 'bar',
-          },
-        },
       })
       .then(_ => _.data.search)
   })
 }
 
 export function seasonsOfShow(
-  _wirings: Wirings,
+  wirings: Wirings,
   showId: string,
 ): Promise<Season<Moment>[]> {
   return cache.cached(`seasons-of-${showId}`, () => {
-    return apolloClient
+    return getApolloClient(wirings)
       .query({
         query: gql`
           query GET_SEASONS_OF_SHOW($showId: ID!) {
