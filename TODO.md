@@ -1,4 +1,8 @@
 - utiliser graphql coté front
+  - utiliser pour les mutations
+  - virer tout le REST coté client et server
+  - try to remove homemade cache and rely on apollo cache
+  - mutualize the different queries done when fetching shows, we can do all of it in one go now that we have graphql
 - fixer le close du search input quand on clique à coté, ça semble pas se fermer
 - ptet faire certains trucs avec des hooks au lieu de redux (la search par exemple ?)
 - rebosser un peu le css, essayer de passer à un container non-fluide
