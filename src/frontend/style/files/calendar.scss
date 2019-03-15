@@ -23,7 +23,7 @@
     width: 10px;
     &::before {
       @extend .absolute-box;
-      content: 'now';
+      content: 'nooow';
       color: $marker-color;
       font-weight: bold;
       font-size: 1.3rem;

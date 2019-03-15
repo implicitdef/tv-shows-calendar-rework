@@ -4,13 +4,17 @@ import { getAxios, Wirings } from 'tv/frontend/services/axiosConfig'
 import * as cache from 'tv/frontend/services/cache'
 import * as conf from 'tv/frontend/services/conf'
 import { Show, Season } from 'tv/shared/domain'
+import gql from 'graphql-tag'
+import { apolloClient } from 'tv/frontend/services/apollo'
+import { ApolloQueryResult } from 'apollo-client'
 
 const base = conf.serverUrl
 
-function extractData(response: axios.AxiosResponse): any {
+function extractData(
+  response: axios.AxiosResponse | ApolloQueryResult<any>,
+): any {
   return response.data
 }
-
 export function allShows(wirings: Wirings): Promise<Show[]> {
   return cache.cached('all-shows', () => {
     return getAxios(wirings)
@@ -20,9 +24,21 @@ export function allShows(wirings: Wirings): Promise<Show[]> {
 }
 
 export function searchShows(wirings: Wirings, q: string): Promise<Show[]> {
+  // TODO see if apollo cache doesn't handle that already somehow
+  // TODO if not, recode cache with memoisation from lodash or something like that
   return cache.cached('all-shows-' + q, () => {
-    return getAxios(wirings)
-      .get(`${base}/shows`, { params: { q } })
+    return apolloClient
+      .query({
+        query: gql`
+          query searchShows($q: String) {
+            shows(input: $q) {
+              id
+              name
+            }
+          }
+        `,
+        variables: { q },
+      })
       .then(extractData)
   })
 }

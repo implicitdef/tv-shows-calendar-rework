@@ -40,6 +40,7 @@ export const defaultShowsIds = [
   '75006', // The umbrella academy
   '84977', // Russian doll
 ]
+
 export const port = process.env.PORT || 3333
 export const pushDataApiKey = process.env.PUSH_DATA_API_KEY || 'pushDataApiKey'
 export const isProd = process.env.NODE_ENV === 'production'

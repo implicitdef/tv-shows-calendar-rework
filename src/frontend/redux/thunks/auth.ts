@@ -33,6 +33,7 @@ export const logout = (): SomeThunkAction<void> => {
 export const checkStatusOnStartupAndFetch = (): SomeThunkAction<void> => {
   return async dispatch => {
     try {
+      dispatch(calendarThunk.fetchSeasons())
       const isLoggedIn = await google.isLoggedIn()
       if (isLoggedIn) {
         const user = await google.getUserInfo()
