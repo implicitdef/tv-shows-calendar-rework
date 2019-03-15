@@ -24,21 +24,15 @@ function buildSeasonsWithShowForShow(
   })
 }
 
-function getShowsToDisplay(
-  wirings: Wirings,
-  isLoggedIn: boolean,
-): Promise<Show[]> {
-  if (isLoggedIn) {
-    return Api.userShows(wirings)
-  }
-  return Api.defaultShows(wirings)
+function getShowsToDisplay(wirings: Wirings): Promise<Show[]> {
+  return Api.meShows(wirings)
 }
 
 export function getSeasonsWithShows(
   wirings: Wirings,
-  isLoggedIn: boolean,
 ): Promise<SeasonWithShow[]> {
-  return getShowsToDisplay(wirings, isLoggedIn).then(shows => {
+  return getShowsToDisplay(wirings).then(shows => {
+    // TODO no need for multiple queries now that we have graphql
     return Promise.all(
       shows.map(show => buildSeasonsWithShowForShow(wirings, show)),
     ).then(flatten)

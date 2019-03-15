@@ -1,24 +1,55 @@
+import ApolloClient from 'apollo-boost'
 import * as axios from 'axios'
 import 'babel-polyfill'
 import 'bootstrap/dist/css/bootstrap.css'
 import gql from 'graphql-tag'
 import moment, { Moment } from 'moment'
+import { tokenSelector } from 'tv/frontend/redux/ducks/auth'
+import { apolloClientSelector } from 'tv/frontend/redux/ducks/meta'
+import * as authThunk from 'tv/frontend/redux/thunks/auth'
 import { getAxios, Wirings } from 'tv/frontend/services/axiosAndApolloConfig'
 import * as cache from 'tv/frontend/services/cache'
 import * as conf from 'tv/frontend/services/conf'
+import { serverUrl } from 'tv/frontend/services/conf'
+import { AUTH_TOKEN_HEADER } from 'tv/shared/constants'
 import { Season, Show } from 'tv/shared/domain'
-import { apolloClientSelector } from 'tv/frontend/redux/ducks/meta'
 
 const base = conf.serverUrl
-
-function extractData(response: axios.AxiosResponse): any {
-  return response.data
-}
 
 function getApolloClient({ getState }: Wirings) {
   const client = apolloClientSelector(getState())
   if (client === undefined) throw new Error('Apollo client missing from store')
   return client
+}
+
+export function createApolloClient({
+  dispatch,
+  getState,
+}: Wirings): ApolloClient<{}> {
+  return new ApolloClient({
+    uri: `${serverUrl}/graphql`,
+    request: operation => {
+      // Add auth header if connected
+      const token = tokenSelector(getState())
+      if (token != null) {
+        operation.setContext({
+          headers: {
+            [AUTH_TOKEN_HEADER]: token,
+          },
+        })
+      }
+      return Promise.resolve()
+    },
+    onError: ({ graphQLErrors }) => {
+      // Disconnect if auth troubles
+      const isBadTokenError =
+        graphQLErrors &&
+        graphQLErrors.find(
+          e => !!e.extensions && e.extensions.code === 'UNAUTHENTICATED',
+        ) !== undefined
+      if (isBadTokenError) dispatch(authThunk.logout())
+    },
+  })
 }
 
 export function searchShows(wirings: Wirings, q: string): Promise<Show[]> {
@@ -76,20 +107,22 @@ export function seasonsOfShow(
   })
 }
 
-export function userShows(wirings: Wirings): Promise<Show[]> {
-  return getAxios(wirings)
-    .get(`${base}/me/shows`)
-    .then()
-    .then(extractData)
-}
-
-export function defaultShows(wirings: Wirings): Promise<Show[]> {
-  return cache.cached('default-shows', () => {
-    return getAxios(wirings)
-      .get(`${base}/shows/default`)
-      .then()
-      .then(extractData)
-  })
+export function meShows(wirings: Wirings): Promise<Show[]> {
+  return getApolloClient(wirings)
+    .query({
+      query: gql`
+        query ME_SHOWS {
+          me {
+            shows {
+              id
+              name
+            }
+          }
+        }
+      `,
+      fetchPolicy: 'no-cache',
+    })
+    .then(_ => _.data.me.shows)
 }
 
 export async function followShow(wirings: Wirings, id: string): Promise<void> {

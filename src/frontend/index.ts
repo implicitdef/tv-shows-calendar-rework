@@ -9,13 +9,13 @@ import * as google from 'tv/frontend/services/google'
 
 require('tv/frontend/style/index.scss')
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
   console.log(
     `Frontend code started with process.env.NODE_ENV = ${process.env.NODE_ENV}`,
   )
   google.setup()
   const dispatch = Store.dispatch as TheDispatch
-  dispatch(authThunk.createApolloClientAndStoreIt())
+  await dispatch(authThunk.createApolloClientAndStoreIt())
   dispatch(authThunk.checkStatusOnStartupAndFetch())
   ReactDOM.render(App.instance, document.getElementById('root'))
 })

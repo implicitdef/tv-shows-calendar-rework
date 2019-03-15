@@ -1,14 +1,11 @@
-import ApolloClient from 'apollo-boost'
 import 'babel-polyfill'
 import 'bootstrap/dist/css/bootstrap.css'
 import { SomeThunkAction } from 'tv/frontend/redux/actions'
-import { authActions, tokenSelector } from 'tv/frontend/redux/ducks/auth'
+import { authActions } from 'tv/frontend/redux/ducks/auth'
 import { metaActions } from 'tv/frontend/redux/ducks/meta'
-import * as authThunk from 'tv/frontend/redux/thunks/auth'
 import * as calendarThunk from 'tv/frontend/redux/thunks/calendar'
-import { serverUrl } from 'tv/frontend/services/conf'
+import { createApolloClient } from 'tv/frontend/services/api'
 import * as google from 'tv/frontend/services/google'
-import { AUTH_TOKEN_HEADER } from 'tv/shared/constants'
 
 export const login = (): SomeThunkAction<void> => {
   return async dispatch => {
@@ -19,6 +16,7 @@ export const login = (): SomeThunkAction<void> => {
       dispatch(authActions.setLoggedIn({ token, user }))
       await dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
+      console.log(e)
       dispatch(metaActions.registerGlobalError())
     }
   }
@@ -31,6 +29,7 @@ export const logout = (): SomeThunkAction<void> => {
       dispatch(authActions.setLoggedOut())
       await dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
+      console.log(e)
       dispatch(metaActions.registerGlobalError())
     }
   }
@@ -50,6 +49,7 @@ export const checkStatusOnStartupAndFetch = (): SomeThunkAction<void> => {
       }
       await dispatch(calendarThunk.fetchSeasons())
     } catch (e) {
+      console.log(e)
       dispatch(authActions.setLoggedOut())
     }
   }
@@ -57,30 +57,7 @@ export const checkStatusOnStartupAndFetch = (): SomeThunkAction<void> => {
 
 export const createApolloClientAndStoreIt = (): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
-    const apolloClient = new ApolloClient({
-      uri: `${serverUrl}/graphql`,
-      request: operation => {
-        // Add auth header if connected
-        const token = tokenSelector(getState())
-        if (token != null) {
-          operation.setContext({
-            headers: {
-              [AUTH_TOKEN_HEADER]: token,
-            },
-          })
-        }
-        return Promise.resolve()
-      },
-      onError: ({ graphQLErrors }) => {
-        // Disconnect if auth troubles
-        const isBadTokenError =
-          graphQLErrors &&
-          graphQLErrors.find(
-            e => !!e.extensions && e.extensions.code === 'UNAUTHENTICATED',
-          ) !== undefined
-        if (isBadTokenError) dispatch(authThunk.logout())
-      },
-    })
+    const apolloClient = createApolloClient({ dispatch, getState })
     await dispatch(metaActions.setApolloClient(apolloClient))
   }
 }
