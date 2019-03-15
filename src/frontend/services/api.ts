@@ -1,10 +1,9 @@
 import * as axios from 'axios'
 import moment, { Moment } from 'moment'
-import { getAxios, Wirings } from 'tv/frontend/services/axiosConfig'
+import { getAxios, Wirings } from 'tv/frontend/services/axiosAndApolloConfig'
 import * as cache from 'tv/frontend/services/cache'
 import * as conf from 'tv/frontend/services/conf'
 import { Show, Season } from 'tv/shared/domain'
-import { ApolloQueryResult } from 'apollo-client'
 import ApolloClient from 'apollo-boost'
 import 'babel-polyfill'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -17,17 +16,8 @@ export const apolloClient = new ApolloClient({
 
 const base = conf.serverUrl
 
-function extractData(
-  response: axios.AxiosResponse | ApolloQueryResult<any>,
-): any {
+function extractData(response: axios.AxiosResponse): any {
   return response.data
-}
-export function allShows(wirings: Wirings): Promise<Show[]> {
-  return cache.cached('all-shows', () => {
-    return getAxios(wirings)
-      .get(`${base}/shows`)
-      .then(extractData)
-  })
 }
 
 export function searchShows(_wirings: Wirings, q: string): Promise<Show[]> {
@@ -37,39 +27,56 @@ export function searchShows(_wirings: Wirings, q: string): Promise<Show[]> {
     return apolloClient
       .query({
         query: gql`
-          query searchShows($q: String) {
-            shows(input: $q) {
+          query SEARCH_SHOWS($q: String!) {
+            search(input: $q) {
               id
               name
             }
           }
         `,
         variables: { q },
+        context: {
+          headers: {
+            foo: 'bar',
+          },
+        },
       })
-      .then(extractData)
-      .then(_ => _.shows)
+      .then(_ => _.data.search)
   })
 }
 
 export function seasonsOfShow(
-  wirings: Wirings,
+  _wirings: Wirings,
   showId: string,
 ): Promise<Season<Moment>[]> {
   return cache.cached(`seasons-of-${showId}`, () => {
-    return getAxios(wirings)
-      .get(`${base}/shows/${showId}/seasons`)
-      .then(extractData)
-      .then((data: Season<string>[]) => {
-        return data.map(season => {
-          return {
-            ...season,
-            time: {
-              start: moment(season.time.start),
-              end: moment(season.time.end),
-            },
+    return apolloClient
+      .query({
+        query: gql`
+          query GET_SEASONS_OF_SHOW($showId: ID!) {
+            show(id: $showId) {
+              seasons {
+                number
+                time {
+                  start
+                  end
+                }
+              }
+            }
           }
-        })
+        `,
+        variables: { showId },
       })
+      .then(_ => _.data.show.seasons)
+      .then((seasons: Season<string>[]) =>
+        seasons.map(season => ({
+          ...season,
+          time: {
+            start: moment(season.time.start),
+            end: moment(season.time.end),
+          },
+        })),
+      )
   })
 }
 

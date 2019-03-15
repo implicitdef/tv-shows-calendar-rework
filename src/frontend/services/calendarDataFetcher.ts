@@ -1,5 +1,5 @@
 import * as Api from 'tv/frontend/services/api'
-import { Wirings } from 'tv/frontend/services/axiosConfig'
+import { Wirings } from 'tv/frontend/services/axiosAndApolloConfig'
 import { Show, SeasonWithShow, Season } from 'tv/shared/domain'
 import { Moment } from 'moment'
 
@@ -40,7 +40,7 @@ export function getSeasonsWithShows(
 ): Promise<SeasonWithShow[]> {
   return getShowsToDisplay(wirings, isLoggedIn).then(shows => {
     return Promise.all(
-      shows.map(s => buildSeasonsWithShowForShow(wirings, s)),
+      shows.map(show => buildSeasonsWithShowForShow(wirings, show)),
     ).then(flatten)
   })
 }

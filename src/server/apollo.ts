@@ -37,7 +37,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    shows(input: String): [Show!]!
+    show(id: ID!): Show!
+    search(input: String!): [Show!]!
     me: Me
   }
 
@@ -69,13 +70,17 @@ function extractMandatoryUserId(context: Context): number {
 
 const resolvers: IResolvers<unknown, Context> = {
   Query: {
-    shows: async (_, { input }: { input?: string }) => {
+    show: async (_, { id }: { id: string }) => {
       const data = await loadDataAndShapeItForGraphql()
-      return input
-        ? data.filter(({ name }) =>
-            name.toLowerCase().includes(input.toLowerCase()),
-          )
-        : data
+      const show = data.find(_ => _.id === id)
+      if (show === undefined) throw new Error(`Show ${id} not found`)
+      return show
+    },
+    search: async (_, { input }: { input: string }) => {
+      const data = await loadDataAndShapeItForGraphql()
+      return data.filter(({ name }) =>
+        name.toLowerCase().includes(input.toLowerCase()),
+      )
     },
     me: async (_, _args, context) => {
       const showsIds = await (context.userId === undefined
