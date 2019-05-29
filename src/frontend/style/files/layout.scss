@@ -7,13 +7,6 @@ body,
 body {
   font-family: Roboto, sans-serif !important;
   background: #37474f;
-  &.plain {
-    background-color: white;
-    * {
-      color: gray !important;
-      background-color: white !important;
-    }
-  }
 }
 
 .page {
