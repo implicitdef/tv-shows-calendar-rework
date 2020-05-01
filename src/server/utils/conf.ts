@@ -10,7 +10,7 @@ export const googleClientId = reverse(
 )
 export const db = process.env.DATABASE_URL || {
   host: '127.0.0.1',
-  user: 'manu',
+  user: 'eletallieur',
   password: '',
   database: 'tv_shows_calendar',
 }
