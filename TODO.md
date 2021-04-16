@@ -7,3 +7,4 @@
 - optimiser perfs : cf les warnings quand on build comme en prod
 - ptet afficher un loader discret pour quand les series se rechargent
 - un jour faire un affichage décent sur mobile
+- ...
