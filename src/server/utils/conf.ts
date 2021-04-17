@@ -8,12 +8,14 @@ function reverse(s: string): string {
 export const googleClientId = reverse(
   'moc.tnetnocresuelgoog.sppa.8ro4a1m8c1e349slnqhhti7nurp81l2o-412795760244',
 )
-export const db = process.env.DATABASE_URL || {
-  host: '127.0.0.1',
-  user: 'eletallieur',
-  password: '',
-  database: 'tv_shows_calendar',
-}
+export const db = process.env.DATABASE_URL
+  ? `${process.env.DATABASE_URL}?ssl=true`
+  : {
+      host: '127.0.0.1',
+      user: 'eletallieur',
+      password: '',
+      database: 'tv_shows_calendar',
+    }
 export const defaultShowsIds = [
   // If you put too much of those, the first request starts to be a bit too long
   '1399', // Game of Thrones
