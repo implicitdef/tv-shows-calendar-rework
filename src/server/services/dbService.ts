@@ -2,7 +2,7 @@ import knex from 'knex'
 import * as DbQueries from 'tv/server/services/dbQueries'
 import * as Conf from 'tv/server/utils/conf'
 import { ShowAndSeasons } from 'tv/shared/domain'
-
+console.log('@@@ using connection', JSON.stringify(Conf.db))
 const knexClient = knex({
   client: 'postgres',
   connection: Conf.db,
